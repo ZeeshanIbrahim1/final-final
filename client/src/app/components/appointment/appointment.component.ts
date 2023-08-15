@@ -35,9 +35,9 @@ export class AppointmentComponent {
     this.appointService
     .appoint(this.appointmentForm.value)
     .subscribe((msg) => console.log(msg));
-    this.appointmentForm.reset();
+    // this.appointmentForm.reset();
     this.clearErrorStates();
-    this.router.navigate(['/home'])
+    // this.router.navigate(['/home'])
   }
   clearErrorStates() {
     const formControls = this.appointmentForm.controls;

@@ -12,7 +12,8 @@ const specialtyRoutes = require('./routes/specialty');
 const firmRoutes = require('./routes/firms');
 const doctorRoutes = require('./routes/doctors');
 const insuranceRoutes = require('./routes/insurance');
-const practiceRoutes = require('./routes/practicelocation')
+const practiceRoutes = require('./routes/practicelocation');
+const appointRoutes = require('./routes/appointments')
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -24,6 +25,7 @@ app.use('/specialty', specialtyRoutes);
 app.use('/firm', firmRoutes);
 app.use('/doctors', doctorRoutes);
 app.use('/insurance', insuranceRoutes);
+app.use('/appoint', appointRoutes)
 app.use('/practicelocation',practiceRoutes)
 
 app.use(errorController.get404);

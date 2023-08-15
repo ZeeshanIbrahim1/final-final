@@ -25,9 +25,10 @@ export class AppointService {
     private router: Router
   ) {}
  
-  appoint(data): Observable<Appoint> {
+  appoint(data:any): Observable<Appoint> {
+    console.log("IN appoinr/service.ts", data)
     return this.http
-      .post<Appoint>(`${this.url}/appoint`, data, this.httpOptions)
+      .post<Appoint>(`${this.url}/appoint/addAppointment`, data, this.httpOptions)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<Appoint>('appoint'))
