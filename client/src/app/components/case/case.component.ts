@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CaseService } from 'src/app/services/case.service';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
@@ -16,6 +16,11 @@ export class CaseComponent {
 
   constructor(private caseService: CaseService, private router: Router) {}
   ngOnInit(): void {
+    ////@ZeeshanIbrahim1 patient se jo Id bheji to wo idher get kr formData me laga
+    //patientId k naam se or case add krde
+
+    // console.log(this.location, 'this.location.getState().patientId');
+    // console.log(this.router.getCurrentNavigation(), 'SLKDFJ'); // should log out 'bar'
     this.caseForm = this.createCaseGroup();
     this.getinfo();
     this.caseForm.get('firmId').valueChanges.subscribe((firm) => {

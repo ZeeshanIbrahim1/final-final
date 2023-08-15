@@ -1,4 +1,6 @@
 const models = require("../models");
+const { validationResult } = require("express-validator");
+
 const addAppoint= async (req, res, next) => {
   const errors = validationResult(req);
   console.log(errors);

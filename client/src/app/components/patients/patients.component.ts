@@ -45,9 +45,11 @@ export class PatientsComponent implements OnInit {
     this.patientService.patient(this.patientForm.value).subscribe((msg) => {
       console.log(msg);
     });
+    //@ZeeshanIbrahim1 patient jo add kia hua he uskay response se id pakkar or navigate me case me bhej de
     this.patientForm.reset();
     this.clearErrorStates();
-    this.router.navigate(['/case']);
+
+    this.router.navigate(['/case'], { state: { patientId: 1 } });
   }
   clearErrorStates() {
     const formControls = this.patientForm.controls;

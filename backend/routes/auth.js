@@ -30,11 +30,5 @@ router.post(
   authController.signup
 );
 
-router.get("/home", authController.verifyToken, authController.getAllPatients);
-router.post("/login", authController.verifyToken, authController.login);
-
-router.post("/patient", authController.verifyToken, authController.addPatient);
-
-router.post("/case", authController.verifyToken, authController.addCase);
-
+router.post("/login", authController.login);
 module.exports = router;

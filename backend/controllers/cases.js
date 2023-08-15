@@ -11,6 +11,7 @@ const addCase = async (req, res, next) => {
   }
   const {
     firmId,
+    patientId,
     insuranceId,
     practiceLocationId,
     practiceLocation,
@@ -45,6 +46,7 @@ const addCase = async (req, res, next) => {
     firmId,
     insuranceId,
     practiceLocationId,
+    patientId
 
   });
   res.status(201).json({ message: "Case Added!" });

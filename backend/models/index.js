@@ -46,6 +46,11 @@ Object.keys(db).forEach((modelName) => {
 
 db.Case.belongsTo(db.Firm, { foreignKey: 'firmId' });
 db.Case.belongsTo(db.Insurance, { foreignKey: 'insuranceId' });
+db.Case.belongsTo(db.Patient, { foreignKey: 'patientId' });
+db.Case.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
+
+db.Patient.hasMany(db.Case, { foreignKey: 'patientId' });
+
 
 db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId' });
 db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId' });

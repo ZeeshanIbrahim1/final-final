@@ -19,7 +19,7 @@ const addPatient = async (req, res, next) => {
     state,
     gender,
     zip,
-    date_of_birth,
+    date_of_birth
   } = req.body;
   const storedDoB = await models.Patient.findByDoB(date_of_birth);
 
@@ -30,7 +30,7 @@ const addPatient = async (req, res, next) => {
       .json(console.log("Patient with same Date of Birth already exists!!"));
     return 0;
   }
-  await models.Patient.addPatient(
+  await models.Patient.create({
     first_name,
     middle_name,
     last_name,
@@ -42,7 +42,7 @@ const addPatient = async (req, res, next) => {
     gender,
     zip,
     date_of_birth
-  );
+  });
   res.status(201).json({ message: "Patient registered!" });
 
   next(errors);
@@ -50,7 +50,19 @@ const addPatient = async (req, res, next) => {
 
 const getAllPatients = async (req, res, next) => {
   try {
-    const patients = await models.Patient.getAllPatients();
+    const patients = await models.Patient.findAll({
+      include: {
+        model: models.Case,
+        include: [
+          {
+            model: models.Firm
+          },
+          {
+            model: models.Insurance
+          }
+        ]
+      }
+    });
 
     if (!patients || patients.length === 0) {
       return res.status(404).json({ message: "No patients found." });
