@@ -14,50 +14,50 @@ export class CaseComponent {
   insuranceInfo: any[] = [];
   firmInfo: any[] = [];
 
-  constructor(private caseService: CaseService, private router:Router) {}
+  constructor(private caseService: CaseService, private router: Router) {}
   ngOnInit(): void {
     this.caseForm = this.createCaseGroup();
     this.getinfo();
-    this.caseForm.get('SelectedFirm').valueChanges.subscribe(selectedFirmId => {
-      const selectedFirm = this.firmInfo.find(firm => firm.id === selectedFirmId);
-      if (selectedFirm) {
-        this.caseForm.get('firmCity').setValue(selectedFirm.city);
-        this.caseForm.get('firmState').setValue(selectedFirm.state);
-        this.caseForm.get('firmZip').setValue(selectedFirm.zip);
+    this.caseForm.get('firmId').valueChanges.subscribe((firmId) => {
+      const firmId = this.firmInfo.find((firm) => firm.id === firmId);
+      if (firmId) {
+        this.caseForm.get('firmCity').setValue(firmId.city);
+        this.caseForm.get('firmState').setValue(firmId.state);
+        this.caseForm.get('firmZip').setValue(firmId.zip);
       }
     });
   }
   createCaseGroup(): FormGroup {
     const formGroupConfig = {
-      selectedLocation: new FormControl('', [Validators.required]),
+      practiceLocationId: new FormControl('', [Validators.required]),
       category: new FormControl('', [Validators.required]),
       purposeOfVisit: new FormControl('', [Validators.required]),
       caseType: new FormControl('', [Validators.required]),
       doa: new FormControl('', [Validators.required]),
 
       // Attributes for the Insurance section
-      selectedInsurance: new FormControl('', [Validators.required]),
+      insuranceId: new FormControl('', [Validators.required]),
       insuranceCity: new FormControl('', [Validators.required]),
       insuranceState: new FormControl('', [Validators.required]),
       insuranceZip: new FormControl('', [Validators.required]),
 
       // Attributes for the Firm section
-      SelectedFirm: new FormControl('', [Validators.required]),
-      firmCity: new FormControl({value:'',disabled: true}),
-      firmState: new FormControl({value:'',disabled: true}),
-      firmZip: new FormControl({value:'',disabled: true}),
+      firmId: new FormControl('', [Validators.required]),
+      firmCity: new FormControl({ value: '', disabled: true }),
+      firmState: new FormControl({ value: '', disabled: true }),
+      firmZip: new FormControl({ value: '', disabled: true }),
     };
     return new FormGroup(formGroupConfig);
   }
-  getinfo(){
+  getinfo() {
     this.PractiseInfo();
     this.InsuranceInfo();
     this.FirmInfo();
   }
   addCase() {
     this.caseForm.get('firmCity').enable();
-  this.caseForm.get('firmState').enable();
-  this.caseForm.get('firmZip').enable();
+    this.caseForm.get('firmState').enable();
+    this.caseForm.get('firmZip').enable();
     console.log(this.caseForm.value);
     this.caseService
       .case(this.caseForm.value)
@@ -73,28 +73,19 @@ export class CaseComponent {
       control.setErrors(null);
     });
   }
-  PractiseInfo(){
-    this.caseService
-      .getPractiseInfo()
-      .subscribe((response: any[])=>{
-        this.practiceInfo = response;
-      }
-      )
+  PractiseInfo() {
+    this.caseService.getPractiseInfo().subscribe((response: any[]) => {
+      this.practiceInfo = response;
+    });
   }
-  InsuranceInfo(){
-    this.caseService
-    .getInsuranceInfo()
-    .subscribe((response: any[])=>{
+  InsuranceInfo() {
+    this.caseService.getInsuranceInfo().subscribe((response: any[]) => {
       this.insuranceInfo = response;
-    }
-    )
+    });
   }
-  FirmInfo(){
-    this.caseService
-    .getFirmInfo()
-    .subscribe((response: any[])=>{
+  FirmInfo() {
+    this.caseService.getFirmInfo().subscribe((response: any[]) => {
       this.firmInfo = response;
-    }
-    )
+    });
   }
 }

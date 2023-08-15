@@ -3,16 +3,19 @@
     <mat-grid-tile class="matgrid">
       <mat-form-field>
         <mat-label>Select Practice Location</mat-label>
-        <mat-select formControlName="selectedLocation">
-          <mat-option *ngFor="let location of practiceInfo" [value]="location.id">
+        <mat-select formControlName="practiceLocationId">
+          <mat-option
+            *ngFor="let location of practiceInfo"
+            [value]="location.id"
+          >
             {{ location.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="caseForm.get('selectedLocation').hasError('required')"
-        >Select Practice Location</mat-error
-      >
+        <mat-error
+          *ngIf="caseForm.get('practiceLocationId').hasError('required')"
+          >Select Practice Location</mat-error
+        >
       </mat-form-field>
-      
     </mat-grid-tile>
 
     <mat-grid-tile class="matgrid">
@@ -65,14 +68,17 @@
     <mat-grid-tile class="matgrid">
       <mat-form-field>
         <mat-label>Select Insurance</mat-label>
-        <mat-select formControlName="selectedInsurance">
-          <mat-option *ngFor="let insurance of insuranceInfo" [value]="insurance.id">
-            {{ insurance.name}}
+        <mat-select formControlName="insuranceId">
+          <mat-option
+            *ngFor="let insurance of insuranceInfo"
+            [value]="insurance.id"
+          >
+            {{ insurance.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="caseForm.get('selectedInsurance').hasError('required')"
-        >Select Insurance Name</mat-error
-      >
+        <mat-error *ngIf="caseForm.get('insuranceId').hasError('required')"
+          >Select Insurance Name</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -113,12 +119,14 @@
     <mat-grid-tile class="matgrid">
       <mat-form-field>
         <mat-label>Select Firm</mat-label>
-        <mat-select formControlName="SelectedFirm">
+        <mat-select formControlName="firmId">
           <mat-option *ngFor="let firm of firmInfo" [value]="firm.id">
             {{ firm.name }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="caseForm.get('SelectedFirm').hasError('required')">Select Firm Name</mat-error>
+        <mat-error *ngIf="caseForm.get('firmId').hasError('required')"
+          >Select Firm Name</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -126,7 +134,9 @@
       <mat-form-field appearance="outline">
         <mat-label>City</mat-label>
         <input matInput formControlName="firmCity" [disabled]="true" />
-        <mat-error *ngIf="caseForm.get('firmCity').hasError('required')">Firm City is required</mat-error>
+        <mat-error *ngIf="caseForm.get('firmCity').hasError('required')"
+          >Firm City is required</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -134,7 +144,9 @@
       <mat-form-field appearance="outline">
         <mat-label>State</mat-label>
         <input matInput formControlName="firmState" [disabled]="true" />
-        <mat-error *ngIf="caseForm.get('firmState').hasError('required')">Firm State is required</mat-error>
+        <mat-error *ngIf="caseForm.get('firmState').hasError('required')"
+          >Firm State is required</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
@@ -142,7 +154,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Zip</mat-label>
         <input matInput formControlName="firmZip" [disabled]="true" />
-        <mat-error *ngIf="caseForm.get('firmZip').hasError('required')">Firm Zip is required</mat-error>
+        <mat-error *ngIf="caseForm.get('firmZip').hasError('required')"
+          >Firm Zip is required</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
