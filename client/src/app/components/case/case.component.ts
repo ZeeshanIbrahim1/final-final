@@ -18,7 +18,7 @@ export class CaseComponent {
   ngOnInit(): void {
     this.caseForm = this.createCaseGroup();
     this.getinfo();
-    this.caseForm.get('firmId').valueChanges.subscribe((firmId) => {
+    this.caseForm.get('firmId').valueChanges.subscribe((firm) => {
       const firmId = this.firmInfo.find((firm) => firm.id === firmId);
       if (firmId) {
         this.caseForm.get('firmCity').setValue(firmId.city);
