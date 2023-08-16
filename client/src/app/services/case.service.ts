@@ -33,6 +33,15 @@ export class CaseService {
         catchError(this.errorHandlerService.handleError<Case>('case'))
       );
   }
+  getCase(patientId){
+    return this.http
+      .get(`${this.url}/cases/getCase/${patientId}`, this.httpOptions) // Change the return type here too
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError('getPractiseInfo')
+        )
+      );
+  }
   getPractiseInfo(){
     return this.http
       .get(`${this.url}/practicelocation/all`, this.httpOptions) // Change the return type here too
@@ -41,7 +50,16 @@ export class CaseService {
           this.errorHandlerService.handleError('getPractiseInfo')
         )
       );
-
+  }
+  updateCase(id:Number,cases: Case){
+    this.http.put(`${this.url}/cases/update/${id}`, cases, this.httpOptions).subscribe(
+      (response: any) => {
+        console.log('Patient updated successfully:', response);
+      },
+      (error) => {
+        console.error('Error updating patient:', error);
+      }
+    );
   }
   getInsuranceInfo(){
     return this.http

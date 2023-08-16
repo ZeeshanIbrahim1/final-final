@@ -1,15 +1,12 @@
+import { Firm } from "./firm";
+import { Insurance } from "./insurance";
 export interface Case {
+  id:Number;
   practiceLocation: string;
   category: string;
   purposeOfVisit: string;
   caseType: string;
   doa: string;
-  insuranceName: string;
-  insuranceCity: string;
-  insuranceState: string;
-  insuranceZip: string;
-  firmName: string;
-  firmCity: string;
-  firmState: string;
-  firmZip: string;
+  insurance: Insurance[];
+  firm: Firm[];
 }

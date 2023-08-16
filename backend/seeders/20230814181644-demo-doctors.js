@@ -16,7 +16,7 @@ module.exports = {
         middle_name: 'Elizabeth',
         last_name: 'Smith'
       },
-      // Add more doctor data entries here
+      
     ];
 
     // Insert doctors into the "Doctors" table

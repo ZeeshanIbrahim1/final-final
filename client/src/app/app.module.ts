@@ -14,6 +14,8 @@ import { HomeComponent } from './components/home/home.component';
 import { CaseComponent } from './components/case/case.component';
 import { AppointmentComponent } from './components/appointment/appointment.component';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
+import { UpdateCaseComponent } from './components/update-case/update-case.component';
+import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -43,6 +45,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     CaseComponent,
     AppointmentComponent,
     UpdatePatientComponent,
+    UpdateCaseComponent,
+    UpdateAppointmentComponent,
   ],
   imports: [
     BrowserModule,

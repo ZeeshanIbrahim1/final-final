@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Insurance.init({
-    name: DataTypes.STRING
+    insuranceName: DataTypes.STRING,
+    insuranceCity: DataTypes.STRING,
+    insuranceState: DataTypes.STRING,
+    insuranceZip: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Insurance',

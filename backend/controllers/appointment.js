@@ -9,9 +9,9 @@ const addAppoint= async (req, res, next) => {
     console.log("Error in AddAppoint controllers/auth.js");
     res.json("ADD Appoinmtment NOT WORKING!");
   }
-  
-    const {appointment_datetime,appointment_type,duration} =  req.body;
-    await models.Appointment.create({appointment_datetime,appointment_type,duration})
+  const {appointmentDate,appointmentTime,appointmentType,duration} =  req.body;
+  console.log(typeof(appointment_date),typeof(appointment_type),typeof(duration))
+    await models.Appointment.create({appointmentDate,appointmentTime,appointmentType,duration})
     res.status(200).json({ message: "Appointment Added!" });
     next(errors);
 };

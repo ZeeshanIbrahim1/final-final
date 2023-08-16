@@ -5,17 +5,18 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const insurancesData = [
       {
-        name: 'Blue Cross Blue Shield',
+        insuranceName: 'Blue Cross Blue Shield',
+        insuranceCity: 'NYC',
+        insuranceState: 'NY',
+        insuranceZip: '01001',
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        name: 'Aetna',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        name: 'Cigna',
+        insuranceName: 'Aetna',
+        insuranceCity: 'CityA',
+        insuranceState: 'StateA',
+        insuranceZip: '09902',
         createdAt: new Date(),
         updatedAt: new Date(),
       },

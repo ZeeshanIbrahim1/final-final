@@ -80,14 +80,25 @@
 
     <!-- ... (remaining fields) ... -->
 
+    
     <mat-grid-tile class="matgrid">
-      <button
+      <button (click)="onButtonClick()"
         color="primary"
-        [disabled]="!appointmentForm.valid"
         mat-raised-button
       >
-        ADD
+        to home page
       </button>
+    </mat-grid-tile>
+      <mat-grid-tile class="matgrid">
+        <button
+          color="primary"
+          [disabled]="!appointmentForm.valid"
+          mat-raised-button
+        >
+          ADD
+        </button>
+        
+      
     </mat-grid-tile>
   </mat-grid-list>
 </form>

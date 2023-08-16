@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
-    "database": "mysql-boiler",
+    "password": null,
+    "database": "database_final",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

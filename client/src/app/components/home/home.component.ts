@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   patients: Patient[] = [];
+  flattenedData:any[] = [];
   constructor(private patientService: PatientService,private router: Router) {}
   ngOnInit(): void {
     this.fetchPatients();
+    
   }
   fetchPatients(): void {
     this.patientService.getAllPatients()
@@ -22,6 +24,7 @@ export class HomeComponent {
       (data) => {
         console.log('Showing Patients', data);
         this.patients = data; // Assign fetched data to the patients array
+        this.storingFlattenData(this.patients);
       },
       (error) => {
         console.error('Error:', error);
@@ -33,6 +36,43 @@ export class HomeComponent {
   }
   editPatient(patient: Patient) {
    this.router.navigate([`/update-Patient`, patient.id]);
+   }
+   storingFlattenData(patients){
+    try {
+      console.log("Patient variable:",patients)
+      patients.forEach((patient) => {
+        if (patient.Cases && patient.Cases.length > 0) {
+          patient.Cases.forEach((caseItem) => {      
+            this.flattenedData.push({
+              patientId: patient.id,
+              patientName: `${patient.first_name} ${patient.middle_name} ${patient.last_name}`,
+              caseId: caseItem.id,
+              category: caseItem.category,
+              purposeOfVisit: caseItem.purposeOfVisit,
+              caseType: caseItem.caseType,
+              doB: patient.doB,
+              // practiceLocation: caseItem.PracticeLocation.name,
+              insuranceName: caseItem.Insurance.insuranceName,
+              firmName: caseItem.Firm.firmName,
+              doa: caseItem.doa,
+              speciality:'',
+              appointmentDateTime: '',
+              doctorname: ''
+            });
+          });
+        } else {
+          this.flattenedData.push({
+          patientId: patient.id,
+          patientName: `${patient.first_name} ${patient.middle_name} ${patient.last_name}`,
+        })
+        }
+      });
+      
+    } catch (error) {
+      console.log("Error in flatten:",error);
+    }
+    
+    console.log("Flatten Data:",this.flattenedData);
    }
 
   deletePatient(patient: Patient): void {

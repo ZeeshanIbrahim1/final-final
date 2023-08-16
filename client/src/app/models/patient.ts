@@ -1,3 +1,4 @@
+import { Case } from "./case";
 export interface Patient {
   id: number;
   first_name: string;
@@ -11,4 +12,5 @@ export interface Patient {
   state: string;
   zip: string;
   gender: string;
+  Cases: Case[];
 }

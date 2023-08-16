@@ -7,13 +7,14 @@
   <table>
     <thead>
       <tr>
-        <th>First Name</th>
-        <th>Middle Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Gender</th>
+        <th>Patient ID</th>
+        <th>Name</th>
+        <th>Case id</th>
+        <th>Category</th>
+        <th>Purpose of visit</th>
+        <th>Case Type</th>
         <th>DoB</th>
-        <th>ssn</th>
+        <th>DOA</th>
         <th>address</th>
         <th>city</th>
         <th>state</th>
@@ -23,27 +24,34 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let patient of patients">
-        <td>{{ patient.first_name }}</td>
-        <td>{{ patient.middle_name }}</td>
-        <td>{{ patient.last_name }}</td>
-        <td>{{ patient.email }}</td>
-        <td>{{ patient.gender }}</td>
-        <td>{{ patient.doB  }} </td>
-        <td>{{ patient.ssn }}</td>
-        <td>{{ patient.address }}</td>
-        <td>{{ patient.city }}</td>
-        <td>{{ patient.state }}</td>
-        <td>{{ patient.zip }}</td>
-        <td>
-          <button class="btnform" (click)="editPatient(patient)">Edit</button>
-        </td>
-        <td>
-          <button class="btnform" (click)="deletePatient(patient)">
-            Delete
-          </button>
-        </td>
-      </tr>
+        <ng-container *ngFor="let data of flattenedData">
+          <tr>
+              <td>{{ data.patientId }}</td>
+              <td>{{ data.first_name }} {{ data.middle_name }} {{ data.last_name }}</td>
+              <td>{{ data.caseId }}</td>
+              <td>{{ data.category }}</td>
+              <td>{{ data.purposeOfVisit }}</td>
+              <td>{{ data.caseType }}</td>
+              <td>{{ data.doB }}</td>
+              <td>{{ data.practiceLocation }}</td>
+              <td>{{ data.insuranceName}}</td>
+              <td>{{ data.firmName }}</td>
+              <td>{{ data.doa }}</td>
+              <!-- <td>Insert Speciality data here</td>
+              <td>Insert Appointment date & time data here</td>
+              <td> Insert Doctor Name data here </td> -->
+              <td></td>
+              <td>
+                <button class="btnform" (click)="editPatient(data)">Edit</button>
+              </td>
+              <td>
+                <button class="btnform" (click)="deletePatient(data)">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        
     </tbody>
   </table>
 </div>

@@ -56,7 +56,6 @@ db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId' });
 db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId' });
 db.Appointment.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
 db.Appointment.belongsTo(db.Case, { foreignKey: 'caseId' });
-db.Appointment.belongsTo(db.Patient, { foreignKey: 'patientId' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

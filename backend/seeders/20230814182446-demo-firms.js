@@ -5,18 +5,18 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const firmsData = [
       {
-        name: 'ABC Law Firm',
-        city: 'New York',
-        state: 'NY',
-        zip: '10001',
+        firmName: 'ABC Law Firm',
+        firmCity: 'New York',
+        firmState: 'NY',
+        firmZip: '10001',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        name: 'XYZ Legal Services',
-        city: 'Los Angeles',
-        state: 'CA',
-        zip: '90001',
+        firmName: 'XYZ Legal Services',
+        firmCity: 'Los Angeles',
+        firmState: 'CA',
+        firmZip: '90001',
         updatedAt: new Date(),
         createdAt: new Date()
       },

@@ -9,6 +9,7 @@ import { AppointmentComponent } from './components/appointment/appointment.compo
 import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from '../app/auth.guard';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
+import { UpdateCaseComponent } from './components/update-case/update-case.component';
 
 const routes: Routes = [
   { path: '', component: RegisterComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'case', component: CaseComponent },
   { path: 'appointment', component: AppointmentComponent },
   {path:'update-Patient/:id', component: UpdatePatientComponent},
+  {path:'update-case/:id', component:UpdateCaseComponent },
   { path: '**', redirectTo: '' },
 ];
 

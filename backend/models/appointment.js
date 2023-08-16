@@ -6,8 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   }
   Appointment.init(
     {
-      appointment_datetime: DataTypes.DATE,
-      appointment_type: DataTypes.STRING,
+      appointmentDate: DataTypes.DATE,
+      appointmentTime: DataTypes.STRING,
+      appointmentType: DataTypes.STRING,
       duration: DataTypes.INTEGER,
       deleted: DataTypes.BOOLEAN,
     },

@@ -6,10 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Firm.init(
     {
-      name: DataTypes.STRING,
-      city: DataTypes.STRING,
-      state: DataTypes.STRING,
-      zip: DataTypes.STRING,
+      firmName: DataTypes.STRING,
+      firmCity: DataTypes.STRING,
+      firmState: DataTypes.STRING,
+      firmZip: DataTypes.STRING
     },
     {
       sequelize,

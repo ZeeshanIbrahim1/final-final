@@ -14,6 +14,8 @@ import { UpdatePatientComponent } from '../components/update-patient/update-pati
 })
 export class PatientService {
     private url = 'http://localhost:3000';
+    id:any;
+    setId:any;
     constructor(
         private http: HttpClient,
         private errorHandlerService: ErrorHandlerService,
@@ -61,6 +63,14 @@ export class PatientService {
         console.error('Error updating patient:', error);
       }
     );
+  }
+  setPatientId(id_R){
+    this.setId  = id_R;
+    console.log("set Id", this.setId)
+  }
+  getPatientId(){
+    console.log("get", this.setId);
+    return this.setId;
   }
   deletePatient(id:Number){
     console.log("IN AUTH SERVICE",id)

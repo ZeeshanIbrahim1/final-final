@@ -3,7 +3,6 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Case extends Model {
     static associate(models) {
-      // define association here
     }
     static addCase(
       practiceLocation,
@@ -21,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       firmZip
     ) {
       return Case.create({
+        practiceLocation,
         category,
         purposeOfVisit,
         caseType,
@@ -35,6 +35,41 @@ module.exports = (sequelize, DataTypes) => {
         firmZip,
       });
     }
+    static async getOneCase(id){
+      console.log("IN getOneCase")
+      try{
+        const cases = await Case.findOne({ where: { id } });
+        return cases; 
+      }
+      catch(error){
+        console.log("Error in getOneCase",error);
+        throw error;
+      }
+    }
+    static async updatePatient(
+      caseId,
+      firmId,
+      patientId,
+      insuranceId,
+      practiceLocationId,
+      category,
+      purposeOfVisit,
+      caseType,
+      doa){
+        return Case.update({
+      firmId,
+      patientId,
+      insuranceId,
+      practiceLocationId,
+      category,
+      purposeOfVisit,
+      caseType,
+      doa,
+        },{
+          where:{id: caseId}
+        })
+      }
+
   }
   Case.init(
     {
@@ -42,14 +77,6 @@ module.exports = (sequelize, DataTypes) => {
       purposeOfVisit: DataTypes.STRING,
       caseType: DataTypes.STRING,
       doa: DataTypes.STRING,
-      insuranceName: DataTypes.STRING,
-      insuranceCity: DataTypes.STRING,
-      insuranceState: DataTypes.STRING,
-      insuranceZip: DataTypes.STRING,
-      firmName: DataTypes.STRING,
-      firmCity: DataTypes.STRING,
-      firmState: DataTypes.STRING,
-      firmZip: DataTypes.STRING,
       deleted: DataTypes.BOOLEAN,
     },
     {
