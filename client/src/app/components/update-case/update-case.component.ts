@@ -34,15 +34,7 @@ export class UpdateCaseComponent {
 
       // Attributes for the Insurance section
       insuranceId: new FormControl('', [Validators.required]),
-      insuranceCity: new FormControl('', [Validators.required]),
-      insuranceState: new FormControl('', [Validators.required]),
-      insuranceZip: new FormControl('', [Validators.required]),
-
-      // Attributes for the Firm section
       firmId: new FormControl('', [Validators.required]),
-      firmCity: new FormControl({ value: '', disabled: true }),
-      firmState: new FormControl({ value: '', disabled: true }),
-      firmZip: new FormControl({ value: '', disabled: true }),
     };
     return new FormGroup(formGroupConfig);
   }

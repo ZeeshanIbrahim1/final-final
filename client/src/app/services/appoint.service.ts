@@ -34,4 +34,22 @@ export class AppointService {
         catchError(this.errorHandlerService.handleError<Appoint>('appoint'))
       );
   }
+  getSpecialtyInfo(){
+    return this.http
+      .get(`${this.url}/specialty/all`, this.httpOptions) // Change the return type here too
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError('getPractiseInfo')
+        )
+      );
+  }
+  getDoctorInfo(){
+    return this.http
+      .get(`${this.url}/doctors/all`, this.httpOptions) // Change the return type here too
+      .pipe(
+        catchError(
+          this.errorHandlerService.handleError('InsuranceInfo')
+        )
+      );
+  }
 }

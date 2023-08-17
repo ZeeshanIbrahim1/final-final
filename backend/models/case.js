@@ -73,9 +73,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Case.init(
     {
-      category: DataTypes.STRING,
       purposeOfVisit: DataTypes.STRING,
-      caseType: DataTypes.STRING,
       doa: DataTypes.STRING,
       deleted: DataTypes.BOOLEAN,
     },

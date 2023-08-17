@@ -14,15 +14,17 @@ export class CaseComponent {
   practiceInfo: any[] = [];
   insuranceInfo: any[] = [];
   firmInfo: any[] = [];
+  categoryInfo: any[] = [];
+  caseTypeInfo: any[] = [];
   patientId:any;
 
   constructor(private caseService: CaseService, private router: Router,private patientService:PatientService) {}
   ngOnInit(): void {
     this.patientId = this.patientService.getPatientId();
     console.log(this.patientId);
-    this.caseForm = this.createCaseGroup();
     this.FirmInfo();
     this.getinfo();
+    this.caseForm = this.createCaseGroup();
     // this.caseForm.get('firmId').valueChanges.subscribe((firm) => {
     //   console.log("ERORR1",firm)
     //   const firmId = this.firmInfo.find((firm) => firm.id === firm);
@@ -37,9 +39,9 @@ export class CaseComponent {
     const formGroupConfig = {
       patientId: new FormControl(this.patientId, [Validators.required]),
       practiceLocationId: new FormControl('', [Validators.required]),
-      category: new FormControl('', [Validators.required]),
+      categoryId: new FormControl('', [Validators.required]),
       purposeOfVisit: new FormControl('', [Validators.required]),
-      caseType: new FormControl('', [Validators.required]),
+      caseTypeId: new FormControl('', [Validators.required]),
       doa: new FormControl('', [Validators.required]),
 
       // Attributes for the Insurance section
@@ -54,20 +56,17 @@ export class CaseComponent {
     return new FormGroup(formGroupConfig);
   }
   getinfo() {
-    this.PractiseInfo();
+    this.PracticeInfo();
     this.InsuranceInfo();
+    this.CategoryInfo();
+    this.CaseTypeInfo();
     // this.FirmInfo();
   }
   addCase() {
-    // this.caseForm.get('firmCity').enable();
-    // this.caseForm.get('firmState').enable();
-    // this.caseForm.get('firmZip').enable();
-    console.log(this.caseForm.value);
     this.caseService
       .case(this.caseForm.value)
       .subscribe((msg) => {
         console.log(msg);
-        // this.patientService.setPatientId(msg);
       });
     this.router.navigate(['/appointment']);
     // this.caseForm.reset();
@@ -80,8 +79,19 @@ export class CaseComponent {
       control.setErrors(null);
     });
   }
-  
-  PractiseInfo() {
+  CategoryInfo() {
+    this.caseService.getCategoryInfo().subscribe((response: any[]) => {
+      console.log(response)
+      this.categoryInfo = response;
+    });
+  }
+  CaseTypeInfo(){
+    this.caseService.getCaseTypeInfo().subscribe((response: any[]) => {
+      console.log(response)
+      this.caseTypeInfo = response;
+    });
+  }
+  PracticeInfo() {
     this.caseService.getPractiseInfo().subscribe((response: any[]) => {
       console.log(response)
       this.practiceInfo = response;

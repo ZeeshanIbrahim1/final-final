@@ -21,6 +21,7 @@ const addPatient = async (req, res, next) => {
     zip,
     date_of_birth
   } = req.body;
+  console.log("dateofBirth", date_of_birth, typeof(date_of_birth))
   const storedDoB = await models.Patient.findByDoB(date_of_birth);
 
   if (storedDoB) {
@@ -52,17 +53,22 @@ const addPatient = async (req, res, next) => {
 const getAllPatients = async (req, res, next) => {
   try {
     const patients = await models.Patient.findAll({
-      include: {
-        model: models.Case,
-        include: [
-          {
-            model: models.Firm
-          },
-          {
-            model: models.Insurance
-          }
-        ]
-      }
+      include: [
+        {
+          model: models.Case,
+          include: [
+            models.Firm,
+            models.Insurance,
+            models.PracticeLocation,
+            models.Category,
+            models.CaseType,
+            {
+              model: models.Appointment,
+              include: [models.Specialty, models.Doctors],
+            },
+          ],
+        },
+      ],
     });
 
     if (!patients || patients.length === 0) {

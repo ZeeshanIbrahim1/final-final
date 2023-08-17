@@ -27,7 +27,7 @@
         <ng-container *ngFor="let data of flattenedData">
           <tr>
               <td>{{ data.patientId }}</td>
-              <td>{{ data.first_name }} {{ data.middle_name }} {{ data.last_name }}</td>
+              <td>{{ data.patientName }}</td>
               <td>{{ data.caseId }}</td>
               <td>{{ data.category }}</td>
               <td>{{ data.purposeOfVisit }}</td>
@@ -42,10 +42,10 @@
               <td> Insert Doctor Name data here </td> -->
               <td></td>
               <td>
-                <button class="btnform" (click)="editPatient(data)">Edit</button>
+                <button class="btnform" (click)="editPatient(data.patientId,data.caseId,data.appointmentId)">Edit</button>
               </td>
               <td>
-                <button class="btnform" (click)="deletePatient(data)">
+                <button class="btnform" (click)="deletePatient(data.patientId)">
                   Delete
                 </button>
               </td>

@@ -12,30 +12,35 @@ import { PatientService } from 'src/app/services/patient.service';
 })
 export class AppointmentComponent {
   caseId:any;
-  patientId:any;
+  specialtyInfo: any[] = [];
+  doctorInfo: any[] = [];
+
+
   appointmentForm: FormGroup;
   constructor(private appointService: AppointService,private patientService:PatientService, private router:Router) {}
   ngOnInit(): void {
     this.caseId = this.patientService.getPatientId();
     console.log(this.caseId);
     this.appointmentForm = this.createFormGroup();
+    this.getInfo();
   }
   createFormGroup(): FormGroup {
     const formGroupConfig = {
-      caseId :  new FormControl(this.caseId, [Validators.required]),
+      // caseId :  new FormControl(this.caseId, [Validators.required]),
       appointmentDate: new FormControl('', [Validators.required]),
       appointmentTime: new FormControl('', [Validators.required]),
       appointmentType: new FormControl('', [Validators.required]),
-      specialty: new FormControl('', [Validators.required]),
-      doctor: new FormControl('', [Validators.required]),
+      specialtyId: new FormControl('', [Validators.required]),
+      doctorId: new FormControl('', [Validators.required]),
 
       // Attributes for the Insurance section
-      practiceLocation: new FormControl('', [Validators.required]),
+      // practiceLocationId: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
     };
     return new FormGroup(formGroupConfig);
   }
   addAppoint() {
+    console.log(this.appointmentForm.value)
     const selectedDate: Date = this.appointmentForm.get('appointmentDate').value;
     const formattedDate = selectedDate.toISOString();
 
@@ -59,6 +64,22 @@ export class AppointmentComponent {
     Object.keys(formControls).forEach((controlName) => {
       const control = formControls[controlName];
       control.setErrors(null);
+    });
+  }
+  getInfo(){
+    this.getDoctorInfo();
+    this.getSpecialtyInfo();
+  }
+  getSpecialtyInfo(){
+    this.appointService.getSpecialtyInfo().subscribe((response: any[]) => {
+      console.log(response)
+      this.specialtyInfo = response;
+    });
+  }
+  getDoctorInfo() {
+    this.appointService.getDoctorInfo().subscribe((response: any[]) => {
+      console.log(response)
+      this.doctorInfo = response;
     });
   }
 }

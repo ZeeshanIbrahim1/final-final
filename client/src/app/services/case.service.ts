@@ -42,6 +42,24 @@ export class CaseService {
         )
       );
   }
+  getCategoryInfo(){
+    return this.http
+    .get(`${this.url}/category/all`, this.httpOptions) // Change the return type here too
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('getPractiseInfo')
+      )
+    );
+  }
+  getCaseTypeInfo(){
+    return this.http
+    .get(`${this.url}/caseType/all`, this.httpOptions) // Change the return type here too
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('getPractiseInfo')
+      )
+    );
+  }
   getPractiseInfo(){
     return this.http
       .get(`${this.url}/practicelocation/all`, this.httpOptions) // Change the return type here too

@@ -34,8 +34,8 @@ export class HomeComponent {
   addPatient(){
     this.router.navigate(['/patient']);
   }
-  editPatient(patient: Patient) {
-   this.router.navigate([`/update-Patient`, patient.id]);
+  editPatient(id1,id2,id3) {
+   this.router.navigate([`/update-Patient`, id1,id2,id3]);
    }
    storingFlattenData(patients){
     try {

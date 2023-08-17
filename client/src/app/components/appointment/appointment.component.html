@@ -44,22 +44,42 @@
 
     <!-- Specialty -->
     <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Specialty</mat-label>
-        <input matInput placeholder="Specialty" formControlName="specialty" />
+      <mat-form-field>
+        <mat-label>Select Specialty</mat-label>
+        <mat-select formControlName="specialtyId">
+          <mat-option
+            *ngFor="let specialty of specialtyInfo"
+            [value]="specialty.id"
+          >
+            {{ specialty.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="appointmentForm.get('specialtyId').hasError('required')"
+          >Select Specialty</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
     <!-- Doctor -->
     <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Doctor</mat-label>
-        <input matInput placeholder="Doctor" formControlName="doctor" />
+      <mat-form-field>
+        <mat-label>Select Doctor</mat-label>
+        <mat-select formControlName="doctorId">
+          <mat-option
+            *ngFor="let doctor of doctorInfo"
+            [value]="doctor.id"
+          >
+            {{ doctor.first_name }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="appointmentForm.get('doctorId').hasError('required')"
+          >Select Doctor</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 
     <!-- Practice Location -->
-    <mat-grid-tile class="matgrid">
+    <!-- <mat-grid-tile class="matgrid">
       <mat-form-field appearance="outline">
         <mat-label>Practice Location</mat-label>
         <input
@@ -68,7 +88,7 @@
           formControlName="practiceLocation"
         />
       </mat-form-field>
-    </mat-grid-tile>
+    </mat-grid-tile> -->
 
     <!-- Duration -->
     <mat-grid-tile class="matgrid">

@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PatientService } from 'src/app/services/patient.service';
 import { Patient } from 'src/app/models/patient';
+// const { format } = require('date-fns');
 
 @Component({
   selector: 'app-patients',
@@ -41,6 +42,13 @@ export class PatientsComponent implements OnInit {
     return new FormGroup(formGroupConfig);
   }
   addPatient() {
+    // const selectedDate: Date = this.patientForm.get('date_of_birth').value;
+    // const formattedDate = selectedDate.toISOString();
+
+    // const formData = {
+    //   ...this.patientForm.value,
+    //   date_of_birth: formattedDate, 
+    // };
     console.log(this.patientForm.value);
     this.patientService.patient(this.patientForm.value).subscribe( (msg) => {
       console.log("Adding pateint id:",msg);

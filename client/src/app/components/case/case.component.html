@@ -18,15 +18,23 @@
       </mat-form-field>
     </mat-grid-tile>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Category</mat-label>
-        <input matInput formControlName="category" />
-        <mat-error *ngIf="caseForm.get('category').hasError('required')"
-          >Category is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
+      <mat-grid-tile class="matgrid">
+        <mat-form-field>
+          <mat-label>Select Category</mat-label>
+          <mat-select formControlName="categoryId">
+            <mat-option
+              *ngFor="let category of categoryInfo"
+              [value]="category.id"
+            >
+              {{ category.categoryName }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="caseForm.get('categoryId').hasError('required')"
+            >Select Category</mat-error
+          >
+        </mat-form-field>
+      </mat-grid-tile>
 
     <mat-grid-tile class="matgrid">
       <mat-form-field appearance="outline">
@@ -39,11 +47,19 @@
     </mat-grid-tile>
 
     <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Case Type</mat-label>
-        <input matInput formControlName="caseType" />
-        <mat-error *ngIf="caseForm.get('caseType').hasError('required')"
-          >Case Type is required</mat-error
+      <mat-form-field>
+        <mat-label>Select Case Type</mat-label>
+        <mat-select formControlName="caseTypeId">
+          <mat-option
+            *ngFor="let case of caseTypeInfo"
+            [value]="case.id"
+          >
+            {{ case.Name }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="caseForm.get('caseTypeId').hasError('required')"
+          >Select Case Type</mat-error
         >
       </mat-form-field>
     </mat-grid-tile>
