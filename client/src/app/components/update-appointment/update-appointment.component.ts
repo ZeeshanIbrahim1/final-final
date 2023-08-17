@@ -21,7 +21,7 @@ export class UpdateAppointmentComponent {
     this.route.paramMap.subscribe(params => {
       this.appointmentId = +params.get('id');
       console.log("id",this.appointmentId);
-      this.caseId = this.caseService.getId(this.appointmentId);
+      this.caseId = this.caseService.getCaseId(this.appointmentId);
       console.log("IN UPDATE APPOINTMENT COMPONENT:",this.caseId);
       this.updateAppointmentForm = this.createFormGroup();
     });

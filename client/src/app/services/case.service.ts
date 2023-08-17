@@ -97,7 +97,7 @@ export class CaseService {
         )
       );
   }
-  getId(appointId){
+  getCaseId(appointId){
     return this.http.get(`${this.url}/cases/getId${appointId}`).subscribe((msg) =>{
       console.log(msg);
     })

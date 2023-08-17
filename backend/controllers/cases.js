@@ -80,9 +80,15 @@ const updateCase = async (req, res) => {
     );
   res.status(201).json({ message: "Case updated!" });
  }
+ const getId= async (req,res,next)=>{
+  const appointId = req.params.id;
+  console.log("In CASES Controllers:". appointId)
+  await models.Case.getId(appointId);
+ }
 
 module.exports = {
   addCase,
   getCase,
-  updateCase
+  updateCase,
+  getId
 };
