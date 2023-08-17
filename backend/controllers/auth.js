@@ -58,7 +58,7 @@ exports.login = async (req, res, next) => {
           userId: storedUser.id,
         },
         "secretfortoken",
-        { expiresIn: "1h" }
+        { expiresIn: "2h" }
       );
     } else {
       // Handle the case where the user doesn't have a valid ID

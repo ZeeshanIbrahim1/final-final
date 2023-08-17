@@ -5,34 +5,26 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
     }
     static addCase(
-      practiceLocation,
-      category,
+      caseId,
       purposeOfVisit,
-      caseType,
       doa,
-      insuranceName,
-      insuranceCity,
-      insuranceState,
-      insuranceZip,
-      firmName,
-      firmCity,
-      firmState,
-      firmZip
+      firmId,
+      insuranceId,
+      patientId,
+      practiceLocationId,
+      caseTypeId,
+      categoryId,
     ) {
       return Case.create({
-        practiceLocation,
-        category,
+        caseId,
         purposeOfVisit,
-        caseType,
         doa,
-        insuranceName,
-        insuranceCity,
-        insuranceState,
-        insuranceZip,
-        firmName,
-        firmCity,
-        firmState,
-        firmZip,
+        firmId,
+        insuranceId,
+        patientId,
+        practiceLocationId,
+        caseTypeId,
+        categoryId,
       });
     }
     static async getOneCase(id){
@@ -46,29 +38,28 @@ module.exports = (sequelize, DataTypes) => {
         throw error;
       }
     }
-    static async updatePatient(
+    static async updateCase(
       caseId,
-      firmId,
-      patientId,
-      insuranceId,
-      practiceLocationId,
-      category,
       purposeOfVisit,
-      caseType,
-      doa){
-        return Case.update({
-      firmId,
-      patientId,
-      insuranceId,
-      practiceLocationId,
-      category,
-      purposeOfVisit,
-      caseType,
       doa,
+      // firmId,
+      insuranceId,
+      practiceLocationId,
+      caseTypeId,
+      categoryId,
+      ){
+        return Case.update({
+          purposeOfVisit,
+          doa,
+          // firmId,
+          insuranceId,
+          practiceLocationId,
+          caseTypeId,
+          categoryId,
         },{
           where:{id: caseId}
         })
-      }
+    }
 
   }
   Case.init(

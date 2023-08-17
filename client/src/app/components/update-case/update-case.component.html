@@ -3,171 +3,128 @@ class="updateCaseForm"
 [formGroup]="updateCaseForm" 
 (ngSubmit)="updateCase()" 
 novalidate>
-  <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Practice Location</mat-label>
+      <mat-select formControlName="practiceLocationId">
+        <mat-option
+          *ngFor="let location of practiceInfo"
+          [value]="location.id"
+        >
+          {{ location.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="updateCaseForm.get('practiceLocationId').hasError('required')"
+        >Select Practice Location</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+
     <mat-grid-tile class="matgrid">
       <mat-form-field>
-        <mat-label>Select Practice Location</mat-label>
-        <mat-select formControlName="practiceLocationId">
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="categoryId">
           <mat-option
-            *ngFor="let location of practiceInfo"
-            [value]="location.id"
+            *ngFor="let category of categoryInfo"
+            [value]="category.id"
           >
-            {{ location.name }}
+            {{ category.categoryName }}
           </mat-option>
         </mat-select>
         <mat-error
-          *ngIf="updateCaseForm.get('practiceLocationId').hasError('required')"
-          >Select Practice Location</mat-error
+          *ngIf="updateCaseForm.get('categoryId').hasError('required')"
+          >Select Category</mat-error
         >
       </mat-form-field>
     </mat-grid-tile>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Category</mat-label>
-        <input matInput formControlName="category" />
-        <mat-error *ngIf="updateCaseForm.get('category').hasError('required')"
-          >Category is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
+  <mat-grid-tile class="matgrid">
+    <mat-form-field appearance="outline">
+      <mat-label>Purpose of Visit</mat-label>
+      <input matInput formControlName="purposeOfVisit" />
+      <mat-error *ngIf="updateCaseForm.get('purposeOfVisit').hasError('required')"
+        >Purpose Of Visit is required</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Purpose of Visit</mat-label>
-        <input matInput formControlName="purposeOfVisit" />
-        <mat-error *ngIf="updateCaseForm.get('purposeOfVisit').hasError('required')"
-          >Purpose Of Visit is required</mat-error
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Case Type</mat-label>
+      <mat-select formControlName="caseTypeId">
+        <mat-option
+          *ngFor="let case of caseTypeInfo"
+          [value]="case.id"
         >
-      </mat-form-field>
-    </mat-grid-tile>
+          {{ case.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="updateCaseForm.get('caseTypeId').hasError('required')"
+        >Select Case Type</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Case Type</mat-label>
-        <input matInput formControlName="caseType" />
-        <mat-error *ngIf="updateCaseForm.get('caseType').hasError('required')"
-          >Case Type is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
+  <mat-grid-tile class="matgrid">
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Admission (DOA)</mat-label>
+      <input matInput [matDatepicker]="doaPicker" formControlName="doa" />
+      <mat-error *ngIf="updateCaseForm.get('doa').hasError('required')"
+        >Use mm/dd/yyyy Format</mat-error
+      >
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="doaPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #doaPicker></mat-datepicker>
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Date of Admission (DOA)</mat-label>
-        <input matInput [matDatepicker]="doaPicker" formControlName="doa" />
-        <mat-error *ngIf="updateCaseForm.get('doa').hasError('required')"
-          >Use mm/dd/yyyy Format</mat-error
+<h3>Insurance Information</h3>
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Insurance</mat-label>
+      <mat-select formControlName="insuranceId">
+        <mat-option
+          *ngFor="let insurance of insuranceInfo"
+          [value]="insurance.id"
         >
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="doaPicker"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #doaPicker></mat-datepicker>
-      </mat-form-field>
-    </mat-grid-tile>
-  </mat-grid-list>
-  Insurance Information
-  <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
-    <mat-grid-tile class="matgrid">
-      <mat-form-field>
-        <mat-label>Select Insurance</mat-label>
-        <mat-select formControlName="insuranceId">
-          <mat-option
-            *ngFor="let insurance of insuranceInfo"
-            [value]="insurance.id"
-          >
-            {{ insurance.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="updateCaseForm.get('insuranceId').hasError('required')"
-          >Select Insurance Name</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
+          {{ insurance.insuranceName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="updateCaseForm.get('insuranceId').hasError('required')"
+        >Select Insurance Name</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list> 
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input matInput formControlName="insuranceCity" />
-        <mat-error *ngIf="updateCaseForm.get('insuranceCity').hasError('required')"
-          >Insurance City is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
+<!-- Firm Information -->
+<h3>Firm Information</h3>
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Firm</mat-label>
+      <mat-select formControlName="firmId">
+        <mat-option *ngFor="let firm of firmInfo" [value]="firm.id">
+          {{ firm.firmName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="updateCaseForm.get('firmId').hasError('required')"
+        >Select Firm Name</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
 
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <input matInput formControlName="insuranceState" />
-        <mat-error *ngIf="updateCaseForm.get('insuranceState').hasError('required')"
-          >State is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Zip</mat-label>
-        <input matInput formControlName="insuranceZip" />
-        <mat-error *ngIf="updateCaseForm.get('insuranceZip').hasError('required')"
-          >Zip is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-  </mat-grid-list>
-
-  <!-- Firm Information -->
-  Firm Information
-  <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
-    <mat-grid-tile class="matgrid">
-      <mat-form-field>
-        <mat-label>Select Firm</mat-label>
-        <mat-select formControlName="firmId">
-          <mat-option *ngFor="let firm of firmInfo" [value]="firm.id">
-            {{ firm.name }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="updateCaseForm.get('firmId').hasError('required')"
-          >Select Firm Name</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input matInput formControlName="firmCity" [disabled]="true" />
-        <mat-error *ngIf="updateCaseForm.get('firmCity').hasError('required')"
-          >Firm City is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <input matInput formControlName="firmState" [disabled]="true" />
-        <mat-error *ngIf="updateCaseForm.get('firmState').hasError('required')"
-          >Firm State is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Zip</mat-label>
-        <input matInput formControlName="firmZip" [disabled]="true" />
-        <mat-error *ngIf="updateCaseForm.get('firmZip').hasError('required')"
-          >Firm Zip is required</mat-error
-        >
-      </mat-form-field>
-    </mat-grid-tile>
-
-    <mat-grid-tile class="matgrid">
-      <button color="primary" [disabled]="!updateCaseForm.valid" mat-raised-button>
-        ADD
-      </button>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <mat-grid-tile class="matgrid">
+    <button color="primary" [disabled]="!updateCaseForm.valid" mat-raised-button>
+      UPDATE
+    </button>
+  </mat-grid-tile>
+</mat-grid-list>
 </form>

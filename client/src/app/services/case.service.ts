@@ -72,7 +72,7 @@ export class CaseService {
   updateCase(id:Number,cases: Case){
     this.http.put(`${this.url}/cases/update/${id}`, cases, this.httpOptions).subscribe(
       (response: any) => {
-        console.log('Patient updated successfully:', response);
+        console.log('Cases updated successfully:', response);
       },
       (error) => {
         console.error('Error updating patient:', error);
@@ -96,5 +96,10 @@ export class CaseService {
           this.errorHandlerService.handleError('FirmInfo')
         )
       );
+  }
+  getId(appointId){
+    return this.http.get(`${this.url}/cases/getId${appointId}`).subscribe((msg) =>{
+      console.log(msg);
+    })
   }
 }

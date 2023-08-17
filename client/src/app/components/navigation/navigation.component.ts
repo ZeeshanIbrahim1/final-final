@@ -12,12 +12,9 @@ export class NavigationComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.authService.isUserLoggedIn$.subscribe((isLoggedIn) => {
-      this.isLoggedIn = isLoggedIn;
-    });
   }
 
   signOut(): void {
-    // this.authService.signOut();
+    this.authService.signOut();
   }
 }

@@ -1,3 +1,4 @@
+<button color="primary" (click)="tologin()" mat-raised-button>Log in</button>
 <div>
   <form [formGroup]="registerForm" (ngSubmit)="register()" novalidate class="registerForm">
     <mat-form-field appearance="outline">
@@ -29,5 +30,6 @@
     </mat-form-field>
     
     <button color="primary" [disabled]="!registerForm.valid" mat-raised-button>Sign Up!</button>
+    <br>
   </form> 
 </div>

@@ -14,16 +14,16 @@ const addCase = async (req, res, next) => {
     patientId,
     insuranceId,
     practiceLocationId,
-    category,
+    categoryId,
     purposeOfVisit,
-    caseType,
+    caseTypeId,
     doa,
   } = req.body;
 
   const caseStored = await models.Case.create({
-    category,
+    categoryId,
     purposeOfVisit,
-    caseType,
+    caseTypeId,
     doa,
     firmId,
     insuranceId,
@@ -56,43 +56,28 @@ const getCase = async (req,res, next) =>{
 }
 
 const updateCase = async (req, res) => { 
+  console.log("aaaaaaaaaaa:",req.body);
   const caseId = req.params.id;
-  const {firmId,
-    patientId,
-    insuranceId,
+  console.log("CASE id and its type:",caseId,typeof(caseId))
+  const {
     practiceLocationId,
-    practiceLocation,
-    category,
+    categoryId,
     purposeOfVisit,
-    caseType,
+    caseTypeId,
     doa,
-    insuranceName,
-    insuranceCity,
-    insuranceState,
-    insuranceZip,
-    firmName,
-    firmCity,
-    firmState,
-    firmZip,} = req.body;
-  await models.Patient.updatePatient(
+    insuranceId,
+    firmId} = req.body;
+    console.log("FIRRRRRRRRRRRRM IDDDDDDD:",firmId,typeof(firmId))
+  await models.Case.updateCase(
     caseId,
-    firmId,
-    patientId,
-    insuranceId,
-    practiceLocationId,
-    practiceLocation,
-    category,
-    purposeOfVisit,
-    caseType,
-    doa,
-    insuranceName,
-    insuranceCity,
-    insuranceState,
-    insuranceZip,
-    firmName,
-    firmCity,
-    firmState,
-    firmZip);
+      purposeOfVisit,
+      doa,
+      firmId,
+      insuranceId,
+      practiceLocationId,
+      caseTypeId,
+      categoryId,
+    );
   res.status(201).json({ message: "Case updated!" });
  }
 

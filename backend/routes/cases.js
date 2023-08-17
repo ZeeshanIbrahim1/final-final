@@ -6,6 +6,6 @@ const casesController = require("../controllers/cases");
 
 router.post("/add", casesController.addCase);
 router.get("/getCase/:id", casesController.getCase)
-router.put("/cases/:id",casesController.updateCase);
+router.put("/update/:id",casesController.updateCase);
 
 module.exports = router;

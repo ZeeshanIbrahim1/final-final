@@ -25,15 +25,6 @@ export class CaseComponent {
     this.FirmInfo();
     this.getinfo();
     this.caseForm = this.createCaseGroup();
-    // this.caseForm.get('firmId').valueChanges.subscribe((firm) => {
-    //   console.log("ERORR1",firm)
-    //   const firmId = this.firmInfo.find((firm) => firm.id === firm);
-    //   if (firmId) {
-    //     this.caseForm.get('firmCity').setValue(firmId.city);
-    //     this.caseForm.get('firmState').setValue(firmId.state);
-    //     this.caseForm.get('firmZip').setValue(firmId.zip);
-    //   }
-    // });
   }
   createCaseGroup(): FormGroup {
     const formGroupConfig = {
@@ -43,14 +34,7 @@ export class CaseComponent {
       purposeOfVisit: new FormControl('', [Validators.required]),
       caseTypeId: new FormControl('', [Validators.required]),
       doa: new FormControl('', [Validators.required]),
-
-      // Attributes for the Insurance section
       insuranceId: new FormControl('', [Validators.required]),
-      // insuranceCity: new FormControl('', [Validators.required]),
-      // insuranceState: new FormControl('', [Validators.required]),
-      // insuranceZip: new FormControl('', [Validators.required]),
-
-      // Attributes for the Firm section
       firmId: new FormControl('', [Validators.required]),
     };
     return new FormGroup(formGroupConfig);
@@ -60,18 +44,8 @@ export class CaseComponent {
     this.InsuranceInfo();
     this.CategoryInfo();
     this.CaseTypeInfo();
-    // this.FirmInfo();
   }
-  addCase() {
-    this.caseService
-      .case(this.caseForm.value)
-      .subscribe((msg) => {
-        console.log(msg);
-      });
-    this.router.navigate(['/appointment']);
-    // this.caseForm.reset();
-    // this.clearErrorStates();
-  }
+  
   clearErrorStates() {
     const formControls = this.caseForm.controls;
     Object.keys(formControls).forEach((controlName) => {
@@ -106,5 +80,16 @@ export class CaseComponent {
     this.caseService.getFirmInfo().subscribe((response: any[]) => {
       this.firmInfo = response;
     });
+  }
+  addCase() {
+    this.caseService
+      .case(this.caseForm.value)
+      .subscribe((msg) => {
+        console.log(msg);
+        this.patientService.setPatientId(msg);
+      });
+    this.router.navigate(['/appointment']);
+    // this.caseForm.reset();
+    // this.clearErrorStates();
   }
 }

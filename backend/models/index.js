@@ -44,21 +44,22 @@ Object.keys(db).forEach((modelName) => {
   }
 });
 
-db.Case.belongsTo(db.Firm, { foreignKey: 'firmId' });
-db.Case.belongsTo(db.Insurance, { foreignKey: 'insuranceId' });
-db.Case.belongsTo(db.Patient, { foreignKey: 'patientId' });
-db.Case.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
-db.Case.belongsTo(db.CaseType, { foreignKey: 'caseTypeId' });
-db.Case.belongsTo(db.Category, { foreignKey: 'categoryId' });
+db.Case.belongsTo(db.Firm, { foreignKey: 'firmId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Case.belongsTo(db.Insurance, { foreignKey: 'insuranceId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Case.belongsTo(db.Patient, { foreignKey: 'patientId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Case.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Case.belongsTo(db.CaseType, { foreignKey: 'caseTypeId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Case.belongsTo(db.Category, { foreignKey: 'categoryId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
 
+db.Firm.hasMany(db.Case,{foreignKey:'id'})
 
 db.Patient.hasMany(db.Case, { foreignKey: 'patientId' });
 
 
-db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId' });
-db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId' });
+db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
+db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId', onUpdate: 'RESTRICT', onDelete: 'RESTRICT' });
 // db.Appointment.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
-db.Appointment.belongsTo(db.Case, { foreignKey: 'caseId' });
+db.Appointment.belongsTo(db.Case, { foreignKey: 'caseId' , onUpdate: 'RESTRICT', onDelete: 'RESTRICT'});
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

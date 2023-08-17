@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators , AbstractControl, ValidatorFn } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -10,9 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class RegisterComponent {
   registerForm : FormGroup;
 
-  constructor(private authService: AuthService){
-
-  }
+  constructor(private authService: AuthService, private router:Router){}
 
   ngOnInit(): void{
     this.registerForm = this.createFormGroup();
@@ -37,6 +36,7 @@ export class RegisterComponent {
       .subscribe((msg) => console.log(msg)  )
       this.registerForm.reset();
       this.clearErrorStates();
+      
   }
   clearErrorStates() {
     const formControls = this.registerForm.controls;
@@ -45,5 +45,8 @@ export class RegisterComponent {
       const control = formControls[controlName];
       control.setErrors(null);
     });
+  }
+  tologin(){
+    this.router.navigate(['/login']);
   }
 }

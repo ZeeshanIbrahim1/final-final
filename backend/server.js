@@ -22,7 +22,7 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/patients", patientsRoutes);
-app.use("/cases", casesRoutes);
+app.use('/cases', casesRoutes);
 app.use('/specialty', specialtyRoutes);
 app.use('/firm', firmRoutes);
 app.use('/doctors', doctorRoutes);

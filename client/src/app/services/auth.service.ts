@@ -32,6 +32,7 @@ export class AuthService {
     localStorage.removeItem(this.userIdKey);
   }
   getToken(): string | null {
+    console.log("token")
     return localStorage.getItem(this.tokenKey);
   }
 
@@ -43,7 +44,6 @@ export class AuthService {
     localStorage.removeItem(this.tokenKey);
   }
 
-  isUserLoggedIn$ = new BehaviorSubject<boolean>(false);
   userId: Pick<User, 'id'>;
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -81,8 +81,9 @@ export class AuthService {
         tap((tokenObject: any) => {
           if (tokenObject && tokenObject.token && tokenObject.userId) {
             this.userId = tokenObject.userId;
+            console.log("IN auth login", tokenObject.token)
             localStorage.setItem('token', tokenObject.token);
-            this.isUserLoggedIn$.next(true);
+            console.log("IN auth login 2", tokenObject.token)
             this.router.navigate(['/home']); // Ensure the route starts with a slash
           } else {
             console.error('Invalid server response format');
@@ -95,6 +96,10 @@ export class AuthService {
           }>('login')
         )
       );
+  }
+  signOut(){
+    this.removeToken();
+    this.router.navigate(['/login']);
   }
   
   

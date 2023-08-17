@@ -10,18 +10,20 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthGuard } from '../app/auth.guard';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
 import { UpdateCaseComponent } from './components/update-case/update-case.component';
+import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
 const routes: Routes = [
-  { path: '', component: RegisterComponent },
+  { path: '', component: RegisterComponent  },
   { path: 'home', component: HomeComponent },
-  { path: 'navigation', component: NavigationComponent },
+  { path: 'navigation', component: NavigationComponent  },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent },
-  { path: 'patient', component: PatientsComponent },
+  { path: 'signup', component: RegisterComponent},
+  { path: 'patient', component: PatientsComponent  },
   { path: 'case', component: CaseComponent },
-  { path: 'appointment', component: AppointmentComponent },
-  {path:'update-Patient/:id', component: UpdatePatientComponent},
-  {path:'update-case/:id', component:UpdateCaseComponent },
+  { path: 'appointment', component: AppointmentComponent  },
+  {path:  'update-Patient/:id1/:id2', component: UpdatePatientComponent },
+  {path:  'update-case/:id', component:UpdateCaseComponent  },
+  {path:  'update-appointment/:id', component:UpdateAppointmentComponent},
   { path: '**', redirectTo: '' },
 ];
 

@@ -16,7 +16,6 @@ export class HomeComponent {
   constructor(private patientService: PatientService,private router: Router) {}
   ngOnInit(): void {
     this.fetchPatients();
-    
   }
   fetchPatients(): void {
     this.patientService.getAllPatients()
@@ -34,8 +33,8 @@ export class HomeComponent {
   addPatient(){
     this.router.navigate(['/patient']);
   }
-  editPatient(id1,id2,id3) {
-   this.router.navigate([`/update-Patient`, id1,id2,id3]);
+  editPatient(id1,id2) {
+   this.router.navigate([`/update-Patient`, id1,id2]);
    }
    storingFlattenData(patients){
     try {
@@ -47,7 +46,7 @@ export class HomeComponent {
               patientId: patient.id,
               patientName: `${patient.first_name} ${patient.middle_name} ${patient.last_name}`,
               caseId: caseItem.id,
-              category: caseItem.category,
+              // categoryName: caseItem.Category.categoryName,
               purposeOfVisit: caseItem.purposeOfVisit,
               caseType: caseItem.caseType,
               doB: patient.doB,
@@ -75,9 +74,9 @@ export class HomeComponent {
     console.log("Flatten Data:",this.flattenedData);
    }
 
-  deletePatient(patient: Patient): void {
+  async deletePatient(id) {
     console.log("Front end !")
-      this.patientService.deletePatient(patient.id)
-      this.fetchPatients()
-    }
+    await this.patientService.deletePatient(id)
+    this.ngOnInit();
+  }
 }

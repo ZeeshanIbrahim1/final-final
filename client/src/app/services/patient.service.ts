@@ -74,7 +74,7 @@ export class PatientService {
   }
   deletePatient(id:Number){
     console.log("IN AUTH SERVICE",id)
-    return this.http.delete(`${this.url}/patients/delete/${id}`, this.httpOptions).subscribe(
+    return this.http.delete(`${this.url}/patients/delete/${id}`).subscribe(
       (response: any) => {
         console.log('Patient deleted successfully:', response);
       },
@@ -82,4 +82,5 @@ export class PatientService {
         console.error('Error deleting patient:', error);
       }
     );
-  }}
+  }
+}

@@ -4,6 +4,8 @@ import { PatientService } from 'src/app/services/patient.service';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Patient } from 'src/app/models/patient';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-update-patient',
   templateUrl: './update-patient.component.html',
@@ -12,19 +14,21 @@ import { Patient } from 'src/app/models/patient';
 export class UpdatePatientComponent {
   updatePatientForm: FormGroup;
   patientId: string;
+  caseId: string;
   patientData: any; // To store patient's data
 
-  constructor(private patientService: PatientService,private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private patientService: PatientService,private route: ActivatedRoute, private http: HttpClient,private router: Router) {}
 
   async ngOnInit() {
     this.updatePatientForm = this.createFormGroup();
-    this.patientId = this.route.snapshot.paramMap.get('id'); // Assuming you're passing patient ID as a route parameter
+    this.patientId =  this.route.snapshot.params['id1'];
+    this.caseId = this.route.snapshot.params['id2'];
     await this.fetchUpdatePatient(this.patientId);
   }
   
   createFormGroup(): FormGroup {
     const formGroupConfig = {
-      first_name: new FormControl(`$patients[first.name]`, [
+      first_name: new FormControl(``, [
         Validators.required,
         Validators.minLength(2),
       ]),
@@ -63,6 +67,7 @@ export class UpdatePatientComponent {
   updatePatient() {
     const numericId = parseInt(this.patientId, 10);
     this.patientService.updatePatient(numericId,this.updatePatientForm.value);
+    this.router.navigate(['./update-case/',this.caseId])
   }
   populating(){
     this.updatePatientForm.patchValue({

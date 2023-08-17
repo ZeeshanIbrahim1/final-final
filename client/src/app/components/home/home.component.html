@@ -26,6 +26,7 @@
     <tbody>
         <ng-container *ngFor="let data of flattenedData">
           <tr>
+            <td>{{ data.firmName }}</td>
               <td>{{ data.patientId }}</td>
               <td>{{ data.patientName }}</td>
               <td>{{ data.caseId }}</td>
@@ -35,14 +36,13 @@
               <td>{{ data.doB }}</td>
               <td>{{ data.practiceLocation }}</td>
               <td>{{ data.insuranceName}}</td>
-              <td>{{ data.firmName }}</td>
               <td>{{ data.doa }}</td>
               <!-- <td>Insert Speciality data here</td>
               <td>Insert Appointment date & time data here</td>
               <td> Insert Doctor Name data here </td> -->
               <td></td>
               <td>
-                <button class="btnform" (click)="editPatient(data.patientId,data.caseId,data.appointmentId)">Edit</button>
+                <button class="btnform" (click)="editPatient(data.patientId,data.caseId)">Edit</button>
               </td>
               <td>
                 <button class="btnform" (click)="deletePatient(data.patientId)">

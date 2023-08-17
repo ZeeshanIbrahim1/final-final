@@ -26,35 +26,25 @@ export class AppointmentComponent {
   }
   createFormGroup(): FormGroup {
     const formGroupConfig = {
-      // caseId :  new FormControl(this.caseId, [Validators.required]),
+      caseId :  new FormControl(this.caseId, [Validators.required]),
       appointmentDate: new FormControl('', [Validators.required]),
       appointmentTime: new FormControl('', [Validators.required]),
       appointmentType: new FormControl('', [Validators.required]),
       specialtyId: new FormControl('', [Validators.required]),
       doctorId: new FormControl('', [Validators.required]),
-
-      // Attributes for the Insurance section
-      // practiceLocationId: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
     };
     return new FormGroup(formGroupConfig);
   }
   addAppoint() {
     console.log(this.appointmentForm.value)
-    const selectedDate: Date = this.appointmentForm.get('appointmentDate').value;
-    const formattedDate = selectedDate.toISOString();
-
-    const formData = {
-      ...this.appointmentForm.value,
-      appointmentDate: formattedDate, 
-    };
-    console.log(formData.value);
+    console.log(this.appointmentForm.value);
     this.appointService
-    .appoint(formData.value)
+    .appoint(this.appointmentForm.value)
     .subscribe((msg) => console.log(msg));
     // this.appointmentForm.reset();
     this.clearErrorStates();
-    // this.router.navigate(['/home'])
+    this.router.navigate(['/home'])
   }
   onButtonClick(){
     this.router.navigate(['/home']);

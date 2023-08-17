@@ -62,10 +62,10 @@ const getAllPatients = async (req, res, next) => {
             models.PracticeLocation,
             models.Category,
             models.CaseType,
-            {
-              model: models.Appointment,
-              include: [models.Specialty, models.Doctors],
-            },
+            // {
+            //   model: models.Appointment,
+            //   include: [models.Specialty, models.Doctors],
+            // },
           ],
         },
       ],

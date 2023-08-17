@@ -3,8 +3,6 @@
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
   Router,
 } from '@angular/router';
 import { AuthService } from './services/auth.service';
@@ -15,14 +13,11 @@ import { AuthService } from './services/auth.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
+  canActivate () {
     if (this.authService.getToken()) {
       return true; // User is authenticated
     } else {
-      this.router.navigate(['/signup']); // Redirect to home page
+      this.router.navigate(['/login']); // Redirect to home page
       return false;
     }
   }

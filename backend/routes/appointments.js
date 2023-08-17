@@ -6,5 +6,5 @@ const appointController = require("../controllers/appointment")
 const { Op } = require("sequelize");
 
 router.post("/addAppointment", appointController.addAppoint);
-
+router.get("/getId/:id", appointController.getId)
 module.exports = router;
