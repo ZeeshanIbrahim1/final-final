@@ -9,16 +9,12 @@ module.exports = {
         firmCity: 'New York',
         firmState: 'NY',
         firmZip: '10001',
-        createdAt: new Date(),
-        updatedAt: new Date()
       },
       {
         firmName: 'XYZ Legal Services',
         firmCity: 'Los Angeles',
         firmState: 'CA',
         firmZip: '90001',
-        updatedAt: new Date(),
-        createdAt: new Date()
       },
     ];
 

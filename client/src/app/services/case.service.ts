@@ -27,7 +27,7 @@ export class CaseService {
   
   case(info: Omit<Case, 'id'>): Observable<Case> {
     return this.http
-      .post<Case>(`${this.url}/cases/add`, info, this.httpOptions)
+      .post<Case>(`${this.url}/cases/add`, info)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<Case>('case'))
@@ -35,7 +35,7 @@ export class CaseService {
   }
   getCase(patientId){
     return this.http
-      .get(`${this.url}/cases/getCase/${patientId}`, this.httpOptions) // Change the return type here too
+      .get(`${this.url}/cases/getCase/${patientId}`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('getPractiseInfo')
@@ -44,7 +44,7 @@ export class CaseService {
   }
   getCategoryInfo(){
     return this.http
-    .get(`${this.url}/category/all`, this.httpOptions) // Change the return type here too
+    .get(`${this.url}/category/all`) // Change the return type here too
     .pipe(
       catchError(
         this.errorHandlerService.handleError('getPractiseInfo')
@@ -53,7 +53,7 @@ export class CaseService {
   }
   getCaseTypeInfo(){
     return this.http
-    .get(`${this.url}/caseType/all`, this.httpOptions) // Change the return type here too
+    .get(`${this.url}/caseType/all`) // Change the return type here too
     .pipe(
       catchError(
         this.errorHandlerService.handleError('getPractiseInfo')
@@ -62,15 +62,22 @@ export class CaseService {
   }
   getPractiseInfo(){
     return this.http
-      .get(`${this.url}/practicelocation/all`, this.httpOptions) // Change the return type here too
+      .get(`${this.url}/practicelocation/all`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('getPractiseInfo')
         )
       );
   }
+  getVisitInfo(){
+    return this.http.get(`${this.url}/cases/visit`).pipe(
+      catchError(
+        this.errorHandlerService.handleError('getVisitInfo')
+      )
+    )
+  }
   updateCase(id:Number,cases: Case){
-    this.http.put(`${this.url}/cases/update/${id}`, cases, this.httpOptions).subscribe(
+    this.http.put(`${this.url}/cases/update/${id}`, cases).subscribe(
       (response: any) => {
         console.log('Cases updated successfully:', response);
       },
@@ -81,7 +88,7 @@ export class CaseService {
   }
   getInsuranceInfo(){
     return this.http
-      .get(`${this.url}/insurance/all`, this.httpOptions) // Change the return type here too
+      .get(`${this.url}/insurance/all`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('InsuranceInfo')
@@ -90,7 +97,7 @@ export class CaseService {
   }
   getFirmInfo(){
     return this.http
-      .get(`${this.url}/firm/all`, this.httpOptions) // Change the return type here too
+      .get(`${this.url}/firm/all`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('FirmInfo')
@@ -102,4 +109,5 @@ export class CaseService {
       console.log(msg);
     })
   }
+  
 }

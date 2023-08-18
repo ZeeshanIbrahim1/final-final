@@ -11,8 +11,8 @@ module.exports = {
         username: 'zeeshan',
         email: 'admin@admin.com',
         password: hashedPassword,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        
+        
       },
       // Add more user data entries here
     ];

@@ -1,6 +1,70 @@
 <div>
   <button class="btn_add" (click)="addPatient()">New Patient</button>
 </div>
+<h1>
+  Apply filter
+</h1>
+<div class="grid-container">
+
+  <div class="grid-item">
+    <label for="patientName">Patient Name:</label>
+    <input type="text" id="patientName" [(ngModel)]="patientName" />
+  </div>
+
+<div class="grid-item">
+  <label for="caseId">Case ID:</label>
+  <input type="number" id="caseId" [(ngModel)]="caseId" />
+</div>
+
+<div class="grid-item">
+  <label for="categoryName">Category Name:</label>
+  <input type="text" id="categoryName" [(ngModel)]="categoryName" />
+</div>
+
+<div class="grid-item">
+  <label for="purposeOfVisit">Purpose of Visit:</label>
+  <input type="text" id="purposeOfVisit" [(ngModel)]="purposeOfVisit" />
+</div>
+
+<div class="grid-item">
+  <label for="caseType">Case Type:</label>
+  <input type="text" id="caseType" [(ngModel)]="caseType" />
+</div>
+
+<div class="grid-item">
+  <label for="dob">Date of Birth (DOB):</label>
+  <input type="date" id="dob" [(ngModel)]="dob" />
+</div>
+<div class="grid-item">
+  <label for="practiceLocation">Practice Location:</label>
+  <input type="text" id="practiceLocation" [(ngModel)]="practiceLocation" />
+</div >
+
+<div class="grid-item">
+  <label for="insuranceName">Insurance Name:</label>
+  <input type="text" id="insuranceName" [(ngModel)]="insuranceName" />
+</div>
+
+<div class="grid-item">
+  <label for="firmName">Firm Name:</label>
+  <input type="text" id="dob" [(ngModel)]="firmName" />
+</div>
+
+<div class="grid-item">
+  <label for="doa">Date of Accident:</label>
+  <input type="date" id="doa" [(ngModel)]="doa" />
+</div>
+
+<div class="grid-item">
+  <label for="Doctor">Doctor Name:</label>
+  <input type="text" id="Doctor" [(ngModel)]="doctor" />
+</div>
+<div class="grid-btn">
+  <button (click)="search()">Search</button>
+</div>
+</div>
+
+
 
 <div>
   <h2>Patients List</h2>
@@ -12,7 +76,7 @@
         <th>Case id</th>
         <th>Category</th>
         <th>Purpose of visit</th>
-        <th>Case Type</th>
+        <th>Firm Name</th>
         <th>DoB</th>
         <th>DOA</th>
         <th>address</th>
@@ -26,17 +90,18 @@
     <tbody>
         <ng-container *ngFor="let data of flattenedData">
           <tr>
+            <!-- <td>{{ data[Cases].caseType }}</td> -->
+            <td>{{ data.patientId }}</td>
+            <td>{{ data.patientName }}</td>
+            <td>{{ data.caseId }}</td>
+            <td>{{ data.category }}</td>
+            <td>{{ data.purposeOfVisit }}</td>
             <td>{{ data.firmName }}</td>
-              <td>{{ data.patientId }}</td>
-              <td>{{ data.patientName }}</td>
-              <td>{{ data.caseId }}</td>
-              <td>{{ data.category }}</td>
-              <td>{{ data.purposeOfVisit }}</td>
-              <td>{{ data.caseType }}</td>
-              <td>{{ data.doB }}</td>
+            <td>{{ data.doB }}</td>
+            <td>{{ data.doa }}</td>
               <td>{{ data.practiceLocation }}</td>
               <td>{{ data.insuranceName}}</td>
-              <td>{{ data.doa }}</td>
+              <!-- <td>{{data.}}</td> -->
               <!-- <td>Insert Speciality data here</td>
               <td>Insert Appointment date & time data here</td>
               <td> Insert Doctor Name data here </td> -->

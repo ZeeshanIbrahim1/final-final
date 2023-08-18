@@ -5,14 +5,10 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     const caseType = [
       {
-        Name: 'Type Y',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        Name: 'Type Y',  
       },
       {
-        Name: 'Type Z',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        Name: 'Type Z',       
       },
     ];
 

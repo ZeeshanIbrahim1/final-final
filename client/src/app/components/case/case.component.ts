@@ -13,6 +13,7 @@ export class CaseComponent {
   caseForm: FormGroup;
   practiceInfo: any[] = [];
   insuranceInfo: any[] = [];
+  visitInfo: any[] = [];
   firmInfo: any[] = [];
   categoryInfo: any[] = [];
   caseTypeInfo: any[] = [];
@@ -22,7 +23,7 @@ export class CaseComponent {
   ngOnInit(): void {
     this.patientId = this.patientService.getPatientId();
     console.log(this.patientId);
-    this.FirmInfo();
+    this.getFirmInfo();
     this.getinfo();
     this.caseForm = this.createCaseGroup();
   }
@@ -40,10 +41,11 @@ export class CaseComponent {
     return new FormGroup(formGroupConfig);
   }
   getinfo() {
-    this.PracticeInfo();
-    this.InsuranceInfo();
-    this.CategoryInfo();
-    this.CaseTypeInfo();
+    this.getPracticeInfo();
+    this.getInsuranceInfo();
+    this.getCategoryInfo();
+    this.getCaseTypeInfo();
+    this.getVisitInfo();
   }
   
   clearErrorStates() {
@@ -53,33 +55,38 @@ export class CaseComponent {
       control.setErrors(null);
     });
   }
-  CategoryInfo() {
+  getCategoryInfo() {
     this.caseService.getCategoryInfo().subscribe((response: any[]) => {
       console.log(response)
       this.categoryInfo = response;
     });
   }
-  CaseTypeInfo(){
+  getCaseTypeInfo(){
     this.caseService.getCaseTypeInfo().subscribe((response: any[]) => {
       console.log(response)
       this.caseTypeInfo = response;
     });
   }
-  PracticeInfo() {
+  getPracticeInfo() {
     this.caseService.getPractiseInfo().subscribe((response: any[]) => {
       console.log(response)
       this.practiceInfo = response;
     });
   }
-  InsuranceInfo() {
+  getInsuranceInfo() {
     this.caseService.getInsuranceInfo().subscribe((response: any[]) => {
       this.insuranceInfo = response;
     });
   }
-  FirmInfo() {
+  getFirmInfo() {
     this.caseService.getFirmInfo().subscribe((response: any[]) => {
       this.firmInfo = response;
     });
+  }
+  getVisitInfo(){
+    this.caseService.getVisitInfo().subscribe((response: any[])=>{
+      this.visitInfo = response;
+    })
   }
   addCase() {
     this.caseService

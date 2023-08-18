@@ -11,19 +11,10 @@ module.exports = (sequelize, DataTypes) => {
     first_name: DataTypes.STRING,
     middle_name: DataTypes.STRING,
     last_name: DataTypes.STRING,
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-      defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-    },
   }, {
     sequelize,
     modelName: 'Doctors',
+    timestamps: false
   });
   return Doctor;
 };

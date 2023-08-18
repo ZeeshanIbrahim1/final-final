@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'CaseType',
+    timestamps: false
   });
   return CaseType;
 };

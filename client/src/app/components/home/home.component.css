@@ -1,3 +1,23 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+.grid-item{
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 15px;
+  text-align: center;
+}
+.grid-btn{
+  text-align: center;
+  padding: 30px;
+}
+.grid-btn button{
+  padding: 10px;
+  background-color: #007bff;
+  color: #ddd;
+}
 table {
   border-collapse: collapse;
   width: 100%;

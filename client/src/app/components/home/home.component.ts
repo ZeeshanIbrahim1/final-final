@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { PatientService } from 'src/app/services/patient.service';
 import { Patient } from 'src/app/models/patient';
 import { Router } from '@angular/router';
@@ -11,6 +10,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
+  patientName: string = '';
+  caseId: number | null = null;
+  categoryName: string = '';
+  purposeOfVisit: string = '';
+  caseType: string = '';
+  dob: Date | null =null;
+  practiceLocation : string = '';
+  insuranceName : string = '';
+  firmName : string = '';
+  doa : Date | null =null;
+  doctor: string = '';
+  searchResults : any[] = [];
+
   patients: Patient[] = [];
   flattenedData:any[] = [];
   constructor(private patientService: PatientService,private router: Router) {}
@@ -78,5 +90,24 @@ export class HomeComponent {
     console.log("Front end !")
     await this.patientService.deletePatient(id)
     this.ngOnInit();
+  }
+  search(){
+    this.patientService
+    .searchPatientsAndCases(
+      this.patientName,
+      this.caseId,
+      this.categoryName,
+      this.purposeOfVisit,
+      this.caseType,
+      this.dob,
+      this.practiceLocation,
+      this.insuranceName,
+      this.firmName,
+      this.doa,
+      this.doctor,     
+    )
+    // .subscribe((results) => {
+    //   this.searchResults = results;
+    // });
   }
 }

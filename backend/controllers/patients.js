@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const models = require("../models");
 const { validationResult } = require("express-validator");
 
@@ -21,8 +22,9 @@ const addPatient = async (req, res, next) => {
     zip,
     date_of_birth
   } = req.body;
-  console.log("dateofBirth", date_of_birth, typeof(date_of_birth))
-  const storedDoB = await models.Patient.findByDoB(date_of_birth);
+  const [datePart, timePart] = date_of_birth.split("T");
+  console.log("dateofBirth", datePart, typeof(datePart))
+  const storedDoB = await models.Patient.findByDoB(datePart);
 
   if (storedDoB) {
     console.log("Patient with same Date of Birth already exists!");
@@ -42,7 +44,7 @@ const addPatient = async (req, res, next) => {
     state,
     gender,
     zip,
-    date_of_birth
+    datePart
   });
   console.log(patientStored.id)
   res.status(201).json(patientStored.id);
@@ -117,10 +119,27 @@ const deletePatient = async (req, res) => {
   }
 }
 
+const filterData = async (req , res) =>{
+  const filters = req.query;
+  console.log("filters Incoming:",filters)
+  try {
+    const patient = await models.Patient.filterPatient(filters);
+    console.log("Data recieving after aplying filter:",patient )
+    if (!patient || patient.length === 0) {
+      return res.status(404).json({ message: "No such data with filter exists" });
+    }
+    res.status(200).json(patient);
+  }catch(error){
+  console.error("Error in filterData:", error);
+  res.status(500).json({ message: "Internal server error." });
+  }
+}
+
 module.exports = {
   addPatient,
   updatePatient,
   getPatient,
   deletePatient,
-  getAllPatients
+  getAllPatients,
+  filterData
 };

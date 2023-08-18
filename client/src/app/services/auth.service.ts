@@ -57,7 +57,7 @@ export class AuthService {
 
   signup(user: Omit<User, 'id'>): Observable<User> {
     return this.http
-      .post<User>(`${this.url}/auth/signup`, user, this.httpOptions)
+      .post<User>(`${this.url}/auth/signup`, user)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<User>('signup'))
@@ -73,8 +73,7 @@ export class AuthService {
     return this.http
       .post<{ token: string; userId: Pick<User, 'id'> }>(
         `${this.url}/auth/login`,
-        { email: email, password: password },
-        this.httpOptions
+        { email: email, password: password }
       )
       .pipe(
         first(),
@@ -106,7 +105,7 @@ export class AuthService {
 
   // appoint(data): Observable<Appoint> {
   //   return this.http
-  //     .post<Appoint>(`${this.url}/appoint`, data, this.httpOptions)
+  //     .post<Appoint>(`${this.url}/appoint`, data)
   //     .pipe(
   //       first(),
   //       catchError(this.errorHandlerService.handleError<Appoint>('appoint'))

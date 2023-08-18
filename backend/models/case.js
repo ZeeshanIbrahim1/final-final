@@ -2,10 +2,8 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Case extends Model {
-    static associate(models) {
-    }
+    static associate(models) {}
     static addCase(
-      caseId,
       purposeOfVisit,
       doa,
       firmId,
@@ -16,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       categoryId,
     ) {
       return Case.create({
-        caseId,
         purposeOfVisit,
         doa,
         firmId,
@@ -42,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       caseId,
       purposeOfVisit,
       doa,
-      // firmId,
+      firmId,
       insuranceId,
       practiceLocationId,
       caseTypeId,
@@ -51,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
         return Case.update({
           purposeOfVisit,
           doa,
-          // firmId,
+          firmId,
           insuranceId,
           practiceLocationId,
           caseTypeId,
@@ -71,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Case",
+      timestamps: false 
     }
   );
   return Case;

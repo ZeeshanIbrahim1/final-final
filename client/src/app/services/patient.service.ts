@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { Patient } from '../models/patient';
@@ -27,7 +27,7 @@ export class PatientService {
     
     patient(patient: Omit<Patient, 'id'>): Observable<Patient> {
     return this.http
-      .post<Patient>(`${this.url}/patients/add`, patient, this.httpOptions)
+      .post<Patient>(`${this.url}/patients/add`, patient)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<Patient>('patient'))
@@ -36,7 +36,7 @@ export class PatientService {
   getAllPatients(): Observable<Patient[]> {
     console.log('working');
     return this.http
-      .get<Patient[]>(`${this.url}/patients/all`, this.httpOptions) // Change the return type here too
+      .get<Patient[]>(`${this.url}/patients/all`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError<Patient[]>('getAllPatients')
@@ -47,7 +47,7 @@ export class PatientService {
     console.log("IN getPatient");
     const numericPatientId = parseInt(id, 10);
     return this.http
-      .get<Patient[]>(`${this.url}/patients/update-Patient/${numericPatientId}`, this.httpOptions)
+      .get<Patient[]>(`${this.url}/patients/update-Patient/${numericPatientId}`)
       .pipe(
         catchError(
           this.errorHandlerService.handleError<Patient[]>('getPatient')
@@ -55,7 +55,7 @@ export class PatientService {
       );
   }
   updatePatient(id:Number,patient: Omit<Patient, 'id'>){
-    this.http.put(`${this.url}/patients/update/${id}`, patient, this.httpOptions).subscribe(
+    this.http.put(`${this.url}/patients/update/${id}`, patient).subscribe(
       (response: any) => {
         console.log('Patient updated successfully:', response);
       },
@@ -82,5 +82,35 @@ export class PatientService {
         console.error('Error deleting patient:', error);
       }
     );
+  }
+  searchPatientsAndCases(
+    patientName: string | null,
+    caseId: number | null,
+    categoryName : string | null,
+    purposeOfVisit : string | null,
+    caseType : string | null,
+    dob : Date | null,
+    practiceLocation : string | null,
+    insuranceName : string | null,
+    firmName : string | null,
+    doa : Date | null,
+    doctor : string | null,
+  ) {
+    const params = new HttpParams()
+      .set('patientName', patientName)
+      .set('caseId', caseId ? caseId.toString() : '')
+      .set('categoryName', categoryName)
+      .set('purposeOfVisit',purposeOfVisit)
+      .set('caseType',caseType)
+      .set('dob',dob ? dob.toISOString():'')
+      .set('practiceLocation',practiceLocation)
+      .set('insuranceName',insuranceName)
+      .set('firmName',firmName)
+      .set('doa',doa ? doa.toISOString():'')
+      .set('doctor',doctor)
+
+    return this.http.get(`${this.url}/patients/filter`, { params }).subscribe((msg)=>{
+      console.log("PATIENT SERVICE WORKING PROPERLY : ", msg)
+    });
   }
 }

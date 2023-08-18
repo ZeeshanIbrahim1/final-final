@@ -40,7 +40,6 @@ module.exports = (sequelize, DataTypes) => {
         date_of_birth,
       });
     }
-
     static async getAllPatients() {
       try {
         const patients = await Patient.findAll();
@@ -91,15 +90,95 @@ module.exports = (sequelize, DataTypes) => {
           {
             where: { id: patientId }
           })
-      }
-      static async deletePatient(patientId){
+    }
+    static async deletePatient(patientId){
         await Patient.destroy({
           where: {
             id: patientId
           },
         });
-      }
+    }
+    static async filterPatient(filterIncoming){
+    const {patientName,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
+    // Construct the base SQL query
+    let sql = `
+    SELECT
+    p.*,
+    c.*,
+    t.*,
+    ct.*,
+    d.*,
+    f.*,
+    i.*,
+    a.*,
+    l.*,
+    s.*
+  FROM
+    patients p
+  LEFT JOIN
+    cases c ON p.id = c.patientId
+  LEFT JOIN
+    Casetypes t ON c.caseTypeId = t.id
+  LEFT JOIN
+    categories ct ON c.categoryId = ct.id
+  LEFT JOIN
+    appointments a ON c.id = a.caseId
+  LEFT JOIN
+    doctors d ON a.doctorId = d.id
+  LEFT JOIN
+    firms f ON c.firmId = f.id
+  LEFT JOIN
+    insurances i ON c.insuranceId = i.id
+  LEFT JOIN
+    practicelocations l ON c.practiceLocationId = l.id
+  LEFT JOIN
+    specialties s ON a.specialtyId = s.id
+    `;
 
+    // Add WHERE conditions based on filters
+    let whereConditions = [];
+
+    if (patientName) {
+      whereConditions.push(`CONCAT(p.firstName, ' ', p.middleName, ' ', p.lastName) LIKE '%${patientName}%'`);
+    }
+    if (caseId) {
+      whereConditions.push(`c.id = '${caseId}'`);
+    }
+    if(categoryName){
+      whereConditions.push(`ct.categoryName= '${categoryName}'`)
+    }
+    if(purposeOfVisit){
+        whereConditions.push(`c.purposeOfVisit = '${purposeOfVisit}'`)
+    }
+    if(caseType){
+      whereConditions.push(`t.Name = '${caseType}'`)
+    }
+    if(dob){
+      whereConditions.push(`p.date_of_birth = '${dob.toISOString().split('T')[0]}'`)
+    }
+    if(practiceLocation){
+      whereConditions.push(`l.name = '${practiceLocation}'`)
+    }
+    if(insuranceName){
+      whereConditions.push(`i.insuranceName = '${insuranceName}'` )
+    }
+    if(firmName){
+      whereConditions.push(`f.firmName = '${firmName}'`)
+    }
+    if(doa){
+      whereConditions.push(`a.appointmentDate ='${doa.toISOString().split('T')[0]}'`)
+    }
+    if(doctor){
+      whereConditions.push(`CONCAT(d.firstName, ' ', d.middleName, ' ', d.lastName) LIKE '%${doctor}%'`)
+    }
+    if (whereConditions.length > 0) {
+      sql += ` WHERE ${whereConditions.join(' AND ')};`;
+    }
+    // Execute the SQL query
+    const results = await sequelize.query(sql);
+
+    return results;
+  }
   }
   Patient.init(
     {
@@ -119,6 +198,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Patient",
+      timestamps: false
     }
   );
   return Patient;

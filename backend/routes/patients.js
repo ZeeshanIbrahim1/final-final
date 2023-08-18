@@ -7,5 +7,6 @@ router.get("/all", patientController.getAllPatients);
 router.get("/update-Patient/:id", patientController.getPatient);
 router.put("/update/:id",patientController.updatePatient);
 router.delete("/delete/:id",patientController.deletePatient);
+router.get('/filter',patientController.filterData)
 
 module.exports = router;

@@ -6,18 +6,18 @@ module.exports = {
     const specialtiesData = [
       {
         name: 'Cardiology',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        
+        
       },
       {
         name: 'Dermatology',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        
+        
       },
       {
         name: 'Orthopedics',
-        createdAt: new Date(),
-        updatedAt: new Date()
+        
+        
       },
     ];
 

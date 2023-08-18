@@ -8,16 +8,16 @@ module.exports = {
         city: 'New York',
         state: 'NY',
         zip: '10001',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        
+        
       },
       {
         name: 'Downtown Clinic',
         city: 'Los Angeles',
         state: 'CA',
         zip: '90001',
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        
+        
       },
     ];
 
