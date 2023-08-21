@@ -32,7 +32,7 @@ export class CaseComponent {
       patientId: new FormControl(this.patientId, [Validators.required]),
       practiceLocationId: new FormControl('', [Validators.required]),
       categoryId: new FormControl('', [Validators.required]),
-      purposeOfVisit: new FormControl('', [Validators.required]),
+      purposeOfVisitId: new FormControl('', [Validators.required]),
       caseTypeId: new FormControl('', [Validators.required]),
       doa: new FormControl('', [Validators.required]),
       insuranceId: new FormControl('', [Validators.required]),
@@ -86,6 +86,7 @@ export class CaseComponent {
   getVisitInfo(){
     this.caseService.getVisitInfo().subscribe((response: any[])=>{
       this.visitInfo = response;
+      console.log("Visit Info:", this.visitInfo)
     })
   }
   addCase() {

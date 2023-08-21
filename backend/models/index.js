@@ -50,7 +50,7 @@ db.Case.belongsTo(db.Patient, { foreignKey: 'patientId' });
 db.Case.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
 db.Case.belongsTo(db.CaseType, { foreignKey: 'caseTypeId' });
 db.Case.belongsTo(db.Category, { foreignKey: 'categoryId' });
-db.Case.belongsTo(db.PurposeOfVisit, {foreignKey: 'PurposeOfVisitId'})
+db.Case.belongsTo(db.PurposeOfVisit, {foreignKey: 'purposeOfVisitId'})
 
 db.Firm.hasMany(db.Case,{foreignKey:'id'})
 

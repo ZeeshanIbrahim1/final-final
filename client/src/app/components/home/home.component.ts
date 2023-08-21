@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  patientName: string = '';
+  firstName: string = '';
+  middleName: string ='';
+  lastName: string= '';
   caseId: number | null = null;
   categoryName: string = '';
   purposeOfVisit: string = '';
@@ -94,7 +96,9 @@ export class HomeComponent {
   search(){
     this.patientService
     .searchPatientsAndCases(
-      this.patientName,
+      this.firmName,
+      this.middleName,
+      this.lastName,
       this.caseId,
       this.categoryName,
       this.purposeOfVisit,

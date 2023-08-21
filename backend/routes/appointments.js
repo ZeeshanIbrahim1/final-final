@@ -7,4 +7,6 @@ const { Op } = require("sequelize");
 
 router.post("/addAppointment", appointController.addAppoint);
 router.get("/getId/:id", appointController.getId)
+router.get("/getType", appointController.getType)
+
 module.exports = router;

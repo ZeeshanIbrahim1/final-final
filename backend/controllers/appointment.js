@@ -52,8 +52,26 @@ const getId = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+const getType = async (req,res)=>{
+  try{
+    const typeInfo = await models.AppointmentType.findAll();
+    if(typeInfo) {
+      res.json(typeInfo);
+    }
+  else{
+    res.status(400).json("No record in Appointment Type");
+  }
+  }
+  catch(error){
+    console.log("appointment gettpye",error)
+    res.status(401).json({message: "Error getting Appointment Type Information"})
+  }
+}
+
 module.exports = {
   getId,
   addAppoint,
+  getType
 //   getAll
 };

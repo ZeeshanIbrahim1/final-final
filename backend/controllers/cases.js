@@ -10,7 +10,7 @@ const addCase = async (req, res, next) => {
     res.json("ADD Case NOT WORKING!");
   }
   const {
-    purposeOfVisit,
+    purposeOfVisitId,
     doa,
     firmId,
     insuranceId,
@@ -21,7 +21,6 @@ const addCase = async (req, res, next) => {
   } = req.body;
 
   const caseStored = await models.Case.create({
-    purposeOfVisit,
     doa,
     firmId,
     insuranceId,
@@ -29,6 +28,7 @@ const addCase = async (req, res, next) => {
     practiceLocationId,
     caseTypeId,
     categoryId,
+    purposeOfVisitId,
   });
   console.log("Stored Case ID:", caseStored.id);
   res.status(201).json(caseStored.id);
@@ -87,7 +87,7 @@ const updateCase = async (req, res) => {
  }
 const getVisit = async (req,res,next)=>{
   try{
-    const extractedInfo = await models.PurposeOfVisit.getInfo();
+    const extractedInfo = await models.PurposeOfVisit.findAll();
     console.log("Purpose of visit : ", extractedInfo)
     if(extractedInfo) {
         res.json(extractedInfo);

@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
   class Case extends Model {
     static associate(models) {}
     static addCase(
-      purposeOfVisit,
       doa,
       firmId,
       insuranceId,
@@ -12,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       practiceLocationId,
       caseTypeId,
       categoryId,
+      purposeOfVisitId,
     ) {
       return Case.create({
-        purposeOfVisit,
         doa,
         firmId,
         insuranceId,
@@ -22,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         practiceLocationId,
         caseTypeId,
         categoryId,
+        purposeOfVisitId,
       });
     }
     static async getOneCase(id){
@@ -61,7 +61,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Case.init(
     {
-      purposeOfVisit: DataTypes.STRING,
       doa: DataTypes.STRING,
       deleted: DataTypes.BOOLEAN,
     },

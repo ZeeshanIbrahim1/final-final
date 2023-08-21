@@ -62,7 +62,7 @@ export class PatientsComponent implements OnInit {
     setTimeout(()=>{
       this.router.navigate(['/case']);
 
-    },2000)
+    },500)
   }
   clearErrorStates() {
     const formControls = this.patientForm.controls;

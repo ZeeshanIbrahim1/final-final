@@ -22,9 +22,7 @@ const addPatient = async (req, res, next) => {
     zip,
     date_of_birth
   } = req.body;
-  const [datePart, timePart] = date_of_birth.split("T");
-  console.log("dateofBirth", datePart, typeof(datePart))
-  const storedDoB = await models.Patient.findByDoB(datePart);
+  const storedDoB = await models.Patient.findByDoB(date_of_birth);
 
   if (storedDoB) {
     console.log("Patient with same Date of Birth already exists!");
@@ -33,8 +31,7 @@ const addPatient = async (req, res, next) => {
       .json(console.log("Patient with same Date of Birth already exists!!"));
     return 0;
   }
-  const patientStored = await models.Patient.create({
-    first_name,
+  const patientStored = await models.Patient.addPatient(first_name,
     middle_name,
     last_name,
     email,
@@ -44,8 +41,7 @@ const addPatient = async (req, res, next) => {
     state,
     gender,
     zip,
-    datePart
-  });
+    date_of_birth)
   console.log(patientStored.id)
   res.status(201).json(patientStored.id);
 

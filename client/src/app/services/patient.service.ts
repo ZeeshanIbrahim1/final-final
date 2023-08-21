@@ -84,7 +84,9 @@ export class PatientService {
     );
   }
   searchPatientsAndCases(
-    patientName: string | null,
+    firstName: string | null,
+    middleName: string| null,
+    lastName:string| null,
     caseId: number | null,
     categoryName : string | null,
     purposeOfVisit : string | null,
@@ -97,7 +99,9 @@ export class PatientService {
     doctor : string | null,
   ) {
     const params = new HttpParams()
-      .set('patientName', patientName)
+      .set('first_name', firstName)
+      .set('middle_name', middleName)
+      .set('last_name', lastName)
       .set('caseId', caseId ? caseId.toString() : '')
       .set('categoryName', categoryName)
       .set('purposeOfVisit',purposeOfVisit)

@@ -55,4 +55,12 @@ export class AppointService {
         )
       );
   }
+  getTypeInfo(){
+    return this.http.get(`${this.url}/appoint/getType`)
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('typeInfo')
+      )
+    )
+  }
 }

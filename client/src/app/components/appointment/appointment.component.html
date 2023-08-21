@@ -32,13 +32,19 @@
 
     <!-- Appointment Type -->
     <mat-grid-tile class="matgrid">
-      <mat-form-field appearance="outline">
-        <mat-label>Appointment Type</mat-label>
-        <input
-          matInput
-          placeholder="Appointment Type"
-          formControlName="appointmentType"
-        />
+      <mat-form-field>
+        <mat-label>Select Appointment Type</mat-label>
+        <mat-select formControlName="appointmentTypeId">
+          <mat-option
+            *ngFor="let type of typeInfo"
+            [value]="type.id"
+          >
+            {{ type.appointmentType }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="appointmentForm.get('specialtyId').hasError('required')"
+          >Select Appointment Type</mat-error
+        >
       </mat-form-field>
     </mat-grid-tile>
 

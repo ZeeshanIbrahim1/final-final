@@ -7,8 +7,16 @@
 <div class="grid-container">
 
   <div class="grid-item">
-    <label for="patientName">Patient Name:</label>
-    <input type="text" id="patientName" [(ngModel)]="patientName" />
+    <label for="firstName">Patient First Name:</label>
+    <input type="text" id="firstName" [(ngModel)]="firstName" />
+  </div>
+  <div class="grid-item">
+    <label for="middleName">Patient Middle Name:</label>
+    <input type="text" id="middleName" [(ngModel)]="middleName" />
+  </div>
+  <div class="grid-item">
+    <label for="lastName">Patient Last  Name:</label>
+    <input type="text" id="lastName" [(ngModel)]="lastName" />
   </div>
 
 <div class="grid-item">
@@ -92,6 +100,7 @@
           <tr>
             <!-- <td>{{ data[Cases].caseType }}</td> -->
             <td>{{ data.patientId }}</td>
+            <!-- <td>{{data.Cases.Category.categoryName}}</td> -->
             <td>{{ data.patientName }}</td>
             <td>{{ data.caseId }}</td>
             <td>{{ data.category }}</td>

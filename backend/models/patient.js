@@ -99,7 +99,7 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
     static async filterPatient(filterIncoming){
-    const {patientName,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
+    const {firstName,middleName,lastName,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
     // Construct the base SQL query
     let sql = `
     SELECT
@@ -138,8 +138,14 @@ module.exports = (sequelize, DataTypes) => {
     // Add WHERE conditions based on filters
     let whereConditions = [];
 
-    if (patientName) {
+    if (firstName) {
       whereConditions.push(`CONCAT(p.firstName, ' ', p.middleName, ' ', p.lastName) LIKE '%${patientName}%'`);
+    }
+    if(middleName){
+      whereConditions.push(`p.middle_name `)
+    }
+    if(lastName){
+
     }
     if (caseId) {
       whereConditions.push(`c.id = '${caseId}'`);
@@ -154,7 +160,7 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`t.Name = '${caseType}'`)
     }
     if(dob){
-      whereConditions.push(`p.date_of_birth = '${dob.toISOString().split('T')[0]}'`)
+      whereConditions.push(`p.date_of_birth = '${dob}'`)
     }
     if(practiceLocation){
       whereConditions.push(`l.name = '${practiceLocation}'`)
@@ -166,10 +172,10 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`f.firmName = '${firmName}'`)
     }
     if(doa){
-      whereConditions.push(`a.appointmentDate ='${doa.toISOString().split('T')[0]}'`)
+      whereConditions.push(`a.appointmentDate ='${doa}'`)
     }
     if(doctor){
-      whereConditions.push(`CONCAT(d.firstName, ' ', d.middleName, ' ', d.lastName) LIKE '%${doctor}%'`)
+      whereConditions.push(`d.first_name LIKE '%${doctor}%'`)
     }
     if (whereConditions.length > 0) {
       sql += ` WHERE ${whereConditions.join(' AND ')};`;
@@ -177,7 +183,11 @@ module.exports = (sequelize, DataTypes) => {
     // Execute the SQL query
     const results = await sequelize.query(sql);
 
-    return results;
+    if (results[0].length === 0) {
+      return "No matching data found.";
+    }
+
+    return results[0];
   }
   }
   Patient.init(

@@ -14,6 +14,7 @@ export class AppointmentComponent {
   caseId:any;
   specialtyInfo: any[] = [];
   doctorInfo: any[] = [];
+  typeInfo:any[]=[];
 
 
   appointmentForm: FormGroup;
@@ -29,7 +30,7 @@ export class AppointmentComponent {
       caseId :  new FormControl(this.caseId, [Validators.required]),
       appointmentDate: new FormControl('', [Validators.required]),
       appointmentTime: new FormControl('', [Validators.required]),
-      appointmentType: new FormControl('', [Validators.required]),
+      appointmentTypeId: new FormControl('', [Validators.required]),
       specialtyId: new FormControl('', [Validators.required]),
       doctorId: new FormControl('', [Validators.required]),
       duration: new FormControl('', [Validators.required]),
@@ -59,12 +60,19 @@ export class AppointmentComponent {
   getInfo(){
     this.getDoctorInfo();
     this.getSpecialtyInfo();
+    this.getTypeInfo();
   }
   getSpecialtyInfo(){
     this.appointService.getSpecialtyInfo().subscribe((response: any[]) => {
       console.log(response)
       this.specialtyInfo = response;
     });
+  }
+  getTypeInfo(){
+    this.appointService.getTypeInfo().subscribe((response: any[])=>{
+      console.log(response);
+      this.typeInfo = response;
+    })
   }
   getDoctorInfo() {
     this.appointService.getDoctorInfo().subscribe((response: any[]) => {
