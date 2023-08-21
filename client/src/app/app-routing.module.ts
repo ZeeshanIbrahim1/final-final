@@ -13,17 +13,17 @@ import { UpdateCaseComponent } from './components/update-case/update-case.compon
 import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
 const routes: Routes = [
-  { path: '', component: RegisterComponent  },
-  { path: 'home', component: HomeComponent },
-  { path: 'navigation', component: NavigationComponent  },
+  { path: '', component: RegisterComponent,   },
+  { path: 'home', component: HomeComponent, canActivate:[AuthGuard]  },
+  { path: 'navigation', component: NavigationComponent, canActivate:[AuthGuard]   },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent},
-  { path: 'patient', component: PatientsComponent  },
-  { path: 'case', component: CaseComponent },
-  { path: 'appointment', component: AppointmentComponent  },
-  {path:  'update-Patient/:id1/:id2', component: UpdatePatientComponent },
-  {path:  'update-case/:id', component:UpdateCaseComponent  },
-  {path:  'update-appointment/:id', component:UpdateAppointmentComponent},
+  { path: 'signup', component: RegisterComponent, canActivate:[AuthGuard] },
+  { path: 'patient', component: PatientsComponent , canActivate:[AuthGuard]  },
+  { path: 'case', component: CaseComponent, canActivate:[AuthGuard]  },
+  { path: 'appointment', component: AppointmentComponent , canActivate:[AuthGuard]  },
+  {path:  'update-Patient/:id1/:id2', component: UpdatePatientComponent, canActivate:[AuthGuard]  },
+  {path:  'update-case/:id', component:UpdateCaseComponent , canActivate:[AuthGuard]  },
+  {path:  'update-appointment/:id', component:UpdateAppointmentComponent, canActivate:[AuthGuard] },
   { path: '**', redirectTo: '' },
 ];
 

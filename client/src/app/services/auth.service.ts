@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   setToken(token: string): void {
+    console.log("tokend ",token)
     localStorage.setItem(this.tokenKey, token);
   }
 
@@ -81,7 +82,8 @@ export class AuthService {
           if (tokenObject && tokenObject.token && tokenObject.userId) {
             this.userId = tokenObject.userId;
             console.log("IN auth login", tokenObject.token)
-            localStorage.setItem('token', tokenObject.token);
+            this.setToken(tokenObject.token);
+            // localStorage.setItem('token', tokenObject.token);
             console.log("IN auth login 2", tokenObject.token)
             this.router.navigate(['/home']); // Ensure the route starts with a slash
           } else {
