@@ -16,6 +16,7 @@ export class PatientService {
     private url = 'http://localhost:3000';
     id:any;
     setId:any;
+    mssgss:any;
     constructor(
         private http: HttpClient,
         private errorHandlerService: ErrorHandlerService,
@@ -36,7 +37,7 @@ export class PatientService {
   getAllPatients(): Observable<Patient[]> {
     console.log('working');
     return this.http
-      .get<Patient[]>(`${this.url}/patients/all`) // Change the return type here too
+      .get<Patient[]>(`${this.url}/patients/all`) 
       .pipe(
         catchError(
           this.errorHandlerService.handleError<Patient[]>('getAllPatients')
@@ -83,7 +84,7 @@ export class PatientService {
       }
     );
   }
-  searchPatientsAndCases(
+  async searchPatientsAndCases(
     firstName: string | null,
     middleName: string| null,
     lastName:string| null,
@@ -98,7 +99,8 @@ export class PatientService {
     doa : Date | null,
     doctor : string | null,
   ) {
-    const params = new HttpParams()
+    console.log("dob", dob, typeof(dob))
+    const params = new HttpParams() 
       .set('first_name', firstName)
       .set('middle_name', middleName)
       .set('last_name', lastName)
@@ -106,15 +108,14 @@ export class PatientService {
       .set('categoryName', categoryName)
       .set('purposeOfVisit',purposeOfVisit)
       .set('caseType',caseType)
-      .set('dob',dob ? dob.toISOString():'')
+      .set('dob', dob instanceof Date ? dob.toISOString(): '')
       .set('practiceLocation',practiceLocation)
       .set('insuranceName',insuranceName)
       .set('firmName',firmName)
       .set('doa',doa ? doa.toISOString():'')
       .set('doctor',doctor)
 
-    return this.http.get(`${this.url}/patients/filter`, { params }).subscribe((msg)=>{
-      console.log("PATIENT SERVICE WORKING PROPERLY : ", msg)
-    });
+    return this.http.get(`${this.url}/patients/filter`, { params }).toPromise()
+    
   }
 }

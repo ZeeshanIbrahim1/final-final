@@ -38,7 +38,6 @@ export class AppointmentComponent {
     return new FormGroup(formGroupConfig);
   }
   addAppoint() {
-    console.log(this.appointmentForm.value)
     console.log(this.appointmentForm.value);
     this.appointService
     .appoint(this.appointmentForm.value)

@@ -99,23 +99,34 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
     static async filterPatient(filterIncoming){
-    const {firstName,middleName,lastName,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
+
+    const {first_name,middle_name,last_name,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
     // Construct the base SQL query
     let sql = `
-    SELECT
-    p.*,
-    c.*,
-    t.*,
-    ct.*,
-    d.*,
-    f.*,
-    i.*,
-    a.*,
-    l.*,
-    s.*
+    SELECT DISTINCT
+    p.id AS "PatientId",
+    p.first_name AS "PatientFirstName",
+    p.middle_name AS "PatientMiddleName",
+    p.last_name AS "PateintLastName",
+    p.date_of_birth AS "Patient_DOB",
+    c.id AS "CaseId",
+    c.doa AS "CaseDOA",
+    ct.categoryName AS "categoryName",
+    t.Name AS "caseType",
+    l.name AS "practiceLocation",
+    a.id AS "AppointmentId",
+    i.insuranceName AS "insuranceName",
+    f.firmName AS "firmName",
+    s.name AS "Speciality",
+    pv.PurposeOfVisit AS "purposeOfVisit",
+    a.appointmentDate AS "appointmentDate", 
+    a.appointmentTime AS "AppointmentTime",
+    d.first_name AS "doctorFirstName",
+    d.middle_name AS "doctorMiddleName",
+    d.last_name AS "doctorLastName"
   FROM
     patients p
-  LEFT JOIN
+  INNER JOIN
     cases c ON p.id = c.patientId
   LEFT JOIN
     Casetypes t ON c.caseTypeId = t.id
@@ -123,6 +134,8 @@ module.exports = (sequelize, DataTypes) => {
     categories ct ON c.categoryId = ct.id
   LEFT JOIN
     appointments a ON c.id = a.caseId
+  LEFT JOIN
+    purposeofvisits pv ON c.purposeOfVisitId = pv.id
   LEFT JOIN
     doctors d ON a.doctorId = d.id
   LEFT JOIN
@@ -137,55 +150,56 @@ module.exports = (sequelize, DataTypes) => {
 
     // Add WHERE conditions based on filters
     let whereConditions = [];
-
-    if (firstName) {
-      whereConditions.push(`CONCAT(p.firstName, ' ', p.middleName, ' ', p.lastName) LIKE '%${patientName}%'`);
+    console.log(first_name)
+    console.log("dobbbbbbbb",dob)
+    if (first_name) {
+      console.log("ddddddddddd", first_name)
+      whereConditions.push(`p.first_name LIKE '%${first_name}%'`);
     }
-    if(middleName){
-      whereConditions.push(`p.middle_name `)
+    if(middle_name){
+      whereConditions.push(`p.middle_name LIKE '%${middle_name}%'`);
     }
-    if(lastName){
-
+    if(last_name){
+      whereConditions.push(`p.last_name LIKE '%${last_name}%'`);
     }
     if (caseId) {
-      whereConditions.push(`c.id = '${caseId}'`);
+      whereConditions.push(`c.id LIKE '%${caseId}%'`);
     }
     if(categoryName){
-      whereConditions.push(`ct.categoryName= '${categoryName}'`)
+      whereConditions.push(`ct.categoryName LIKE '%${categoryName}%'`)
     }
     if(purposeOfVisit){
-        whereConditions.push(`c.purposeOfVisit = '${purposeOfVisit}'`)
+        whereConditions.push(`c.purposeOfVisit LIKE '%${purposeOfVisit}%'`)
     }
     if(caseType){
-      whereConditions.push(`t.Name = '${caseType}'`)
+      whereConditions.push(`t.Name LIKE '%${caseType}%'`)
     }
     if(dob){
-      whereConditions.push(`p.date_of_birth = '${dob}'`)
+      console.log("DATE OF BIRTH",dob)
+      whereConditions.push(`p.date_of_birth LIKE '%${dob}%'`)
     }
     if(practiceLocation){
-      whereConditions.push(`l.name = '${practiceLocation}'`)
+      whereConditions.push(`l.name LIKE '%${practiceLocation}%'`)
     }
     if(insuranceName){
-      whereConditions.push(`i.insuranceName = '${insuranceName}'` )
+      whereConditions.push(`i.insuranceName LIKE '%${insuranceName}%'` )
     }
     if(firmName){
-      whereConditions.push(`f.firmName = '${firmName}'`)
+      whereConditions.push(`f.firmName LIKE '%${firmName}%'`)
     }
     if(doa){
-      whereConditions.push(`a.appointmentDate ='${doa}'`)
+      whereConditions.push(`a.appointmentDate LIKE '%${doa.toISOString().split('T')[0]}%'`)
     }
     if(doctor){
-      whereConditions.push(`d.first_name LIKE '%${doctor}%'`)
+      whereConditions.push(`CONCAT(d.firstName, ' ', d.middleName, ' ', d.lastName) LIKE '%${doctor}%'`)
     }
     if (whereConditions.length > 0) {
       sql += ` WHERE ${whereConditions.join(' AND ')};`;
     }
+
+    console.log("conditonnnnnn", whereConditions)
     // Execute the SQL query
     const results = await sequelize.query(sql);
-
-    if (results[0].length === 0) {
-      return "No matching data found.";
-    }
 
     return results[0];
   }

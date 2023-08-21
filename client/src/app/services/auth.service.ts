@@ -81,21 +81,12 @@ export class AuthService {
         tap((tokenObject: any) => {
           if (tokenObject && tokenObject.token && tokenObject.userId) {
             this.userId = tokenObject.userId;
-            console.log("IN auth login", tokenObject.token)
             this.setToken(tokenObject.token);
-            // localStorage.setItem('token', tokenObject.token);
-            console.log("IN auth login 2", tokenObject.token)
             this.router.navigate(['/home']); // Ensure the route starts with a slash
           } else {
             console.error('Invalid server response format');
           }
         }),
-        catchError(
-          this.errorHandlerService.handleError<{
-            token: string;
-            userId: Pick<User, 'id'>;
-          }>('login')
-        )
       );
   }
   signOut(){

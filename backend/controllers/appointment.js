@@ -12,8 +12,8 @@ const addAppoint= async (req, res, next) => {
   const {
     appointmentDate,
     appointmentTime,
-    appointmentType,
     duration,
+    appointmentTypeId,
     specialtyId,
     doctorId,
     caseId
@@ -22,8 +22,8 @@ const addAppoint= async (req, res, next) => {
     await models.Appointment.create({
       appointmentDate,
       appointmentTime,
-      appointmentType,
       duration,
+      appointmentTypeId,
       specialtyId,
       doctorId,
       caseId})
@@ -68,10 +68,49 @@ const getType = async (req,res)=>{
     res.status(401).json({message: "Error getting Appointment Type Information"})
   }
 }
+const getAppointments = async(req,res)=>{
+  const appointId = req.params.id;
+  const id = parseInt(appointId,10)
+  try{
+    const appointments = await models.Appointment.findOne({ where: { id } })
+    if (!appointments || appointments.length === 0) {
+      return res.status(404).json({ message: "No Appointments found." });
+    }
+    res.status(200).json(appointments);
+  }catch(error){
+    console.error("Error in getAppointments", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+}
+const updateAppointment = async(req,res) =>{
+    const appointmentId = req.params.id;
+    const {
+      appointmentDate,
+      appointmentTime,
+      appointmentTypeId,
+      duration,
+      specialtyId,
+      doctorId,
+      caseId
+    } =  req.body;
+    await models.Appointment.update({
+      appointmentDate,
+      appointmentTime,
+      appointmentTypeId,
+      duration,
+      specialtyId,
+      doctorId,
+      caseId
+    },{
+      where:{id:appointmentId}
+    })
+}
 
 module.exports = {
   getId,
   addAppoint,
-  getType
+  getType,
+  getAppointments,
+  updateAppointment
 //   getAll
 };

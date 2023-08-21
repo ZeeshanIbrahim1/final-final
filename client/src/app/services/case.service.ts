@@ -14,6 +14,7 @@ import { UpdatePatientComponent } from '../components/update-patient/update-pati
 })
 export class CaseService {
   private url = 'http://localhost:3000';
+  currentCaseId: any;
 
   httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -38,7 +39,7 @@ export class CaseService {
       .get(`${this.url}/cases/getCase/${patientId}`) // Change the return type here too
       .pipe(
         catchError(
-          this.errorHandlerService.handleError('getPractiseInfo')
+          this.errorHandlerService.handleError('getCase')
         )
       );
   }
@@ -104,10 +105,11 @@ export class CaseService {
         )
       );
   }
-  getCaseId(appointId){
-    return this.http.get(`${this.url}/cases/getId${appointId}`).subscribe((msg) =>{
-      console.log(msg);
-    })
+  getCaseId(){
+    return this.currentCaseId;
+  }
+  setCaseId(caseId){
+    this.currentCaseId = caseId;
   }
   
 }

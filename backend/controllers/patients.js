@@ -48,37 +48,6 @@ const addPatient = async (req, res, next) => {
   next(errors);
 };
 
-const getAllPatients = async (req, res, next) => {
-  try {
-    const patients = await models.Patient.findAll({
-      include: [
-        {
-          model: models.Case,
-          include: [
-            models.Firm,
-            models.Insurance,
-            models.PracticeLocation,
-            models.Category,
-            models.CaseType,
-            // {
-            //   model: models.Appointment,
-            //   include: [models.Specialty, models.Doctors],
-            // },
-          ],
-        },
-      ],
-    });
-
-    if (!patients || patients.length === 0) {
-      return res.status(404).json({ message: "No patients found." });
-    }
-
-    res.status(200).json(patients);
-  } catch (error) {
-    console.error("Error in getAllPatients:", error);
-    res.status(500).json({ message: "Internal server error." });
-  }
-};
 
 const getPatient = async (req, res, next)=>{
   const patientId = req.params.id;
@@ -122,7 +91,7 @@ const filterData = async (req , res) =>{
     const patient = await models.Patient.filterPatient(filters);
     console.log("Data recieving after aplying filter:",patient )
     if (!patient || patient.length === 0) {
-      return res.status(404).json({ message: "No such data with filter exists" });
+      return res.json(["No such data with filter exists"]);
     }
     res.status(200).json(patient);
   }catch(error){
@@ -135,7 +104,6 @@ module.exports = {
   addPatient,
   updatePatient,
   getPatient,
-  deletePatient,
-  getAllPatients,
+  deletePatient,  
   filterData
 };

@@ -52,11 +52,10 @@ db.Case.belongsTo(db.CaseType, { foreignKey: 'caseTypeId' });
 db.Case.belongsTo(db.Category, { foreignKey: 'categoryId' });
 db.Case.belongsTo(db.PurposeOfVisit, {foreignKey: 'purposeOfVisitId'})
 
-db.Firm.hasMany(db.Case,{foreignKey:'id'})
 
 db.Patient.hasMany(db.Case, { foreignKey: 'patientId' });
 
-db.Appointment.belongsTo(db.AppointmentType,{foreignKey: 'AppointmentTypeId'})
+db.Appointment.belongsTo(db.AppointmentType,{foreignKey: 'appointmentTypeId'})
 db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId' });
 db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId' });
 // db.Appointment.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });

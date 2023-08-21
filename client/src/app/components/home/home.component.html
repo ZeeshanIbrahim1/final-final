@@ -39,10 +39,10 @@
   <input type="text" id="caseType" [(ngModel)]="caseType" />
 </div>
 
-<div class="grid-item">
+<!-- <div class="grid-item">
   <label for="dob">Date of Birth (DOB):</label>
   <input type="date" id="dob" [(ngModel)]="dob" />
-</div>
+</div> -->
 <div class="grid-item">
   <label for="practiceLocation">Practice Location:</label>
   <input type="text" id="practiceLocation" [(ngModel)]="practiceLocation" />
@@ -58,10 +58,10 @@
   <input type="text" id="dob" [(ngModel)]="firmName" />
 </div>
 
-<div class="grid-item">
+<!-- <div class="grid-item">
   <label for="doa">Date of Accident:</label>
   <input type="date" id="doa" [(ngModel)]="doa" />
-</div>
+</div> -->
 
 <div class="grid-item">
   <label for="Doctor">Doctor Name:</label>
@@ -73,59 +73,58 @@
 </div>
 
 
-
 <div>
   <h2>Patients List</h2>
   <table>
     <thead>
       <tr>
         <th>Patient ID</th>
-        <th>Name</th>
+        <th>Pateint Name</th>
         <th>Case id</th>
         <th>Category</th>
         <th>Purpose of visit</th>
+        <th>Case Type</th>
+        <th>Date of Birth</th>
+        <th>Practice Location</th>
+        <th>Insurance Name</th>
         <th>Firm Name</th>
-        <th>DoB</th>
-        <th>DOA</th>
-        <th>address</th>
-        <th>city</th>
-        <th>state</th>
-        <th>zip</th>
+        <th>Date Of Accident</th>
+        <th>Speciality</th>
+        <th>Appointment date and time</th>
+        <th>Doctor Name</th>
         <th>Edit</th>
         <th>Delete</th>
       </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let data of flattenedData">
-          <tr>
-            <!-- <td>{{ data[Cases].caseType }}</td> -->
-            <td>{{ data.patientId }}</td>
-            <!-- <td>{{data.Cases.Category.categoryName}}</td> -->
-            <td>{{ data.patientName }}</td>
-            <td>{{ data.caseId }}</td>
-            <td>{{ data.category }}</td>
-            <td>{{ data.purposeOfVisit }}</td>
-            <td>{{ data.firmName }}</td>
-            <td>{{ data.doB }}</td>
-            <td>{{ data.doa }}</td>
-              <td>{{ data.practiceLocation }}</td>
-              <td>{{ data.insuranceName}}</td>
-              <!-- <td>{{data.}}</td> -->
-              <!-- <td>Insert Speciality data here</td>
-              <td>Insert Appointment date & time data here</td>
-              <td> Insert Doctor Name data here </td> -->
-              <td></td>
-              <td>
-                <button class="btnform" (click)="editPatient(data.patientId,data.caseId)">Edit</button>
-              </td>
-              <td>
-                <button class="btnform" (click)="deletePatient(data.patientId)">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </ng-container>
-        
+      <ng-container *ngFor="let data of retrievedData">
+        <tr>
+          <td>{{ data.PatientId }}</td>
+          <td>{{ data.PatientFirstName}} {{ data.PatientMiddleName }} {{ data.PateintLastName}}</td>
+          <td>{{ data.CaseId }}</td>
+          <td>{{ data.categoryName }}</td>
+          <td>{{ data.purposeOfVisit }}</td>
+          <td>{{data.caseType}}</td>
+          <td>{{ data.Patient_DOB}}</td>
+          <td>{{data.practiceLocation}}</td>
+          <td>{{data.insuranceName}}</td>
+          <td>{{ data.firmName }}</td>
+          <td>{{ data.CaseDOA }}</td>
+          <td>{{ data.Speciality }}</td>
+          <td>{{ data.appointmentDate}} {{ data.AppointmentTime}}</td>
+          <td>{{data.doctorFirstName}}</td>
+          <td>
+            <button class="btnform" (click)="editPatient(data.PatientId,data.CaseId)">Edit</button>
+          </td>
+          <td>
+            <button class="btnform" (click)="deletePatient(data.PatientId)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>
+
+<h2 id="message"></h2>

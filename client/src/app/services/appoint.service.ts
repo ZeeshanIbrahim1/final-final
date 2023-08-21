@@ -37,6 +37,14 @@ export class AppointService {
   getAppointId(appointId:any){
     return this.http.get(`${this.url}/appoint/getId/${appointId}`) 
   }
+  getAppointments(appointmentId:any){
+    return this.http.get(`${this.url}/appoint/getAppoints/${appointmentId}`)
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('getAppointments')
+      )
+    );
+  }
   getSpecialtyInfo(){
     return this.http
       .get(`${this.url}/specialty/all`) // Change the return type here too
@@ -62,5 +70,14 @@ export class AppointService {
         this.errorHandlerService.handleError('typeInfo')
       )
     )
+  }
+  updateAppointment(appointmentId: number,value){
+      this.http.put(`${this.url}/appoint/updateAppoint/${appointmentId}`,value).subscribe(
+      (response: any) => {
+        console.log('Appointment updated successfully:', response);
+      },
+      (error) => {
+        console.error('Error updating Appointment:', error);
+      })
   }
 }

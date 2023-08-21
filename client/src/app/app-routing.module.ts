@@ -13,11 +13,11 @@ import { UpdateCaseComponent } from './components/update-case/update-case.compon
 import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
 const routes: Routes = [
-  { path: '', component: RegisterComponent,   },
+  { path: '', component: RegisterComponent  },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard]  },
   { path: 'navigation', component: NavigationComponent, canActivate:[AuthGuard]   },
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: RegisterComponent, canActivate:[AuthGuard] },
+  { path: 'signup', component: RegisterComponent},
   { path: 'patient', component: PatientsComponent , canActivate:[AuthGuard]  },
   { path: 'case', component: CaseComponent, canActivate:[AuthGuard]  },
   { path: 'appointment', component: AppointmentComponent , canActivate:[AuthGuard]  },

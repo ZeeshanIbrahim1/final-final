@@ -40,15 +40,23 @@ novalidate>
       </mat-form-field>
     </mat-grid-tile>
 
-  <mat-grid-tile class="matgrid">
-    <mat-form-field appearance="outline">
-      <mat-label>Purpose of Visit</mat-label>
-      <input matInput formControlName="purposeOfVisit" />
-      <mat-error *ngIf="updateCaseForm.get('purposeOfVisit').hasError('required')"
-        >Purpose Of Visit is required</mat-error
-      >
-    </mat-form-field>
-  </mat-grid-tile>
+    <mat-grid-tile class="matgrid">
+      <mat-form-field>
+        <mat-label>Select Purpose of Visit</mat-label>
+        <mat-select formControlName="purposeOfVisitId">
+          <mat-option
+            *ngFor="let visit of visitInfo"
+            [value]="visit.id" 
+          >
+            {{ visit.PurposeOfVisit }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="updateCaseForm.get('purposeOfVisitId').hasError('required')"
+          >Select Purpose of Visit</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
 
   <mat-grid-tile class="matgrid">
     <mat-form-field>

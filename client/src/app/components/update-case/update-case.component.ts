@@ -18,6 +18,7 @@ export class UpdateCaseComponent {
   appointmentId: any;
   practiceInfo: any[] = [];
   insuranceInfo: any[] = [];
+  visitInfo: any[]=[];
   firmInfo: any[] = [];
   categoryInfo: any[] = [];
   caseTypeInfo: any[] = [];
@@ -34,7 +35,7 @@ export class UpdateCaseComponent {
     const formGroupConfig = {
       practiceLocationId: new FormControl('', [Validators.required]),
       categoryId: new FormControl('', [Validators.required]),
-      purposeOfVisit: new FormControl('', [Validators.required]),
+      purposeOfVisitId: new FormControl('', [Validators.required]),
       caseTypeId: new FormControl('', [Validators.required]),
       doa: new FormControl('', [Validators.required]),
       insuranceId: new FormControl('', [Validators.required]),
@@ -52,7 +53,7 @@ export class UpdateCaseComponent {
         return cases;
       },
       (error) => {
-        console.error('Error fetching patient:', error);
+        console.log('Error fetching Cases:', error);
       }
     );
 }
@@ -62,12 +63,13 @@ export class UpdateCaseComponent {
     this.FirmInfo();
     this.CategoryInfo();
     this.CaseTypeInfo();
+    this.getVisitInfo();
   }
   populating(){
       this.updateCaseForm.patchValue({
       practiceLocationId: this.caseData.practiceLocationId,
       categoryId: this.caseData.categoryId,
-      purposeOfVisit: this.caseData.purposeOfVisit,
+      purposeOfVisitId: this.caseData.purposeOfVisitId,
       caseTypeId: this.caseData.caseTypeId,
       doa: this.caseData.doa,
 
@@ -110,18 +112,26 @@ export class UpdateCaseComponent {
       this.caseTypeInfo = response;
     });
   }
+  getVisitInfo(){
+    this.caseService.getVisitInfo().subscribe((response: any[])=>{
+      this.visitInfo = response;
+      console.log("Visit Info:", this.visitInfo)
+    })
+  }
   getAppointId(appointId){
     this.appointService.getAppointId(appointId).subscribe((msg: any)=> {
-      console.log("Appointment Id:",msg);
+      console.log("Appointmentsssssss Id:",msg);
       this.appointmentId = msg;
     })
   }
   updateCase() {
+    this.caseService.setCaseId(this.caseId);
     const numericId = parseInt(this.caseId, 10);
     console.log("CaseId:", numericId)
     this.caseService.updateCase(numericId,this.updateCaseForm.value);
     console.log("Updated Case:",this.updateCaseForm.value)
-    this.router.navigate(['/update-appointment',this.appointmentId.id])
+    setTimeout(()=>{
+        this.router.navigate(['/update-appointment',this.appointmentId.id])
+    },500)
   }
-
 }
