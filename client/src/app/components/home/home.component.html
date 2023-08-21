@@ -72,7 +72,7 @@
 </div>
 </div>
 
-
+<div *ngIf="retrievedData && retrievedData.length > 0 ">
 <div>
   <h2>Patients List</h2>
   <table>
@@ -125,6 +125,7 @@
       </ng-container>
     </tbody>
   </table>
+</div>
 </div>
 
 <h2 id="message"></h2>

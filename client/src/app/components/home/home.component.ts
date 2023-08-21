@@ -68,6 +68,7 @@ export class HomeComponent {
         const messageElement = document.getElementById('message');
         if (messageElement) {
             messageElement.textContent = "NO DATA";
+            this.retrievedData.length = 0;
        }
       }
   }
