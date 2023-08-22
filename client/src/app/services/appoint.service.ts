@@ -45,6 +45,9 @@ export class AppointService {
       )
     );
   }
+  getAllAppointments(){
+    return this.http.get(`${this.url}/appoint/c`)
+  }
   getSpecialtyInfo(){
     return this.http
       .get(`${this.url}/specialty/all`) // Change the return type here too

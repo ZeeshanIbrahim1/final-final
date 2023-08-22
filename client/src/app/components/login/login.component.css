@@ -12,3 +12,6 @@ button {
     float: right;
     /* width: 200px */
 }
+.error_msg{
+    color: red;
+}

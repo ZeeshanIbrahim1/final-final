@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent {
   loginForm : FormGroup;
+  showErrorMessage = false;
   
   constructor(private authService:AuthService,private router:Router) {}
 
@@ -28,9 +29,7 @@ export class LoginComponent {
   login(){   
     console.log("LOGIN PRESSED!")
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
-    .subscribe((msg) => console.log(msg),(error)=> {console.log(error);
-      console.log("error here")
-    }
+    .subscribe((msg) => console.log(msg),(error)=> {this.showErrorMessage = true   }
     ) 
   }
   toregister(){

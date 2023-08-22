@@ -163,7 +163,7 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`p.last_name LIKE '%${last_name}%'`);
     }
     if (caseId) {
-      whereConditions.push(`c.id = '%${caseId}%'`);
+      whereConditions.push(`c.id = '${caseId}'`);
     }
     if(categoryName){
       whereConditions.push(`ct.categoryName LIKE '%${categoryName}%'`)

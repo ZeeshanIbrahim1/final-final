@@ -105,12 +105,22 @@ const updateAppointment = async(req,res) =>{
       where:{id:appointmentId}
     })
 }
+const getAllAppointment = async(req,res) => {
+    const allAppointments = await models.Appointment.findAll();
+    if(!allAppointments && allAppointments.lenth ===0 ){
+      res.json({message: "No Appointment exists"});
+    }
+    else{
+      res.status(201).json(allAppointments);
+    }
+  } 
 
 module.exports = {
   getId,
   addAppoint,
   getType,
   getAppointments,
-  updateAppointment
+  updateAppointment,
+  getAllAppointment
 //   getAll
 };

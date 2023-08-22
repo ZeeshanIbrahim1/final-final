@@ -4,10 +4,11 @@ import { Router } from '@angular/router';
 
 import { Patient } from '../models/patient';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, concat } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
 import { UpdatePatientComponent } from '../components/update-patient/update-patient.component';
+import { of, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,9 @@ export class PatientService {
     id:any;
     setId:any;
     mssgss:any;
+    dataIncoming:any;
+    name:any;
+    fetchedData:any;
     constructor(
         private http: HttpClient,
         private errorHandlerService: ErrorHandlerService,
@@ -81,7 +85,7 @@ export class PatientService {
       }
     );
   }
-  async searchPatientsAndCases(
+   searchPatientsAndCases(
     firstName: string | null,
     middleName: string| null,
     lastName:string| null,
@@ -112,7 +116,15 @@ export class PatientService {
       .set('doa',doa ? doa.toISOString():'')
       .set('doctor',doctor)
 
-    return this.http.get(`${this.url}/patients/filter`, { params }).toPromise()
+   return this.http.get(`${this.url}/patients/filter`, { params }).pipe(
+    // map((data:any)=>{
+    //   for(let nm of data){
+    //     nm.name = nm.PatientFirstName + " " + nm.PateintLastName;
+    //   }
+    //   return data
+    // }
+    // )
+    )
     
   }
 }

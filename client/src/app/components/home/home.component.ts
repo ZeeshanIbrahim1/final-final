@@ -38,6 +38,9 @@ export class HomeComponent {
   viewAllPatient(){
     this.router.navigate(['/allPatient'])
   }
+  viewAllCases(){
+    this.router.navigate(['/allCases'])
+  }
   editPatient(id1,id2) {
    this.router.navigate([`/update-Patient`, id1,id2]);
    }
@@ -47,8 +50,8 @@ export class HomeComponent {
     this.patientService.deletePatient(id1,id2)
     this.ngOnInit();
   }
-  async search(){
-       this.retrievedData = await this.patientService.searchPatientsAndCases(
+   search(){
+     this.patientService.searchPatientsAndCases(
        this.firstName,
        this.middleName,
        this.lastName,
@@ -62,11 +65,15 @@ export class HomeComponent {
        this.firmName,
        this.doa,
        this.doctor,     
-     )
-     this.displayInfo();
+     ).subscribe((info)=> {
+      console.log("info",info)
+      this.retrievedData = info;
+      console.log("Again trying", this.retrievedData)
+      this.displayInfo();
+    })
   }
   displayInfo(){
-      console.log("All information:",this.retrievedData)
+      // console.log("All information:",this.retrievedData)
       if(this.retrievedData[0] === 'No such data with filter exists'){
         const messageElement = document.getElementById('message');
         if (messageElement) {

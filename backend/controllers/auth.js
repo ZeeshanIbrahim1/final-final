@@ -8,13 +8,15 @@ exports.signup = async (req, res, next) => {
   console.log(errors);
   if (!errors.isEmpty()) {
     console.log("Error here", req.body);
-    res.json("email already exists");
-    return 0;
+    res.status(401).json(errors)
   }
   let { name, email, password } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(password, 12);
-
+    const checkEmail = await models.User.findByEmail(email);
+    if(checkEmail){
+      res.status(401).json({message:"Email already exists"});
+    }
     await models.User.createUser(name, email, hashedPassword);
     res.status(201).json({ message: "User registered!" });
   } catch (err) {

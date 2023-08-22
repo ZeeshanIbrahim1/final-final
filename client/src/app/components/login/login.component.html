@@ -15,7 +15,9 @@
         <mat-error *ngIf="loginForm.get('password').hasError('required')">Password is required</mat-error>
         <mat-error *ngIf="loginForm.get('password').hasError('minlength')">Password must be at least 7 characters long</mat-error>
       </mat-form-field>
-      
+      <div *ngIf="showErrorMessage">
+        <h3 class="error_msg">Invalid username and password Please try again</h3>
+      </div>
       <button color="primary" [disabled]="!loginForm.valid" mat-raised-button >LOG IN!</button>
     </form> 
   </div>

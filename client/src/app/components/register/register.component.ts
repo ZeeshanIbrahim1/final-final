@@ -33,9 +33,16 @@ export class RegisterComponent {
     };}
   register(){
       this.authService.signup(this.registerForm.value)
-      .subscribe((msg) => console.log(msg)  )
+      .subscribe(
+        (msg) => {console.log("In register component",msg)
+        this.router.navigate(['/login'])
+      },
+        (error) =>{
+        console.log("Error during signup:",error)
+      } )
       this.registerForm.reset();
       this.clearErrorStates();
+      
       
   }
   clearErrorStates() {
