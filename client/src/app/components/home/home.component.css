@@ -2,6 +2,9 @@
   display: grid;
   grid-template-columns: auto auto auto;
 }
+h1{
+  margin-top: 20px;
+}
 .grid-item{
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(0, 0, 0, 0.8);
@@ -57,4 +60,11 @@ tr:nth-child(even) {
 .btn_add{
   background-color: #007bff; /* Change button color to blue */
   color: white;
+  margin-left: 20px;
+  font-size: 18px; /* Increase this value to adjust font size */
+  padding: 10px 20px; /* Adjust padding to increase button size */
+}
+.btn_add:hover{
+  background-color: #1f2199; 
+  color: #ffffff; 
 }

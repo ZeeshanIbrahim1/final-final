@@ -11,6 +11,7 @@ import { AuthGuard } from '../app/auth.guard';
 import { UpdatePatientComponent } from './components/update-patient/update-patient.component';
 import { UpdateCaseComponent } from './components/update-case/update-case.component';
 import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
+import { ViewAllPatientsComponent } from './components/view-all-patients/view-all-patients.component';
 
 const routes: Routes = [
   { path: '', component: RegisterComponent  },
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path:  'update-Patient/:id1/:id2', component: UpdatePatientComponent, canActivate:[AuthGuard]  },
   {path:  'update-case/:id', component:UpdateCaseComponent , canActivate:[AuthGuard]  },
   {path:  'update-appointment/:id', component:UpdateAppointmentComponent, canActivate:[AuthGuard] },
-  { path: '**', redirectTo: '' },
+  {path: 'allPatient', component:ViewAllPatientsComponent, canActivate:[AuthGuard]},
+  { path: '**', redirectTo: 'signup' },
 ];
 
 @NgModule({

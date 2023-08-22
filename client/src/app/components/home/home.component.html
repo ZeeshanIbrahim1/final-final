@@ -1,5 +1,7 @@
 <div>
   <button class="btn_add" (click)="addPatient()">New Patient</button>
+
+  <button class="btn_add" (click)="viewAllPatient()" >View All Patient</button>
 </div>
 <h1>
   Apply filter
@@ -117,7 +119,7 @@
             <button class="btnform" (click)="editPatient(data.PatientId,data.CaseId)">Edit</button>
           </td>
           <td>
-            <button class="btnform" (click)="deletePatient(data.PatientId)">
+            <button class="btnform" (click)="deletePatient(data.CaseId, data.AppointmentId)">
               Delete
             </button>
           </td>

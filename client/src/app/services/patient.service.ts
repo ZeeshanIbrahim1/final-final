@@ -34,15 +34,9 @@ export class PatientService {
         catchError(this.errorHandlerService.handleError<Patient>('patient'))
       );
   }
-  getAllPatients(): Observable<Patient[]> {
+  getAllPatients() {
     console.log('working');
-    return this.http
-      .get<Patient[]>(`${this.url}/patients/all`) 
-      .pipe(
-        catchError(
-          this.errorHandlerService.handleError<Patient[]>('getAllPatients')
-        )
-      );
+    return this.http.get(`${this.url}/patients/all`) 
   }
   getPatient(id: string): Observable<Patient[]> {
     console.log("IN getPatient");
@@ -55,13 +49,16 @@ export class PatientService {
         )
       );
   }
+  getPatientsAll(){
+    return this.http.get(`${this.url}/patients/getAllP`)
+  }
   updatePatient(id:Number,patient: Omit<Patient, 'id'>){
     this.http.put(`${this.url}/patients/update/${id}`, patient).subscribe(
       (response: any) => {
         console.log('Patient updated successfully:', response);
       },
       (error) => {
-        console.error('Error updating patient:', error);
+        console.log('Error updating patient:', error);
       }
     );
   }
@@ -73,11 +70,11 @@ export class PatientService {
     console.log("get", this.setId);
     return this.setId;
   }
-  deletePatient(id:Number){
-    console.log("IN AUTH SERVICE",id)
-    return this.http.delete(`${this.url}/patients/delete/${id}`).subscribe(
+  deletePatient(id1:Number,id2:Number){
+    console.log("IN AUTH SERVICE",id1,id2)
+    return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}`).subscribe(
       (response: any) => {
-        console.log('Patient deleted successfully:', response);
+        console.log('Case and Appointment deleted successfully:', response);
       },
       (error) => {
         console.error('Error deleting patient:', error);

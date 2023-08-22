@@ -34,6 +34,7 @@ import {MatSelectModule} from '@angular/material/select';
 // import {MatInputModule} from '@angular/material/input';
 // import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ViewAllPatientsComponent } from './components/view-all-patients/view-all-patients.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     UpdatePatientComponent,
     UpdateCaseComponent,
     UpdateAppointmentComponent,
+    ViewAllPatientsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,6 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatRadioModule,
     FormsModule,
     MatSelectModule,
-    
   ],
   providers: [],
   bootstrap: [AppComponent],

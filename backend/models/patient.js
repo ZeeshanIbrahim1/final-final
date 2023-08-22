@@ -91,7 +91,7 @@ module.exports = (sequelize, DataTypes) => {
             where: { id: patientId }
           })
     }
-    static async deletePatient(patientId){
+    static async deletePatient(patientId,caseId){
         await Patient.destroy({
           where: {
             id: patientId
@@ -163,7 +163,7 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`p.last_name LIKE '%${last_name}%'`);
     }
     if (caseId) {
-      whereConditions.push(`c.id LIKE '%${caseId}%'`);
+      whereConditions.push(`c.id = '%${caseId}%'`);
     }
     if(categoryName){
       whereConditions.push(`ct.categoryName LIKE '%${categoryName}%'`)

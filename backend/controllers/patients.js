@@ -74,9 +74,19 @@ const updatePatient = async (req, res) => {
  }
 
 const deletePatient = async (req, res) => { 
-  const patientId = req.params.id;
+  const caseId = req.params.id1;
+  const AppointId = req.params.id2;
   try{
-    await models.Patient.deletePatient(patientId);
+    await models.Case.destroy({
+      where: {
+        id: caseId
+      },
+    });
+    await models.Appointment.destroy({
+      where:{
+        id:AppointId
+      }
+    })
     res.status(201).json({ message: " Patient Successfully Destroyed! "})
   }
   catch(error){
@@ -100,10 +110,21 @@ const filterData = async (req , res) =>{
   }
 }
 
+const getPatientAll = async(req,res)=>{
+  const allPatients = await models.Patient.findAll();
+  if(!allPatients && allPatients.length === 0 ){
+    res.json({message : "No Patient exists" })
+  }
+  else{
+    res.status(201).json(allPatients)
+  } 
+}
+
 module.exports = {
   addPatient,
   updatePatient,
   getPatient,
   deletePatient,  
-  filterData
+  filterData,
+  getPatientAll
 };

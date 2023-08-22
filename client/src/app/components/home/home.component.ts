@@ -35,13 +35,16 @@ export class HomeComponent {
   addPatient(){
     this.router.navigate(['/patient']);
   }
+  viewAllPatient(){
+    this.router.navigate(['/allPatient'])
+  }
   editPatient(id1,id2) {
    this.router.navigate([`/update-Patient`, id1,id2]);
    }
 
-  async deletePatient(id) {
+  deletePatient(id1,id2) {
     console.log("Front end !")
-    await this.patientService.deletePatient(id)
+    this.patientService.deletePatient(id1,id2)
     this.ngOnInit();
   }
   async search(){

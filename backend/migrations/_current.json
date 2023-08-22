@@ -1,0 +1,471 @@
+{
+    "tables": {
+        "Appointments": {
+            "tableName": "Appointments",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "appointmentDate": {
+                    "field": "appointmentDate",
+                    "seqType": "Sequelize.DATE"
+                },
+                "appointmentTime": {
+                    "field": "appointmentTime",
+                    "seqType": "Sequelize.STRING"
+                },
+                "duration": {
+                    "field": "duration",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "appointmentTypeId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "AppointmentType",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "appointmentTypeId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "specialtyId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Specialties",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "specialtyId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "doctorId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Doctors",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "doctorId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "caseId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Cases",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "caseId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "AppointmentType": {
+            "tableName": "AppointmentType",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "appointmentType": {
+                    "field": "appointmentType",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                }
+            },
+            "indexes": []
+        },
+        "Cases": {
+            "tableName": "Cases",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "doa": {
+                    "field": "doa",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
+                "firmId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Firms",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "firmId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "insuranceId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Insurances",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "insuranceId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "patientId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Patients",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "patientId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "practiceLocationId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "PracticeLocations",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "practiceLocationId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "caseTypeId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "CaseTypes",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "caseTypeId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "categoryId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Categories",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "categoryId",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "purposeOfVisitId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "PurposeOfVisits",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "purposeOfVisitId",
+                    "seqType": "Sequelize.INTEGER"
+                }
+            },
+            "indexes": []
+        },
+        "CaseTypes": {
+            "tableName": "CaseTypes",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "Name": {
+                    "field": "Name",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Categories": {
+            "tableName": "Categories",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "categoryName": {
+                    "field": "categoryName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "categoryType": {
+                    "field": "categoryType",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Doctors": {
+            "tableName": "Doctors",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "first_name": {
+                    "field": "first_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "middle_name": {
+                    "field": "middle_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "last_name": {
+                    "field": "last_name",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Firms": {
+            "tableName": "Firms",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "firmName": {
+                    "field": "firmName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "firmCity": {
+                    "field": "firmCity",
+                    "seqType": "Sequelize.STRING"
+                },
+                "firmState": {
+                    "field": "firmState",
+                    "seqType": "Sequelize.STRING"
+                },
+                "firmZip": {
+                    "field": "firmZip",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Insurances": {
+            "tableName": "Insurances",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "insuranceName": {
+                    "field": "insuranceName",
+                    "seqType": "Sequelize.STRING"
+                },
+                "insuranceCity": {
+                    "field": "insuranceCity",
+                    "seqType": "Sequelize.STRING"
+                },
+                "insuranceState": {
+                    "field": "insuranceState",
+                    "seqType": "Sequelize.STRING"
+                },
+                "insuranceZip": {
+                    "field": "insuranceZip",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Patients": {
+            "tableName": "Patients",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "first_name": {
+                    "field": "first_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "middle_name": {
+                    "field": "middle_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "last_name": {
+                    "field": "last_name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "gender": {
+                    "field": "gender",
+                    "seqType": "Sequelize.STRING"
+                },
+                "date_of_birth": {
+                    "field": "date_of_birth",
+                    "seqType": "Sequelize.STRING"
+                },
+                "ssn": {
+                    "field": "ssn",
+                    "seqType": "Sequelize.STRING"
+                },
+                "address": {
+                    "field": "address",
+                    "seqType": "Sequelize.STRING"
+                },
+                "city": {
+                    "field": "city",
+                    "seqType": "Sequelize.STRING"
+                },
+                "state": {
+                    "field": "state",
+                    "seqType": "Sequelize.STRING"
+                },
+                "zip": {
+                    "field": "zip",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                }
+            },
+            "indexes": []
+        },
+        "PracticeLocations": {
+            "tableName": "PracticeLocations",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                },
+                "city": {
+                    "field": "city",
+                    "seqType": "Sequelize.STRING"
+                },
+                "state": {
+                    "field": "state",
+                    "seqType": "Sequelize.STRING"
+                },
+                "zip": {
+                    "field": "zip",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "PurposeOfVisits": {
+            "tableName": "PurposeOfVisits",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "PurposeOfVisit": {
+                    "field": "PurposeOfVisit",
+                    "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
+                }
+            },
+            "indexes": []
+        },
+        "Specialties": {
+            "tableName": "Specialties",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        },
+        "Users": {
+            "tableName": "Users",
+            "schema": {
+                "id": {
+                    "allowNull": false,
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "username": {
+                    "field": "username",
+                    "seqType": "Sequelize.STRING"
+                },
+                "email": {
+                    "field": "email",
+                    "seqType": "Sequelize.STRING"
+                },
+                "password": {
+                    "field": "password",
+                    "seqType": "Sequelize.STRING"
+                }
+            },
+            "indexes": []
+        }
+    },
+    "revision": 1
+}
