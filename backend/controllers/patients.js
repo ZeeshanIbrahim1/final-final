@@ -76,7 +76,13 @@ const updatePatient = async (req, res) => {
 const deletePatient = async (req, res) => { 
   const caseId = req.params.id1;
   const AppointId = req.params.id2;
+  const patientId = req.params.id3;
   try{
+    // await models.Patient.destroy({
+    //   where:{
+    //     id : patientId
+    //   }
+    // })
     await models.Case.destroy({
       where: {
         id: caseId
@@ -92,6 +98,21 @@ const deletePatient = async (req, res) => {
   catch(error){
     console.log("ERROR IN BACKEND CONTROLLERS:",error)
   }
+}
+
+const deleteOne = async (req, res) =>{
+  const patientId = req.params.id;
+  try{
+    await models.Patient.destroy({
+      where:{
+        id : patientId
+      }
+    })
+    res.json("Patient Successfully deleted")
+  }catch(error){
+    console.log("ERROR IN BACKEND CONTROLLERS deleting patient:",error)
+  }
+
 }
 
 const filterData = async (req , res) =>{
@@ -126,5 +147,6 @@ module.exports = {
   getPatient,
   deletePatient,  
   filterData,
-  getPatientAll
+  getPatientAll,
+  deleteOne
 };

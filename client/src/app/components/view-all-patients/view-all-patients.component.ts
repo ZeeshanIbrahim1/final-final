@@ -26,5 +26,9 @@ export class ViewAllPatientsComponent {
     this.patientService.setPatientId(PatientId);
     this.router.navigate(['/case']);
   }
+  deletePatient(PatientId:any){
+    this.patientService.deleteOnePatient(PatientId);
+    this.ngOnInit();
+  }
 
 }

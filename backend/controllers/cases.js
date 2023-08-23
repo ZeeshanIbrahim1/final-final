@@ -1,5 +1,6 @@
 const models = require("../models");
 const { validationResult } = require("express-validator");
+const { all } = require("../routes/cases");
 
 const addCase = async (req, res, next) => {
   const errors = validationResult(req);
@@ -100,10 +101,57 @@ const getVisit = async (req,res,next)=>{
       res.json({ message: "Internal server error."})
   }
 }
+const getAll = async (req,res) => {
+  let sql = `
+  SELECT
+    c.id AS "caseId",
+    c.doa AS "caseDOA",
+    f.firmName AS "frimName",
+    i.insuranceName AS "insuranceName",
+    l.name AS "practiceLocation",
+    t.Name AS "caseType",
+    ct.categoryName AS "categoryName",
+    pv.PurposeOfVisit AS "purposeOfVisit"
+  FROM 
+    cases c
+  LEFT JOIN
+    casetypes t ON c.caseTypeId = t.id
+  LEFT JOIN
+    categories ct ON c.categoryId = ct.id
+  LEFT JOIN
+    appointments a ON c.id = a.caseId
+  LEFT JOIN
+    purposeofvisits pv ON c.purposeOfVisitId = pv.id
+  LEFT JOIN
+    doctors d ON a.doctorId = d.id
+  LEFT JOIN
+    firms f ON c.firmId = f.id
+  LEFT JOIN
+    insurances i ON c.insuranceId = i.id
+  LEFT JOIN
+    practicelocations l ON c.practiceLocationId = l.id
+  LEFT JOIN
+    specialties s ON a.specialtyId = s.id
+  `;
+  // try {
+    const results = await models.Case.sequelize.query(sql);
+    const allCases = results[0];
+    if(allCases){
+      console.log("In cases controller:", allCases)
+      res.status(201).json(allCases);
+    }
+    else{
+      res.json({message:"No Case exists!"})
+    }
+  // } catch (error) {
+  //   res.status(401).json(error)
+  // }
+}
 module.exports = {
   addCase,
   getCase,
   updateCase,
   getId,
-  getVisit
+  getVisit,
+  getAll
 };

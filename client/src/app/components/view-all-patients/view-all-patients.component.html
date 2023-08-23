@@ -10,6 +10,7 @@
             <th>Gender</th>
             <th>Date of birth</th>
             <th>Edit</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,10 @@
                <td>
                 <button class="btnform" (click)="addCases(info.id)">AddCase & appointments</button>
               </td>
+              <td>
+                <button class="btnform" (click)="deletePatient(info.id)">Delete Patient</button>
+              </td>
+              
             
             </tr>
           </ng-container> 

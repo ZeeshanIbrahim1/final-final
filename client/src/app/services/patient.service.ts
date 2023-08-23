@@ -17,7 +17,6 @@ export class PatientService {
     private url = 'http://localhost:3000';
     id:any;
     setId:any;
-    mssgss:any;
     dataIncoming:any;
     name:any;
     fetchedData:any;
@@ -74,9 +73,19 @@ export class PatientService {
     console.log("get", this.setId);
     return this.setId;
   }
-  deletePatient(id1:Number,id2:Number){
+  deleteOnePatient(id1:any){
+    this.http.delete(`${this.url}/patients/deleteOne/${id1}`).subscribe(
+      (response)=>{
+        console.log("Patient deleted successfully:", response)
+      },
+      (error) => {
+        console.error('Error deleting patient:', error);
+      }
+    )
+  }
+  deletePatient(id1:Number,id2:Number,id3:Number){
     console.log("IN AUTH SERVICE",id1,id2)
-    return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}`).subscribe(
+    return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}/${id3}`).subscribe(
       (response: any) => {
         console.log('Case and Appointment deleted successfully:', response);
       },
@@ -119,7 +128,7 @@ export class PatientService {
    return this.http.get(`${this.url}/patients/filter`, { params }).pipe(
     // map((data:any)=>{
     //   for(let nm of data){
-    //     nm.name = nm.PatientFirstName + " " + nm.PateintLastName;
+    //     nm.name = nm.PatientFirstName + " " + nm.PatientLastName;
     //   }
     //   return data
     // }

@@ -54,11 +54,11 @@ db.Case.belongsTo(db.PurposeOfVisit, {foreignKey: 'purposeOfVisitId'})
 
 
 db.Patient.hasMany(db.Case, { foreignKey: 'patientId' });
+db.Case.hasMany(db.Appointment,{foreignKey: 'caseId'});
 
 db.Appointment.belongsTo(db.AppointmentType,{foreignKey: 'appointmentTypeId'})
 db.Appointment.belongsTo(db.Specialty, { foreignKey: 'specialtyId' });
 db.Appointment.belongsTo(db.Doctors, { foreignKey: 'doctorId' });
-// db.Appointment.belongsTo(db.PracticeLocation, { foreignKey: 'practiceLocationId' });
 db.Appointment.belongsTo(db.Case, { foreignKey: 'caseId' });
 
 db.sequelize = sequelize;

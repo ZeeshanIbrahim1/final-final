@@ -45,10 +45,13 @@ export class HomeComponent {
    this.router.navigate([`/update-Patient`, id1,id2]);
    }
 
-  deletePatient(id1,id2) {
+  deletePatient(id1:any,id2:any,id3:any) {
     console.log("Front end !")
-    this.patientService.deletePatient(id1,id2)
-    this.ngOnInit();
+    this.patientService.deletePatient(id1,id2,id3)
+    setTimeout(() => {
+      
+      this.ngOnInit();
+    }, 200);
   }
    search(){
      this.patientService.searchPatientsAndCases(

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppointService } from 'src/app/services/appoint.service';
 import { CaseService } from 'src/app/services/case.service';
+import { PatientService } from 'src/app/services/patient.service';
 
 @Component({
   selector: 'app-view-all-cases',
@@ -8,12 +10,24 @@ import { CaseService } from 'src/app/services/case.service';
   styleUrls: ['./view-all-cases.component.css']
 })
 export class ViewAllCasesComponent {
-  constructor(private caseService:CaseService, private appointService:AppointService ){}
+  casesInfo:any;
+  constructor(private router:Router,private patientService:PatientService, private caseService:CaseService, private appointService:AppointService ){}
 
   ngOnInit(){
     this.getInfo()
   }
   getInfo(){
-    // this.caseService.getAllAppointments()
+    this.caseService.getAllCases()
+    .subscribe((data)=>{
+      console.log("Cases-data",data)
+      this.casesInfo = data;
+      console.log("Cases data", this.casesInfo)
+    })
+  }
+  addAppointments(id:any){
+    this.patientService.setPatientId(id);
+    setTimeout(() => {
+      this.router.navigate(['/appointment']);
+    }, 100);
   }
 }

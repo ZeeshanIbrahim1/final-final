@@ -111,5 +111,13 @@ export class CaseService {
   setCaseId(caseId){
     this.currentCaseId = caseId;
   }
+  getAllCases(){
+    return this.http.get(`${this.url}/cases/allCases`)
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('FirmInfo')
+      )
+    );
+  }
   
 }

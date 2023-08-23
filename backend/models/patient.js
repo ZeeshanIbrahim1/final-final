@@ -98,6 +98,7 @@ module.exports = (sequelize, DataTypes) => {
           },
         });
     }
+    
     static async filterPatient(filterIncoming){
 
     const {first_name,middle_name,last_name,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
@@ -107,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
     p.id AS "PatientId",
     p.first_name AS "PatientFirstName",
     p.middle_name AS "PatientMiddleName",
-    p.last_name AS "PateintLastName",
+    p.last_name AS "PatientLastName",
     p.date_of_birth AS "Patient_DOB",
     c.id AS "CaseId",
     c.doa AS "CaseDOA",
@@ -129,7 +130,7 @@ module.exports = (sequelize, DataTypes) => {
   INNER JOIN
     cases c ON p.id = c.patientId
   LEFT JOIN
-    Casetypes t ON c.caseTypeId = t.id
+    casetypes t ON c.caseTypeId = t.id
   LEFT JOIN
     categories ct ON c.categoryId = ct.id
   LEFT JOIN
@@ -166,7 +167,7 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`c.id = '${caseId}'`);
     }
     if(categoryName){
-      whereConditions.push(`ct.categoryName LIKE '%${categoryName}%'`)
+      whereConditions.push(`ct.categoryName LIKE '%${categoryName.trim()}%'`)
     }
     if(purposeOfVisit){
         whereConditions.push(`c.purposeOfVisit LIKE '%${purposeOfVisit}%'`)

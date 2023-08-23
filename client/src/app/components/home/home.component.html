@@ -103,7 +103,7 @@
       <ng-container *ngFor="let data of retrievedData">
         <tr>
           <td>{{ data.PatientId }}</td>
-          <td>{{ data.PatientFirstName}} {{ data.PatientMiddleName }} {{ data.PateintLastName}}</td>
+          <td>{{ data.PatientFirstName}} {{ data.PatientMiddleName }} {{ data.PatientLastName}}</td>
           <td>{{ data.CaseId }}</td>
           <td>{{ data.categoryName }}</td>
           <td>{{ data.purposeOfVisit }}</td>
@@ -120,7 +120,7 @@
             <button class="btnform" (click)="editPatient(data.PatientId,data.CaseId)">Edit</button>
           </td>
           <td>
-            <button class="btnform" (click)="deletePatient(data.CaseId, data.AppointmentId)">
+            <button class="btnform" (click)="deletePatient(data.CaseId, data.AppointmentId,data.PatientId)">
               Delete
             </button>
           </td>

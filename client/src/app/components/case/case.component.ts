@@ -96,10 +96,10 @@ export class CaseComponent {
         console.log(msg);
         this.patientService.setPatientId(msg);
       });
-    setTimeout(() => {
+      setTimeout(() => {
       
-      this.router.navigate(['/appointment']);
-    }, 100);
+        this.router.navigate(['/appointment']);
+      }, 100);
     // this.caseForm.reset();
     // this.clearErrorStates();
   }

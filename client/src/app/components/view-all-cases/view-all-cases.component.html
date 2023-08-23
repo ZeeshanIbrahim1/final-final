@@ -1,7 +1,7 @@
 <div>
     <!-- *ngIf="retrievedData && retrievedData.length > 0 " -->
     <div>
-      <h2>All Patients</h2>
+      <h2>All Cases</h2>
       <table>
         <thead>
           <tr>
@@ -10,7 +10,6 @@
             <th>Insurance Name</th>
             <th>Firm Name</th>
             <th>doa</th>
-            <th>patientId</th>
             <th>practiceLocation</th>
             <th>caseTypeId</th>
             <th>category</th>
@@ -18,21 +17,25 @@
             <th>Edit</th>
           </tr>
         </thead>
-        <!-- <tbody>
+        <tbody>
           <ng-container 
-             *ngFor="let info of patientInfo" >
+             *ngFor="let info of casesInfo" >
             <tr>
-              <td>{{ info.id }}</td>
-              <td>{{info.first_name}} {{info.middle_name}} {{info.last_name}}</td>
-              <td>{{info.gender}}</td>
-              <td>{{info.date_of_birth}}</td>
-               <td>
-                <button class="btnform" (click)="addCases(info.id)">AddCase & appointments</button>
+              <td>{{ info.caseId }}</td>
+              <td>{{info.caseType}}</td>
+              <td>{{info.insuranceName}}</td>
+              <td>{{info.frimName}}</td>
+              <td>{{info.caseDOA}}</td>
+              <td>{{info.practiceLocation}}</td>
+              <td>{{info.caseType}}</td>
+              <td>{{info.categoryName}}</td>
+              <td>{{info.purposeOfVisit}}</td>
+              <td>
+                <button class="btnform" (click)="addAppointments(info.caseId)">Add Appointments</button>
               </td>
-            
             </tr>
           </ng-container> 
-        </tbody> -->
+        </tbody>
       </table>
     </div>
     </div>
