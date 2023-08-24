@@ -47,11 +47,13 @@ export class HomeComponent {
 
   deletePatient(id1:any,id2:any,id3:any) {
     console.log("Front end !")
-    this.patientService.deletePatient(id1,id2,id3)
-    setTimeout(() => {
-      
-      this.ngOnInit();
-    }, 200);
+    let isExecuted = confirm("This will delete all cases and appointment of this Patient. Do you want to delete?")
+    if(isExecuted){
+      this.patientService.deletePatient(id1,id2,id3)
+      setTimeout(() => { 
+        this.search(); 
+      }, 200);
+    }
   }
    search(){
      this.patientService.searchPatientsAndCases(

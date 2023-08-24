@@ -61,6 +61,7 @@
           matInput
           [matDatepicker]="picker"
           formControlName="date_of_birth"
+          [max]="maxDate"
         />
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle

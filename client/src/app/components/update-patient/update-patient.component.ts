@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientService } from 'src/app/services/patient.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,10 +11,12 @@ import { Router } from '@angular/router';
   templateUrl: './update-patient.component.html',
   styleUrls: ['./update-patient.component.css']
 })
-export class UpdatePatientComponent {
+export class UpdatePatientComponent implements OnInit {
+  maxDate: any;
   updatePatientForm: FormGroup;
   patientId: string;
   caseId: string;
+  date = new Date();
   patientData: any; // To store patient's data
 
   constructor(private patientService: PatientService,private route: ActivatedRoute, private http: HttpClient,private router: Router) {}
@@ -24,9 +26,11 @@ export class UpdatePatientComponent {
     this.patientId =  this.route.snapshot.params['id1'];
     this.caseId = this.route.snapshot.params['id2'];
     await this.fetchUpdatePatient(this.patientId);
+  
   }
   
   createFormGroup(): FormGroup {
+    
     const formGroupConfig = {
       first_name: new FormControl(``, [
         Validators.required,
@@ -70,6 +74,10 @@ export class UpdatePatientComponent {
     this.router.navigate(['./update-case/',this.caseId])
   }
   populating(){
+    this.maxDate = new Date();
+    console.log("dateee", this.maxDate)
+    console.log("dob value", this.patientData.date_of_birth)
+    console.log("date", this.date)
     this.updatePatientForm.patchValue({
       first_name: this.patientData.first_name,
       middle_name: this.patientData.middle_name ,
@@ -82,6 +90,6 @@ export class UpdatePatientComponent {
       gender: this.patientData.gender,
       zip: this.patientData.zip,
       date_of_birth: this.patientData.date_of_birth,
-    });
+    });   
   }
 }

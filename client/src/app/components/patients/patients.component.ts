@@ -14,11 +14,13 @@ import { Patient } from 'src/app/models/patient';
 export class PatientsComponent implements OnInit {
   patients: Patient[] = [];
   patientForm: FormGroup;
+  maxDate: Date;
   constructor(private patientService: PatientService,private router: Router) {}
   ngOnInit(): void {
     this.patientForm = this.createFormGroup();
   }
   createFormGroup(): FormGroup {
+    this.maxDate = new Date();
     const formGroupConfig = {
       first_name: new FormControl('', [
         Validators.required,

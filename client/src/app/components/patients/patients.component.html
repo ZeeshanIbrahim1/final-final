@@ -61,6 +61,7 @@
           matInput
           [matDatepicker]="picker"
           formControlName="date_of_birth"
+          [max]="maxDate"
         />
         <mat-error *ngIf="patientForm.get('date_of_birth').hasError('required')"
           >Use mm/dd/yyyy Format</mat-error

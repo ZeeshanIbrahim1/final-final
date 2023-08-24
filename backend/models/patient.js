@@ -192,7 +192,7 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`a.appointmentDate LIKE '%${doa.toISOString().split('T')[0]}%'`)
     }
     if(doctor){
-      whereConditions.push(`CONCAT(d.firstName, ' ', d.middleName, ' ', d.lastName) LIKE '%${doctor}%'`)
+      whereConditions.push(`d.first_name LIKE '%${doctor}%'`)
     }
     if (whereConditions.length > 0) {
       sql += ` WHERE ${whereConditions.join(' AND ')};`;

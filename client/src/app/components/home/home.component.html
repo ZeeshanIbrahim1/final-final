@@ -108,13 +108,13 @@
           <td>{{ data.categoryName }}</td>
           <td>{{ data.purposeOfVisit }}</td>
           <td>{{data.caseType}}</td>
-          <td>{{ data.Patient_DOB}}</td>
+          <td>{{ data.Patient_DOB | date}}</td>
           <td>{{data.practiceLocation}}</td>
           <td>{{data.insuranceName}}</td>
           <td>{{ data.firmName }}</td>
-          <td>{{ data.CaseDOA }}</td>
+          <td>{{ data.CaseDOA | date}}</td>
           <td>{{ data.Speciality }}</td>
-          <td>{{ data.appointmentDate}} {{ data.AppointmentTime}}</td>
+          <td>{{ data.appointmentDate | date}} {{ data.AppointmentTime}}</td>
           <td>{{data.doctorFirstName}}</td>
           <td>
             <button class="btnform" (click)="editPatient(data.PatientId,data.CaseId)">Edit</button>
