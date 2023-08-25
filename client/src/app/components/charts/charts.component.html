@@ -1,0 +1,24 @@
+
+<mat-form-field>
+  <mat-label>Choose Chart</mat-label>
+  <mat-select placeholder="Chart" (selectionChange)="createChart($event.value)">
+    <mat-option *ngFor="let chart of charts" [value]="chart.value">
+      {{chart.viewChart}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div class="chart-container">
+    <canvas id="chart1" ></canvas>
+</div>
+
+<mat-form-field>
+    <mat-label>Choose Chart</mat-label>
+    <mat-select placeholder="Chart" (selectionChange)="create2ndChart($event.value)">
+      <mat-option *ngFor="let chart of charts" [value]="chart.value">
+        {{chart.viewChart}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+<div class="chart-container">
+    <canvas id="chart2"></canvas>
+</div>

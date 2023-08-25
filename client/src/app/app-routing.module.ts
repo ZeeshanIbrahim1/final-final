@@ -13,6 +13,8 @@ import { UpdateCaseComponent } from './components/update-case/update-case.compon
 import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 import { ViewAllPatientsComponent } from './components/view-all-patients/view-all-patients.component';
 import { ViewAllCasesComponent } from './components/view-all-cases/view-all-cases.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ChartUsingNpxChartsComponent } from "./components/chart-using-npx-charts/chart-using-npx-charts.component"
 
 const routes: Routes = [
   { path: '', component: RegisterComponent  },
@@ -28,6 +30,8 @@ const routes: Routes = [
   { path:  'update-appointment/:id', component:UpdateAppointmentComponent, canActivate:[AuthGuard] },
   { path: 'allPatient', component:ViewAllPatientsComponent, canActivate:[AuthGuard] },
   { path: 'allCases', component:ViewAllCasesComponent, canActivate:[AuthGuard] },
+  { path: 'charts' , component:ChartsComponent ,canActivate:[AuthGuard] },
+  { path: 'npxChart', component:ChartUsingNpxChartsComponent, canActivate:[AuthGuard] },
   { path: '**', redirectTo: 'signup' },
 ];
 

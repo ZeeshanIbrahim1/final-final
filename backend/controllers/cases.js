@@ -106,7 +106,7 @@ const getAll = async (req,res) => {
   SELECT
     c.id AS "caseId",
     c.doa AS "caseDOA",
-    f.firmName AS "frimName",
+    f.firmName AS "firmName",
     i.insuranceName AS "insuranceName",
     l.name AS "practiceLocation",
     t.Name AS "caseType",

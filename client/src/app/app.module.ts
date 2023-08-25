@@ -17,6 +17,7 @@ import { UpdatePatientComponent } from './components/update-patient/update-patie
 import { UpdateCaseComponent } from './components/update-case/update-case.component';
 import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -36,6 +37,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ViewAllPatientsComponent } from './components/view-all-patients/view-all-patients.component';
 import { ViewAllCasesComponent } from './components/view-all-cases/view-all-cases.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ChartUsingNpxChartsComponent } from './components/chart-using-npx-charts/chart-using-npx-charts.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +54,8 @@ import { ViewAllCasesComponent } from './components/view-all-cases/view-all-case
     UpdateAppointmentComponent,
     ViewAllPatientsComponent,
     ViewAllCasesComponent,
+    ChartsComponent,
+    ChartUsingNpxChartsComponent,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { ViewAllCasesComponent } from './components/view-all-cases/view-all-case
     MatRadioModule,
     FormsModule,
     MatSelectModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
