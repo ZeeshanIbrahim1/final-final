@@ -24,6 +24,7 @@ export class HomeComponent {
   firmName : string = '';
   doa : Date | null =null;
   doctor: string = '';
+  displayedColumns: string[] = []
   //searchResults : any[] = [];
 
   patients: Patient[] = [];
@@ -31,6 +32,23 @@ export class HomeComponent {
   constructor(private patientService: PatientService,private router: Router) {}
   ngOnInit(): void {
     this.search(); 
+    this.displayedColumns = [
+      'patientId',
+      'patientName',
+      'caseId',
+      'categoryName',
+      'purposeOfVisit',
+      'caseType',
+      'dob',
+      'practiceLocation',
+      'insuranceName',
+      'firmName',
+      'doa',
+      'doctor',
+      // ... Include other column names here ...
+      'edit',
+      'delete'
+    ];
   }
   addPatient(){
     this.router.navigate(['/patient']);

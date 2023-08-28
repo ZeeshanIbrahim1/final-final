@@ -1,136 +1,164 @@
 <div>
-  <button class="btn_add" (click)="addPatient()">New Patient</button>
-
-  <button class="btn_add" (click)="viewAllPatient()" >View All Patient</button>
-  <button class="btn_add" (click)="viewAllCases()" >View All Cases</button>
-  <button class="btn_add" (click)="viewChartjs()" >View Chart js</button>
-  <button class="btn_add" (click)="viewNjxChart()" >View Njx Charts</button>
+  <button class="MR-1" color="primary" (click)="addPatient()" mat-raised-button>New Patient</button>
+  <button class="MR-1" color="primary" (click)="viewAllPatient()" mat-raised-button>View All Patient</button>
+  <button class="MR-1" color="primary" (click)="viewAllCases()" mat-raised-button>View All Cases</button>
+  <button class="MR-1" color="primary" (click)="viewChartjs()" mat-raised-button>View Chart js</button>
+  <button color="primary" (click)="viewNjxChart()" mat-raised-button>View Njx Charts</button>
 </div>
 <h1>
   Apply filter
 </h1>
-<div class="grid-container">
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+        <mat-form-field appearance="outline">
+          <mat-label>Patient First Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="firstName" />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile class="matgrid">
+        <mat-form-field appearance="outline">
+          <mat-label>Patient Middle Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="middleName" />
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile class="matgrid">
+        <mat-form-field appearance="outline">
+          <mat-label>Patient Last Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="lastName" />
+        </mat-form-field>
+      </mat-grid-tile>
+    
 
-  <div class="grid-item">
-    <label for="firstName">Patient First Name:</label>
-    <input type="text" id="firstName" [(ngModel)]="firstName" />
-  </div>
-  <div class="grid-item">
-    <label for="middleName">Patient Middle Name:</label>
-    <input type="text" id="middleName" [(ngModel)]="middleName" />
-  </div>
-  <div class="grid-item">
-    <label for="lastName">Patient Last  Name:</label>
-    <input type="text" id="lastName" [(ngModel)]="lastName" />
-  </div>
+      <mat-grid-tile class="matgrid">
+        <mat-form-field appearance="outline">
+          <mat-label>Case ID:</mat-label>
+          <input matInput type="number" [(ngModel)]="caseId" />
+        </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Category Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="categoryName" />
+        </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Purpose of Visit:</mat-label>
+          <input matInput type="text" [(ngModel)]="purposeOfVisit" />
+        </mat-form-field>
+        </mat-grid-tile>
 
-<div class="grid-item">
-  <label for="caseId">Case ID:</label>
-  <input type="number" id="caseId" [(ngModel)]="caseId" />
-</div>
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+      
+          <mat-label>Case Type:</mat-label>
+          <input matInput type="text" [(ngModel)]="caseType" />
+        </mat-form-field>
+        </mat-grid-tile>
+      
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Practice Location:</mat-label>
+          <input matInput type="text" [(ngModel)]="practiceLocation" />
+        </mat-form-field>
+        </mat-grid-tile>
+      
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Insurance Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="insuranceName" />
+        </mat-form-field>
+        </mat-grid-tile>
 
-<div class="grid-item">
-  <label for="categoryName">Category Name:</label>
-  <input type="text" id="categoryName" [(ngModel)]="categoryName" />
-</div>
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Firm Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="firmName" />
+        </mat-form-field>
+        </mat-grid-tile>
 
-<div class="grid-item">
-  <label for="purposeOfVisit">Purpose of Visit:</label>
-  <input type="text" id="purposeOfVisit" [(ngModel)]="purposeOfVisit" />
-</div>
-
-<div class="grid-item">
-  <label for="caseType">Case Type:</label>
-  <input type="text" id="caseType" [(ngModel)]="caseType" />
-</div>
-
-<!-- <div class="grid-item">
-  <label for="dob">Date of Birth (DOB):</label>
-  <input type="date" id="dob" [(ngModel)]="dob" />
-</div> -->
-<div class="grid-item">
-  <label for="practiceLocation">Practice Location:</label>
-  <input type="text" id="practiceLocation" [(ngModel)]="practiceLocation" />
-</div >
-
-<div class="grid-item">
-  <label for="insuranceName">Insurance Name:</label>
-  <input type="text" id="insuranceName" [(ngModel)]="insuranceName" />
-</div>
-
-<div class="grid-item">
-  <label for="firmName">Firm Name:</label>
-  <input type="text" id="dob" [(ngModel)]="firmName" />
-</div>
-
-<!-- <div class="grid-item">
-  <label for="doa">Date of Accident:</label>
-  <input type="date" id="doa" [(ngModel)]="doa" />
-</div> -->
-
-<div class="grid-item">
-  <label for="Doctor">Doctor Name:</label>
-  <input type="text" id="Doctor" [(ngModel)]="doctor" />
-</div>
-<div class="grid-btn">
-  <button (click)="search()">Search</button>
-</div>
-</div>
-
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+          <mat-label>Doctor Name:</mat-label>
+          <input matInput type="text" [(ngModel)]="doctor" />
+        </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="matgrid">
+        <button mat-raised-button color="primary" (click)="search()">Search</button>
+        </mat-grid-tile>
+  
+</mat-grid-list>
 <div *ngIf="retrievedData && retrievedData.length > 0 ">
 <div>
   <h2>Patients List</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>Patient ID</th>
-        <th>Pateint Name</th>
-        <th>Case id</th>
-        <th>Category</th>
-        <th>Purpose of visit</th>
-        <th>Case Type</th>
-        <th>Date of Birth</th>
-        <th>Practice Location</th>
-        <th>Insurance Name</th>
-        <th>Firm Name</th>
-        <th>Date Of Accident</th>
-        <th>Speciality</th>
-        <th>Appointment date and time</th>
-        <th>Doctor Name</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let data of retrievedData">
-        <tr>
-          <td>{{ data.PatientId }}</td>
-          <td>{{ data.PatientFirstName}} {{ data.PatientMiddleName }} {{ data.PatientLastName}}</td>
-          <td>{{ data.CaseId }}</td>
-          <td>{{ data.categoryName }}</td>
-          <td>{{ data.purposeOfVisit }}</td>
-          <td>{{data.caseType}}</td>
-          <td>{{ data.Patient_DOB | date}}</td>
-          <td>{{data.practiceLocation}}</td>
-          <td>{{data.insuranceName}}</td>
-          <td>{{ data.firmName }}</td>
-          <td>{{ data.CaseDOA | date}}</td>
-          <td>{{ data.Speciality }}</td>
-          <td>{{ data.appointmentDate | date}} {{ data.AppointmentTime}}</td>
-          <td>{{data.doctorFirstName}}</td>
-          <td>
-            <button class="btnform" (click)="editPatient(data.PatientId,data.CaseId)">Edit</button>
-          </td>
-          <td>
-            <button class="btnform" (click)="deletePatient(data.CaseId, data.AppointmentId,data.PatientId)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
+  <table mat-table [dataSource]="retrievedData" class="mat-elevation-z8 demo-table">
+    <ng-container matColumnDef="patientId">
+      <mat-header-cell *matHeaderCellDef>Patient ID</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.PatientId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="patientName">
+      <mat-header-cell *matHeaderCellDef>Patient Name</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.PatientFirstName }} {{ data.PatientMiddleName }} {{ data.PatientLastName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="caseId">
+      <mat-header-cell *matHeaderCellDef>Case ID</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.PatientId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="categoryName">
+      <mat-header-cell *matHeaderCellDef>Category Name</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.categoryName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="purposeOfVisit">
+      <mat-header-cell *matHeaderCellDef>Purpose Of Visit</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.PatientId }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="caseType">
+      <mat-header-cell *matHeaderCellDef>Case Type</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.caseType }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="dob">
+      <mat-header-cell *matHeaderCellDef>Patient DoB</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.Patient_DOB }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="practiceLocation">
+      <mat-header-cell *matHeaderCellDef>Practice Location</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.practiceLocation }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="insuranceName">
+      <mat-header-cell *matHeaderCellDef>Insurance Name</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.insuranceName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="firmName">
+      <mat-header-cell *matHeaderCellDef>Firm Name</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.firmName }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="doa">
+      <mat-header-cell *matHeaderCellDef>Date of Accident</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.CaseDOA }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="doctor">
+      <mat-header-cell *matHeaderCellDef>Doctor Name</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.doctorFirstName }} {{ data.doctorMiddleName }} {{ data.doctorLastName }}</mat-cell>
+    </ng-container>
+    <!-- ... Repeat the other columns here ... -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell *matCellDef="let data">
+        <button mat-raised-button color="primary" (click)="editPatient(data.PatientId, data.CaseId)">Edit</button>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell *matCellDef="let data">
+        <button mat-raised-button color="warn" (click)="deletePatient(data.CaseId, data.AppointmentId, data.PatientId)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="custom-row"  *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="custom-row"  *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </table>
 </div>
+
 </div>
 
 <h2 id="message"></h2>

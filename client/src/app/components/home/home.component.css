@@ -1,3 +1,4 @@
+
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -21,27 +22,7 @@ h1{
   background-color: #007bff;
   color: #ddd;
 }
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
 
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-/* Add background color to header row */
-th {
-  background-color: #f2f2f2;
-}
-
-/* Add alternate background color to rows */
-tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
 .btnform {
   padding: 10px 10px; /* Adjust padding to control button size */
   font-size: 14px; /* Adjust font size */
@@ -68,3 +49,18 @@ tr:nth-child(even) {
   background-color: #1f2199; 
   color: #ffffff; 
 }
+.MR-1{
+  margin-right: 10px;
+}
+.demo-table {
+  width: 100%;
+}
+
+.demo-button-container {
+  padding-bottom: 16px;
+}
+
+.demo-button + .demo-button {
+  margin-left: 8px;
+}
+
