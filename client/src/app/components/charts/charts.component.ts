@@ -24,13 +24,12 @@ export class ChartsComponent implements AfterViewInit {
   charts: any[]=[
     {value:"bar", viewChart : "Bar Graph"},
     {value: "pie", viewChart : "Pie Graph"},
-    {value: "line", viewChart: "Line Graph"}
+    {value: "line", viewChart: "Line Graph"},
+    // {value: "bubble", viewChart: "Bubble Chart"}
   ]
   constructor(private patientService:PatientService, private caseService:CaseService, private appointService:AppointService){}
   ngAfterViewInit() {
-    this.myChart = document.getElementById("chart1");
     this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
-    this.firmChart = document.getElementById("chart2");
     this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
     this.initializeChart();
     this.initializeFirmChart();

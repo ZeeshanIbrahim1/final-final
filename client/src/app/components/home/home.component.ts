@@ -87,4 +87,11 @@ export class HomeComponent {
        }
       }
   }
+  viewChartjs(){
+    this.router.navigate(['/charts'])
+  }
+  viewNjxChart(){
+    this.router.navigate(['/njxChart'])
+
+  }
 }

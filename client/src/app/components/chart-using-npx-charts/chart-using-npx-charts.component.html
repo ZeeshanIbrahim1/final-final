@@ -9,5 +9,23 @@
 [showYAxisLabel]="showYAxisLabel"
 [xAxisLabel]="xAxisLabel"
 [yAxisLabel]="yAxisLabel"
+
 >
+<ng-template #tooltipTemplate let-model="model">
+    This is the single point tooltip template
+    <!-- <pre>{{model|json}}</pre> -->
+  </ng-template>
 </ngx-charts-bar-vertical-2d>
+
+<h2>Patients Info w.r.t Gender</h2>
+<ngx-charts-bar-vertical
+[view]="[550,660]"
+[results]="parsedData"
+[legend]="true"
+[xAxis]="showXAxis"
+[yAxis]="showYAxis"
+[xAxisLabel]="xAxisLabel2"
+[yAxisLabel]="yAxisLabel2"
+[showXAxisLabel]="showXAxisLabel"
+[showYAxisLabel]="showYAxisLabel"
+></ngx-charts-bar-vertical>

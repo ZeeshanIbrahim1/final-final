@@ -31,8 +31,8 @@ const routes: Routes = [
   { path: 'allPatient', component:ViewAllPatientsComponent, canActivate:[AuthGuard] },
   { path: 'allCases', component:ViewAllCasesComponent, canActivate:[AuthGuard] },
   { path: 'charts' , component:ChartsComponent ,canActivate:[AuthGuard] },
-  { path: 'npxChart', component:ChartUsingNpxChartsComponent, canActivate:[AuthGuard] },
-  { path: '**', redirectTo: 'signup' },
+  { path: 'njxChart', component:ChartUsingNpxChartsComponent, canActivate:[AuthGuard] },
+  { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
