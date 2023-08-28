@@ -110,7 +110,7 @@ const deleteOne = async (req, res) =>{
     })
     res.json("Patient Successfully deleted")
   }catch(error){
-    console.log("ERROR IN BACKEND CONTROLLERS deleting patient:",error)
+    console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:",error)
   }
 
 }
