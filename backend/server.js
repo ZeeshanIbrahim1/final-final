@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 
 const errorController = require("./controllers/error");
+const authController = require("./controllers/auth")
 const authRoutes = require("./routes/auth");
 const patientsRoutes = require("./routes/patients");
 const casesRoutes = require("./routes/cases");
@@ -21,16 +22,16 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/auth", authRoutes);
-app.use("/patients", patientsRoutes);
-app.use('/cases', casesRoutes);
-app.use('/specialty', specialtyRoutes);
-app.use('/firm', firmRoutes);
-app.use('/doctors', doctorRoutes);
-app.use('/insurance', insuranceRoutes);
-app.use('/appoint', appointRoutes)
-app.use('/practicelocation',practiceRoutes)
-app.use('/category', categoryRoutes)
-app.use('/caseType', caseTypeRoutes )
+app.use("/patients",authController.verifyToken, patientsRoutes);
+app.use('/cases',authController.verifyToken, casesRoutes);
+app.use('/specialty',authController.verifyToken, specialtyRoutes);
+app.use('/firm',authController.verifyToken, firmRoutes);
+app.use('/doctors',authController.verifyToken, doctorRoutes);
+app.use('/insurance',authController.verifyToken, insuranceRoutes);
+app.use('/appoint',authController.verifyToken, appointRoutes)
+app.use('/practicelocation',authController.verifyToken,practiceRoutes)
+app.use('/category',authController.verifyToken, categoryRoutes)
+app.use('/caseType',authController.verifyToken, caseTypeRoutes )
 
 app.use(errorController.get404);
 app.use(errorController.get500);

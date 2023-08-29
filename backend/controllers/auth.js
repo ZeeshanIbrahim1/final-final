@@ -84,6 +84,7 @@ exports.signOut = (req, res, next) => {
 };
 exports.verifyToken = (req, res, next) => {
   const token = req.headers.authorization;
+  console.log("Incoming in Verify Token:", token)
 
   if (!token) {
     return res.status(401).json({ message: "No token provided." });

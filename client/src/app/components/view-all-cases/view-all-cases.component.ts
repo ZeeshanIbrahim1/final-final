@@ -31,7 +31,7 @@ export class ViewAllCasesComponent {
     }, 100);
   }
   deleteCases(id:any){
-    this.caseService.deleteCases(id).subscribe(()=>{
+    this.caseService.deleteCases(id).subscribe((data)=>{
       this.ngOnInit();
     },(error)=> console.log(error))
   }

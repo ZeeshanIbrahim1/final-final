@@ -124,6 +124,7 @@ export class PatientService {
       .set('firmName',firmName)
       .set('doa',doa ? doa.toISOString():'')
       .set('doctor',doctor)
+      
 
    return this.http.get(`${this.url}/patients/filter`, { params }).pipe(
     // map((data:any)=>{
