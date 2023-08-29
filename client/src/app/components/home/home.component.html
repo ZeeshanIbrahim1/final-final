@@ -118,7 +118,7 @@
     </ng-container>
     <ng-container matColumnDef="dob">
       <mat-header-cell *matHeaderCellDef>Patient DoB</mat-header-cell>
-      <mat-cell *matCellDef="let data">{{ data.Patient_DOB }}</mat-cell>
+      <mat-cell *matCellDef="let data">{{ data.Patient_DOB | date }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="practiceLocation">
       <mat-header-cell *matHeaderCellDef>Practice Location</mat-header-cell>
@@ -134,7 +134,7 @@
     </ng-container>
     <ng-container matColumnDef="doa">
       <mat-header-cell *matHeaderCellDef>Date of Accident</mat-header-cell>
-      <mat-cell *matCellDef="let data">{{ data.CaseDOA}}</mat-cell>
+      <mat-cell *matCellDef="let data">{{ data.CaseDOA | date}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="doctor">
       <mat-header-cell *matHeaderCellDef>Doctor Name</mat-header-cell>
