@@ -36,6 +36,7 @@ export class HomeComponent {
       'patientId',
       'patientName',
       'caseId',
+      'appointmentId',
       'categoryName',
       'purposeOfVisit',
       'caseType',
@@ -65,7 +66,7 @@ export class HomeComponent {
 
   deletePatient(id1:any,id2:any,id3:any) {
     console.log("Front end !")
-    let isExecuted = confirm("This will delete all cases and appointment of this Patient. Do you want to delete?")
+    let isExecuted = confirm("This will delete this case and appointment of this Patient. Do you want to delete?")
     if(isExecuted){
       this.patientService.deletePatient(id1,id2,id3)
       setTimeout(() => { 

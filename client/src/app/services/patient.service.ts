@@ -84,7 +84,7 @@ export class PatientService {
     )
   }
   deletePatient(id1:Number,id2:Number,id3:Number){
-    console.log("IN AUTH SERVICE",id1,id2)
+    console.log("IN AUTH SERVICE",id1,id2,id3)
     return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}/${id3}`).subscribe(
       (response: any) => {
         console.log('Case and Appointment deleted successfully:', response);

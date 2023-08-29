@@ -119,5 +119,13 @@ export class CaseService {
       )
     );
   }
+  deleteCases(id){
+    return this.http.delete(`${this.url}/cases/deleteCase/${id}`)
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('FirmInfo')
+      )
+    );
+  }
   
 }

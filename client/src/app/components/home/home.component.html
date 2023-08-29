@@ -104,6 +104,10 @@
       <mat-header-cell *matHeaderCellDef>Case ID</mat-header-cell>
       <mat-cell *matCellDef="let data">{{ data.CaseId }}</mat-cell>
     </ng-container>
+    <ng-container matColumnDef="appointmentId">
+      <mat-header-cell *matHeaderCellDef>Appointment ID</mat-header-cell>
+      <mat-cell *matCellDef="let data">{{ data.AppointmentId }}</mat-cell>
+    </ng-container>
     <ng-container matColumnDef="categoryName">
       <mat-header-cell *matHeaderCellDef>Category Name</mat-header-cell>
       <mat-cell *matCellDef="let data">{{ data.categoryName }}</mat-cell>

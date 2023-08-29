@@ -27,8 +27,11 @@ export class ViewAllPatientsComponent {
     this.router.navigate(['/case']);
   }
   deletePatient(PatientId:any){
-    this.patientService.deleteOnePatient(PatientId);
-    this.ngOnInit();
+    let isExecuted = confirm("This will delete all cases and all appointments of this Patient. Do you want to delete?")
+    if(isExecuted){
+      this.patientService.deleteOnePatient(PatientId);
+      this.ngOnInit();
+    }
   }
 
 }

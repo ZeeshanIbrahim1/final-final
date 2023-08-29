@@ -1,4 +1,4 @@
-const { where } = require("sequelize");
+const { sequelize } = require("../models/index");
 const models = require("../models");
 const { validationResult } = require("express-validator");
 
@@ -48,7 +48,6 @@ const addPatient = async (req, res, next) => {
   next(errors);
 };
 
-
 const getPatient = async (req, res, next)=>{
   const patientId = req.params.id;
   console.log("IN controllers/getPatient : ", typeof(patientId))
@@ -74,12 +73,13 @@ const updatePatient = async (req, res) => {
  }
 
 const deletePatient = async (req, res) => { 
+  const transaction = await sequelize.transaction() 
+  
+  try{
   const caseId = req.params.id1;
   const AppointId = req.params.id2;
   const patientId = req.params.id3;
   const deletionTimestamp = new Date();
-  const transaction = await sequelize.transaction();
-  try{
     // await models.Patient.destroy({
     //   where:{
     //     id : patientId
@@ -88,15 +88,12 @@ const deletePatient = async (req, res) => {
     console.log("In deleteeeeeeeeeeeeeee: date :", deletionTimestamp)
     await models.Case.update(
       { deleted: deletionTimestamp }, // Set the deleted column to the timestamp
-      { where: { id: caseId } },
-      transaction
+      { where: { id: caseId },transaction  },
     );
 
     await models.Appointment.update(
       { deleted: deletionTimestamp },
-      { where: { id: AppointId } },
-      transaction
-    );
+      { where: { id: AppointId },transaction  });
     await transaction.commit();
     res.status(201).json({ message: " Patient Successfully Destroyed! "})
   }
@@ -107,15 +104,22 @@ const deletePatient = async (req, res) => {
 }
 
 const deleteOne = async (req, res) =>{
+  const transaction = await sequelize.transaction();
   const patientId = req.params.id;
   const deletionTimestamp = new Date();
   try{
     await models.Patient.update(
       {deleted: deletionTimestamp},
-      {where:{id : patientId}}
+      {where:{id : patientId},transaction}
     )
+    await models.Case.update({
+      deleted: deletionTimestamp},
+      {where: {patientId: patientId},transaction}
+      )
+    transaction.commit()
     res.json("Patient Successfully deleted")
   }catch(error){
+    transaction.rollback()
     console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:",error)
   }
 

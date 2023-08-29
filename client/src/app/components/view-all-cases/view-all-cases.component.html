@@ -1,42 +1,62 @@
 <div>
-    <!-- *ngIf="retrievedData && retrievedData.length > 0 " -->
-    <div>
-      <h2>All Cases</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Case ID</th>
-            <th>Case Type</th>
-            <th>Insurance Name</th>
-            <th>Firm Name</th>
-            <th>doa</th>
-            <th>practiceLocation</th>
-            <th>caseTypeId</th>
-            <th>category</th>
-            <th>purposeOfVisit</th>
-            <th>Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container 
-             *ngFor="let info of casesInfo" >
-            <tr>
-              <td>{{ info.caseId }}</td>
-              <td>{{info.caseType}}</td>
-              <td>{{info.insuranceName}}</td>
-              <td>{{info.firmName}}</td>
-              <td>{{info.caseDOA}}</td>
-              <td>{{info.practiceLocation}}</td>
-              <td>{{info.caseType}}</td>
-              <td>{{info.categoryName}}</td>
-              <td>{{info.purposeOfVisit}}</td>
-              <td>
-                <button class="btnform" (click)="addAppointments(info.caseId)">Add Appointments</button>
-              </td>
-            </tr>
-          </ng-container> 
-        </tbody>
-      </table>
-    </div>
-    </div>
-
+  <div>
+    <h2>All Cases</h2>
+    <mat-table [dataSource]="casesInfo" class="mat-elevation-z8">
+      <ng-container matColumnDef="caseId">
+        <mat-header-cell *matHeaderCellDef>Case ID</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.caseId }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="caseType">
+        <mat-header-cell *matHeaderCellDef>Case Type</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.caseType }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="insuranceName">
+        <mat-header-cell *matHeaderCellDef>Insurance Name</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.insuranceName }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="firmName">
+        <mat-header-cell *matHeaderCellDef>Firm Name</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.firmName }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="caseDOA">
+        <mat-header-cell *matHeaderCellDef>doa</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.caseDOA | date}}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="practiceLocation">
+        <mat-header-cell *matHeaderCellDef>practiceLocation</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.practiceLocation }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="categoryName">
+        <mat-header-cell *matHeaderCellDef>category</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.categoryName }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="purposeOfVisit">
+        <mat-header-cell *matHeaderCellDef>purposeOfVisit</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.purposeOfVisit }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="add">
+        <mat-header-cell *matHeaderCellDef>Add</mat-header-cell>
+        <mat-cell *matCellDef="let info">
+          <button class="btn" mat-raised-button color="primary" (click)="addAppointments(info.caseId)">Add Appointments</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let info">
+          <button class="btn" mat-raised-button color="warn" (click)="deleteCases(info.caseId)">Delete</button>
+        </mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="['caseId', 'caseType', 'insuranceName', 'firmName', 'caseDOA', 'practiceLocation', 'categoryName', 'purposeOfVisit', 'add', 'delete']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['caseId', 'caseType', 'insuranceName', 'firmName', 'caseDOA', 'practiceLocation',  'categoryName', 'purposeOfVisit', 'add', 'delete'];"></mat-row>
+    </mat-table>
+  </div>
+</div>

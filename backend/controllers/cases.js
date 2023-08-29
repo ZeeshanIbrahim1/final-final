@@ -1,3 +1,4 @@
+const { sequelize } = require("../models/index")
 const models = require("../models");
 const { validationResult } = require("express-validator");
 const { all } = require("../routes/cases");
@@ -119,19 +120,13 @@ const getAll = async (req,res) => {
   LEFT JOIN
     categories ct ON c.categoryId = ct.id
   LEFT JOIN
-    appointments a ON c.id = a.caseId
-  LEFT JOIN
     purposeofvisits pv ON c.purposeOfVisitId = pv.id
-  LEFT JOIN
-    doctors d ON a.doctorId = d.id
   LEFT JOIN
     firms f ON c.firmId = f.id
   LEFT JOIN
     insurances i ON c.insuranceId = i.id
   LEFT JOIN
     practicelocations l ON c.practiceLocationId = l.id
-  LEFT JOIN
-    specialties s ON a.specialtyId = s.id
   `;
   let whereConditions = [];
   whereConditions.push(`c.deleted IS NULL`);
@@ -146,11 +141,34 @@ const getAll = async (req,res) => {
       res.json({message:"No Case exists!"})
     }
 }
+
+const deleteCase = async(req,res) => {
+  const caseId = req.params.id;
+  const transaction = await sequelize.transaction();
+  const dateStamp = new Date();
+  try {
+    await models.Case.update(
+      { deleted : dateStamp },
+      {where:{id:caseId}, transaction}
+    )
+    await models.Appointment.update(
+      {deleted: dateStamp},
+      {where:{caseId: caseId},transaction}
+    )
+    transaction.commit();
+    res.json("Cases and Appointment Successfuly deleted")
+  } catch (error) {
+    transaction.rollback();
+    console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:", error)
+  }
+}
+
 module.exports = {
   addCase,
   getCase,
   updateCase,
   getId,
   getVisit,
-  getAll
+  getAll,
+  deleteCase
 };

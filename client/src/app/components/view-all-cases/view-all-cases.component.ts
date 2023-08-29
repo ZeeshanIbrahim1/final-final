@@ -30,4 +30,9 @@ export class ViewAllCasesComponent {
       this.router.navigate(['/appointment']);
     }, 100);
   }
+  deleteCases(id:any){
+    this.caseService.deleteCases(id).subscribe(()=>{
+      this.ngOnInit();
+    },(error)=> console.log(error))
+  }
 }

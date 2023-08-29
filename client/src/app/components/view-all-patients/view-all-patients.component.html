@@ -1,37 +1,41 @@
 <div>
-    <!-- *ngIf="retrievedData && retrievedData.length > 0 " -->
-    <div>
-      <h2>All Patients</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Patient ID</th>
-            <th>Pateint Name</th>
-            <th>Gender</th>
-            <th>Date of birth</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <ng-container 
-             *ngFor="let info of patientInfo" >
-            <tr>
-              <td>{{ info.id }}</td>
-              <td>{{info.first_name}} {{info.middle_name}} {{info.last_name}}</td>
-              <td>{{info.gender}}</td>
-              <td>{{info.date_of_birth}}</td>
-               <td>
-                <button class="btnform" (click)="addCases(info.id)">AddCase & appointments</button>
-              </td>
-              <td>
-                <button class="btnform" (click)="deletePatient(info.id)">Delete Patient</button>
-              </td>
-              
-            
-            </tr>
-          </ng-container> 
-        </tbody>
-      </table>
-    </div>
-    </div>
+  <div>
+    <h2>All Patients</h2>
+    <mat-table [dataSource]="patientInfo" class="mat-elevation-z8 demo-table">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Patient ID</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.id }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="fullName">
+        <mat-header-cell *matHeaderCellDef>Patient Name</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.first_name }} {{ info.middle_name }} {{ info.last_name }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.gender }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="dateOfBirth">
+        <mat-header-cell *matHeaderCellDef>Date of birth</mat-header-cell>
+        <mat-cell *matCellDef="let info">{{ info.date_of_birth | date }}</mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="add">
+        <mat-header-cell *matHeaderCellDef>Add</mat-header-cell>
+        <mat-cell *matCellDef="let info">
+          <button mat-raised-button color="primary" (click)="addCases(info.id)">Add Case & Appointments</button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+        <mat-cell *matCellDef="let info">
+          <button mat-raised-button color="warn" (click)="deletePatient(info.id)">Delete Patient</button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="['id', 'fullName', 'gender', 'dateOfBirth', 'add', 'delete']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['id', 'fullName', 'gender', 'dateOfBirth', 'add','delete'];"></mat-row>
+    </mat-table>
+  </div>
+</div>

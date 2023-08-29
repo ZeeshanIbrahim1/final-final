@@ -120,6 +120,7 @@ module.exports = (sequelize, DataTypes) => {
     f.firmName AS "firmName",
     s.name AS "Speciality",
     pv.PurposeOfVisit AS "purposeOfVisit",
+    a.id AS "appointmentId",
     a.appointmentDate AS "appointmentDate", 
     a.appointmentTime AS "AppointmentTime",
     d.first_name AS "doctorFirstName",
