@@ -24,18 +24,7 @@
                 },
                 "deleted": {
                     "field": "deleted",
-                    "seqType": "Sequelize.DATE"
-                },
-                "caseId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "Cases",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "CASCADE",
-                    "field": "caseId",
-                    "seqType": "Sequelize.INTEGER"
+                    "seqType": "Sequelize.BOOLEAN"
                 },
                 "appointmentTypeId": {
                     "allowNull": true,
@@ -69,6 +58,17 @@
                     "onUpdate": "CASCADE",
                     "field": "doctorId",
                     "seqType": "Sequelize.INTEGER"
+                },
+                "caseId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "Cases",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "field": "caseId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -86,6 +86,10 @@
                 "appointmentType": {
                     "field": "appointmentType",
                     "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
             "indexes": []
@@ -106,7 +110,7 @@
                 },
                 "deleted": {
                     "field": "deleted",
-                    "seqType": "Sequelize.DATE"
+                    "seqType": "Sequelize.BOOLEAN"
                 },
                 "firmId": {
                     "allowNull": true,
@@ -136,7 +140,7 @@
                         "model": "Patients",
                         "key": "id"
                     },
-                    "onDelete": "CASCADE",
+                    "onDelete": "SET NULL",
                     "onUpdate": "CASCADE",
                     "field": "patientId",
                     "seqType": "Sequelize.INTEGER"
@@ -365,7 +369,7 @@
                 },
                 "deleted": {
                     "field": "deleted",
-                    "seqType": "Sequelize.DATE"
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
             "indexes": []
@@ -412,6 +416,10 @@
                 "PurposeOfVisit": {
                     "field": "PurposeOfVisit",
                     "seqType": "Sequelize.STRING"
+                },
+                "deleted": {
+                    "field": "deleted",
+                    "seqType": "Sequelize.BOOLEAN"
                 }
             },
             "indexes": []
@@ -459,5 +467,5 @@
             "indexes": []
         }
     },
-    "revision": 2
+    "revision": 1
 }

@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
   AppointmentType.init(
     {
       appointmentType: DataTypes.STRING,
-      deleted: DataTypes.BOOLEAN,
     },
     {
       sequelize,

@@ -153,6 +153,7 @@ module.exports = (sequelize, DataTypes) => {
     let whereConditions = [];
     console.log(first_name)
     console.log("dobbbbbbbb",dob)
+    whereConditions.push(`p.deleted IS NULL AND c.deleted IS NULL`);
     if (first_name) {
       console.log("ddddddddddd", first_name)
       whereConditions.push(`p.first_name LIKE '%${first_name}%'`);
@@ -198,6 +199,7 @@ module.exports = (sequelize, DataTypes) => {
       sql += ` WHERE ${whereConditions.join(' AND ')};`;
     }
 
+
     console.log("conditonnnnnn", whereConditions)
     // Execute the SQL query
     const results = await sequelize.query(sql);
@@ -218,7 +220,7 @@ module.exports = (sequelize, DataTypes) => {
       city: DataTypes.STRING,
       state: DataTypes.STRING,
       zip: DataTypes.STRING,
-      deleted: DataTypes.BOOLEAN,
+      deleted: DataTypes.DATE,
     },
     {
       sequelize,

@@ -7,7 +7,6 @@ module.exports = (sequelize, DataTypes) => {
   PurposeOfVisit.init(
     {
       PurposeOfVisit: DataTypes.STRING,
-      deleted: DataTypes.BOOLEAN,
     },
     {
       sequelize,

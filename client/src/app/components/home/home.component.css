@@ -1,4 +1,11 @@
-
+.p-all{
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+.m-all{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;

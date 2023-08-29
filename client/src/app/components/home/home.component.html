@@ -8,7 +8,7 @@
 <h1>
   Apply filter
 </h1>
-<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid" class="mat-elevation-z8 p-all m-all">
   <mat-grid-tile class="matgrid">
         <mat-form-field appearance="outline">
           <mat-label>Patient First Name:</mat-label>
@@ -90,7 +90,7 @@
 </mat-grid-list>
 <div *ngIf="retrievedData && retrievedData.length > 0 ">
 <div>
-  <h2>Patients List</h2>
+  <h2 class="p-all m-all">Patients List</h2>
   <table mat-table [dataSource]="retrievedData" class="mat-elevation-z8 demo-table">
     <ng-container matColumnDef="patientId">
       <mat-header-cell *matHeaderCellDef>Patient ID</mat-header-cell>
@@ -102,7 +102,7 @@
     </ng-container>
     <ng-container matColumnDef="caseId">
       <mat-header-cell *matHeaderCellDef>Case ID</mat-header-cell>
-      <mat-cell *matCellDef="let data">{{ data.PatientId }}</mat-cell>
+      <mat-cell *matCellDef="let data">{{ data.CaseId }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="categoryName">
       <mat-header-cell *matHeaderCellDef>Category Name</mat-header-cell>
@@ -110,7 +110,7 @@
     </ng-container>
     <ng-container matColumnDef="purposeOfVisit">
       <mat-header-cell *matHeaderCellDef>Purpose Of Visit</mat-header-cell>
-      <mat-cell *matCellDef="let data">{{ data.PatientId }}</mat-cell>
+      <mat-cell *matCellDef="let data">{{ data.purposeOfVisit }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="caseType">
       <mat-header-cell *matHeaderCellDef>Case Type</mat-header-cell>
@@ -134,7 +134,7 @@
     </ng-container>
     <ng-container matColumnDef="doa">
       <mat-header-cell *matHeaderCellDef>Date of Accident</mat-header-cell>
-      <mat-cell *matCellDef="let data">{{ data.CaseDOA }}</mat-cell>
+      <mat-cell *matCellDef="let data">{{ data.CaseDOA}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="doctor">
       <mat-header-cell *matHeaderCellDef>Doctor Name</mat-header-cell>

@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
   Case.init(
     {
       doa: DataTypes.STRING,
-      deleted: DataTypes.BOOLEAN,
+      deleted: DataTypes.DATE,
     },
     {
       sequelize,

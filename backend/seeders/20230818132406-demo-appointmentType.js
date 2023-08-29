@@ -6,15 +6,12 @@ module.exports = {
     const appointmentTypeData = [
       {
         appointmentType: 'Vaccinations',
-        deleted: false,
       },
       {
         appointmentType: 'Routine checkup',
-        deleted: false,
       },
       {
         appointmentType: 'Other medical specialties',
-        deleted: false,
       },
     ];
 

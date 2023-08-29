@@ -77,37 +77,43 @@ const deletePatient = async (req, res) => {
   const caseId = req.params.id1;
   const AppointId = req.params.id2;
   const patientId = req.params.id3;
+  const deletionTimestamp = new Date();
+  const transaction = await sequelize.transaction();
   try{
     // await models.Patient.destroy({
     //   where:{
     //     id : patientId
     //   }
     // })
-    await models.Case.destroy({
-      where: {
-        id: caseId
-      },
-    });
-    await models.Appointment.destroy({
-      where:{
-        id:AppointId
-      }
-    })
+    console.log("In deleteeeeeeeeeeeeeee: date :", deletionTimestamp)
+    await models.Case.update(
+      { deleted: deletionTimestamp }, // Set the deleted column to the timestamp
+      { where: { id: caseId } },
+      transaction
+    );
+
+    await models.Appointment.update(
+      { deleted: deletionTimestamp },
+      { where: { id: AppointId } },
+      transaction
+    );
+    await transaction.commit();
     res.status(201).json({ message: " Patient Successfully Destroyed! "})
   }
   catch(error){
+    await transaction.rollback();
     console.log("ERROR IN BACKEND CONTROLLERS:",error)
   }
 }
 
 const deleteOne = async (req, res) =>{
   const patientId = req.params.id;
+  const deletionTimestamp = new Date();
   try{
-    await models.Patient.destroy({
-      where:{
-        id : patientId
-      }
-    })
+    await models.Patient.update(
+      {deleted: deletionTimestamp},
+      {where:{id : patientId}}
+    )
     res.json("Patient Successfully deleted")
   }catch(error){
     console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:",error)
@@ -132,7 +138,9 @@ const filterData = async (req , res) =>{
 }
 
 const getPatientAll = async(req,res)=>{
-  const allPatients = await models.Patient.findAll();
+  const allPatients = await models.Patient.findAll(
+    {where: {deleted: null}}
+    );
   if(!allPatients && allPatients.length === 0 ){
     res.json({message : "No Patient exists" })
   }

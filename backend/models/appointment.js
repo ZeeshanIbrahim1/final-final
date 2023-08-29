@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       appointmentDate: DataTypes.DATE,
       appointmentTime: DataTypes.STRING,
       duration: DataTypes.INTEGER,
-      deleted: DataTypes.BOOLEAN,
+      deleted: DataTypes.DATE,
     },
     {
       sequelize,

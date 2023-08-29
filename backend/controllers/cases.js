@@ -133,7 +133,9 @@ const getAll = async (req,res) => {
   LEFT JOIN
     specialties s ON a.specialtyId = s.id
   `;
-  // try {
+  let whereConditions = [];
+  whereConditions.push(`c.deleted IS NULL`);
+  sql += ` WHERE ${whereConditions.join(' AND ')};`;
     const results = await models.Case.sequelize.query(sql);
     const allCases = results[0];
     if(allCases){
@@ -143,9 +145,6 @@ const getAll = async (req,res) => {
     else{
       res.json({message:"No Case exists!"})
     }
-  // } catch (error) {
-  //   res.status(401).json(error)
-  // }
 }
 module.exports = {
   addCase,
