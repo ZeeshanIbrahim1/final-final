@@ -73,32 +73,29 @@ const updatePatient = async (req, res) => {
  }
 
 const deletePatient = async (req, res) => { 
-  const transaction = await sequelize.transaction() 
-  
   try{
-  const caseId = req.params.id1;
-  const AppointId = req.params.id2;
-  const patientId = req.params.id3;
-  const deletionTimestamp = new Date();
-    // await models.Patient.destroy({
-    //   where:{
-    //     id : patientId
-    //   }
-    // })
+    const caseId = req.params.id1;
+    const AppointId = req.params.id2;
+    const patientId = req.params.id3;
+    const appointmentsExist = await models.Appointment.findOne({
+      where: { caseId ,
+        deleted: null
+      }
+    });
+  if(appointmentsExist){
+    res.status(400).json({message:"To delete this case, first delete its appointments."})
+  }
+  else{
+    const deletionTimestamp = new Date();
     console.log("In deleteeeeeeeeeeeeeee: date :", deletionTimestamp)
     await models.Case.update(
       { deleted: deletionTimestamp }, // Set the deleted column to the timestamp
-      { where: { id: caseId },transaction  },
-    );
-
-    await models.Appointment.update(
-      { deleted: deletionTimestamp },
-      { where: { id: AppointId },transaction  });
-    await transaction.commit();
-    res.status(201).json({ message: " Patient Successfully Destroyed! "})
+      { where: { id: caseId }  },
+      );
+        res.status(201).json({ message: " Patient Successfully Destroyed! "})
+      }
   }
   catch(error){
-    await transaction.rollback();
     console.log("ERROR IN BACKEND CONTROLLERS:",error)
   }
 }
@@ -152,6 +149,31 @@ const getPatientAll = async(req,res)=>{
     res.status(201).json(allPatients)
   } 
 }
+const updateAll = async (req,res) => {
+  const {patientData,caseData,appointmentData} = req.body;
+  const transaction = await sequelize.transaction()
+  try {
+    // Update Patient
+    console.log("idsss", patientData.id,appointmentData.id,caseData.id,)
+    await models.Patient.update(patientData, {where: {id:patientData.id}, transaction });
+
+    // Update Case
+    await models.Case.update(caseData, {where: {id:caseData.id}, transaction });
+
+    // Update Appointment
+    await models.appointmentData.update(appointmentData, {where: {id:appointmentData.id}, transaction });
+
+    // Commit the transaction
+    await transaction.commit();
+
+    res.status(200).json({ message: 'Update successful' });
+  } catch (error) {
+    // Rollback the transaction on error
+    await transaction.rollback();
+    console.error('Error updating data:', error);
+    res.status(500).json({ error: 'An error occurred while updating data' });
+  }
+}
 
 module.exports = {
   addPatient,
@@ -160,5 +182,6 @@ module.exports = {
   deletePatient,  
   filterData,
   getPatientAll,
-  deleteOne
+  deleteOne,
+  updateAll
 };

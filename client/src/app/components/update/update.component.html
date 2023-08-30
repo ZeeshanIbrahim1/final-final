@@ -1,0 +1,381 @@
+<form
+  class="updateForm"
+  [formGroup]="updateForm"
+  (ngSubmit)="updateData()"
+  novalidate
+>
+<div class="mat-elevation-z8 p-all m-all">
+    <h1 class="mLeft">Update Patient Info</h1>
+<form
+  class="updatePatientForm"
+  [formGroup]="updatePatientForm"
+  (ngSubmit)="updatePatient()"
+  novalidate
+>
+  <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>First name</mat-label>
+        <input matInput placeholder="Name" formControlName="first_name" />
+        <mat-error *ngIf="updatePatientForm.get('first_name').hasError('required')"
+          >Name is required</mat-error
+        >
+        <mat-error *ngIf="updatePatientForm.get('first_name').hasError('minlength')"
+          >Name must be at least 2 characters long</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>Middle name</mat-label>
+        <input
+          matInput
+          placeholder="Middle name"
+          formControlName="middle_name"
+        />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="lastname" formControlName="last_name" />
+        <mat-error *ngIf="updatePatientForm.get('last_name').hasError('required')"
+          >Last Name is required</mat-error
+        >
+        <mat-error *ngIf="updatePatientForm.get('last_name').hasError('minlength')"
+          >Name must be at least 2 characters long</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="xyz@gmail.com" formControlName="email" />
+        <mat-error *ngIf="updatePatientForm.get('email').hasError('required')"
+          >Email is required</mat-error
+        >
+        <mat-error *ngIf="updatePatientForm.get('email').hasError('email')"
+          >Invalid email format</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="date_of_birth"
+          [max]="maxDate"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>SSN</mat-label>
+        <input matInput formControlName="ssn" />
+        <mat-error *ngIf="updatePatientForm.get('ssn').hasError('required')"
+          >SSN is required</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" />
+        <mat-error *ngIf="updatePatientForm.get('address').hasError('required')"
+          >Address is required</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+        <mat-error *ngIf="updatePatientForm.get('city').hasError('required')"
+          >City is required</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>State</mat-label>
+        <input matInput formControlName="state" />
+        <mat-error *ngIf="updatePatientForm.get('state').hasError('required')"
+          >State is required</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field appearance="outline">
+        <mat-label>Zip</mat-label>
+        <input matInput formControlName="zip" />
+        <mat-error *ngIf="updatePatientForm.get('zip').hasError('required')"
+          >Zip is required</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>
+</div>
+<div class="mat-elevation-z8 p-all m-all ">
+<h1 class="mLeft">Update Case Info</h1>
+    <form 
+class="updateCaseForm" 
+[formGroup]="updateCaseForm" 
+(ngSubmit)="updateCase()" 
+novalidate>
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Practice Location</mat-label>
+      <mat-select formControlName="practiceLocationId">
+        <mat-option
+          *ngFor="let location of practiceInfo"
+          [value]="location.id"
+        >
+          {{ location.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="updateCaseForm.get('practiceLocationId').hasError('required')"
+        >Select Practice Location</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field>
+        <mat-label>Select Category</mat-label>
+        <mat-select formControlName="categoryId">
+          <mat-option
+            *ngFor="let category of categoryInfo"
+            [value]="category.id"
+          >
+            {{ category.categoryName }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="updateCaseForm.get('categoryId').hasError('required')"
+          >Select Category</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile class="matgrid">
+      <mat-form-field>
+        <mat-label>Select Purpose of Visit</mat-label>
+        <mat-select formControlName="purposeOfVisitId">
+          <mat-option
+            *ngFor="let visit of visitInfo"
+            [value]="visit.id" 
+          >
+            {{ visit.PurposeOfVisit }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="updateCaseForm.get('purposeOfVisitId').hasError('required')"
+          >Select Purpose of Visit</mat-error
+        >
+      </mat-form-field>
+    </mat-grid-tile>
+
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Case Type</mat-label>
+      <mat-select formControlName="caseTypeId">
+        <mat-option
+          *ngFor="let case of caseTypeInfo"
+          [value]="case.id"
+        >
+          {{ case.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="updateCaseForm.get('caseTypeId').hasError('required')"
+        >Select Case Type</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+
+  <mat-grid-tile class="matgrid">
+    <mat-form-field appearance="outline">
+      <mat-label>Date of Admission (DOA)</mat-label>
+      <input matInput [matDatepicker]="doaPicker" formControlName="doa" />
+      <mat-error *ngIf="updateCaseForm.get('doa').hasError('required')"
+        >Use mm/dd/yyyy Format</mat-error
+      >
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="doaPicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #doaPicker></mat-datepicker>
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<h3 class="mLeft">Insurance Information</h3>
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Insurance</mat-label>
+      <mat-select formControlName="insuranceId">
+        <mat-option
+          *ngFor="let insurance of insuranceInfo"
+          [value]="insurance.id"
+        >
+          {{ insurance.insuranceName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="updateCaseForm.get('insuranceId').hasError('required')"
+        >Select Insurance Name</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list> 
+
+<!-- Firm Information -->
+<h3 class="mLeft">Firm Information</h3>
+<mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+  <mat-grid-tile class="matgrid">
+    <mat-form-field>
+      <mat-label>Select Firm</mat-label>
+      <mat-select formControlName="firmId">
+        <mat-option *ngFor="let firm of firmInfo" [value]="firm.id">
+          {{ firm.firmName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="updateCaseForm.get('firmId').hasError('required')"
+        >Select Firm Name</mat-error
+      >
+    </mat-form-field>
+  </mat-grid-tile>
+</mat-grid-list>
+</form>
+
+</div>
+<div class="mat-elevation-z8 p-all m-all">
+  <h1 class="mLeft">Update Appointment</h1>
+    <div *ngIf="noAppointmentAssigned()">
+        <h1 class="mLeft">No appointment assigned to Case</h1>
+          <button class="mLeft-big" color="primary" (click)="updatePnC()"  mat-raised-button>
+            UPDATE
+          </button>
+    </div>
+    <form
+      class="appointmentForm"
+      [formGroup]="updateAppointmentForm"
+      (ngSubmit)="updateAppoint()"
+      *ngIf="!noAppointmentAssigned()"
+      novalidate
+    >
+      <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
+       <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+            <mat-label>Appointment Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="appointmentDatePicker"
+              formControlName="appointmentDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="appointmentDatePicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #appointmentDatePicker></mat-datepicker>
+          </mat-form-field>
+        </mat-grid-tile>
+    
+  
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+            <mat-label>Appointment Time</mat-label>
+            <input matInput type="time" formControlName="appointmentTime" />
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile class="matgrid">
+          <mat-form-field>
+            <mat-label>Select Appointment Type</mat-label>
+            <mat-select formControlName="appointmentTypeId">
+              <mat-option
+                *ngFor="let type of typeInfo"
+                [value]="type.id"
+              >
+                {{ type.appointmentType}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="updateAppointmentForm.get('appointmentTypeId').hasError('required')"
+              >Select Appointment Type</mat-error
+            >
+          </mat-form-field>
+        </mat-grid-tile>
+    
+        <mat-grid-tile class="matgrid">
+          <mat-form-field>
+            <mat-label>Select Specialty</mat-label>
+            <mat-select formControlName="specialtyId">
+              <mat-option
+                *ngFor="let specialty of specialtyInfo"
+                [value]="specialty.id"
+              >
+                {{ specialty.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="updateAppointmentForm.get('specialtyId').hasError('required')"
+              >Select Specialty</mat-error
+            >
+          </mat-form-field>
+        </mat-grid-tile>
+    
+      
+        <mat-grid-tile class="matgrid">
+          <mat-form-field>
+            <mat-label>Select Doctor</mat-label>
+            <mat-select formControlName="doctorId">
+              <mat-option
+                *ngFor="let doctor of doctorInfo"
+                [value]="doctor.id"
+              >
+                {{ doctor.first_name }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="updateAppointmentForm.get('doctorId').hasError('required')"
+              >Select Doctor</mat-error
+            >
+          </mat-form-field>
+        </mat-grid-tile>
+        <mat-grid-tile class="matgrid">
+          <mat-form-field appearance="outline">
+            <mat-label>Duration</mat-label>
+            <input matInput placeholder="Duration" formControlName="duration" />
+          </mat-form-field>
+        </mat-grid-tile>   
+      </mat-grid-list>
+    </form>
+    
+    
+  </div>
+    <button (click)="onButtonClick()" color="primary" mat-raised-button>To home page</button>
+      <button color="primary" [disabled]="!updateForm.valid" mat-raised-button>UPDATE</button>
+</form>

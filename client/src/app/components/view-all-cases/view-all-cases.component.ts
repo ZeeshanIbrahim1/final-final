@@ -31,8 +31,12 @@ export class ViewAllCasesComponent {
     }, 100);
   }
   deleteCases(id:any){
-    this.caseService.deleteCases(id).subscribe((data)=>{
-      this.ngOnInit();
-    },(error)=> console.log(error))
+    let isExecuted = confirm("Are you sure you want to delete this Case?")
+    if(isExecuted){
+      this.caseService.deleteCases(id)
+      setTimeout(()=>{
+        this.ngOnInit();
+      },300)
+    }
   }
 }

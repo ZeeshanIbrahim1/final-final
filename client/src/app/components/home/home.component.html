@@ -2,6 +2,7 @@
   <button class="MR-1" color="primary" (click)="addPatient()" mat-raised-button>New Patient</button>
   <button class="MR-1" color="primary" (click)="viewAllPatient()" mat-raised-button>View All Patient</button>
   <button class="MR-1" color="primary" (click)="viewAllCases()" mat-raised-button>View All Cases</button>
+  <button class="MR-1" color="primary" (click)="viewAllAppointments()" mat-raised-button>View All Appointments</button>
   <button class="MR-1" color="primary" (click)="viewChartjs()" mat-raised-button>View Chart js</button>
   <button color="primary" (click)="viewNjxChart()" mat-raised-button>View Njx Charts</button>
 </div>
@@ -148,7 +149,7 @@
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
       <mat-cell *matCellDef="let data">
-        <button mat-raised-button color="primary" (click)="editPatient(data.PatientId, data.CaseId)">Edit</button>
+        <button mat-raised-button color="primary" (click)="editPatient(data.PatientId, data.CaseId,data.AppointmentId)">Edit</button>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="delete">

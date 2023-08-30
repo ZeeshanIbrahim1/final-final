@@ -46,7 +46,7 @@ export class AppointService {
     );
   }
   getAllAppointments(){
-    return this.http.get(`${this.url}/appoint/c`)
+    return this.http.get(`${this.url}/appoint/getAllAppointments`)
   }
   getSpecialtyInfo(){
     return this.http
@@ -82,5 +82,13 @@ export class AppointService {
       (error) => {
         console.error('Error updating Appointment:', error);
       })
+  }
+  deleteAppointment(id: number){
+    return this.http.delete(`${this.url}/appoint/deleteAppoint/${id}`)
+    .pipe(
+      catchError(
+        this.errorHandlerService.handleError('deleteAppoint')
+      )
+    )
   }
 }

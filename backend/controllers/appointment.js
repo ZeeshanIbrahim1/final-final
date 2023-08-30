@@ -106,7 +106,9 @@ const updateAppointment = async(req,res) =>{
     })
 }
 const getAllAppointment = async(req,res) => {
-    const allAppointments = await models.Appointment.findAll();
+    const allAppointments = await models.Appointment.findAll(
+      {where:{deleted: null}}
+    );
     if(!allAppointments && allAppointments.lenth ===0 ){
       res.json({message: "No Appointment exists"});
     }
@@ -115,12 +117,28 @@ const getAllAppointment = async(req,res) => {
     }
   } 
 
+ const deleteAppointment = async (req,res) =>{
+   const dateStamp = new Date();
+  try {
+    const id = req.params.id;
+    await models.Appointment.update(
+      {deleted: dateStamp},
+      {where: {id : id}}
+    )
+    res.status(201).json({message: "Successfully deleted!"})
+  } catch (error) {
+    console.log("Error in appoint controller:", error)
+    res.status(406).json({message: "Error in deleting the appointment"});
+  }
+ }
+
 module.exports = {
   getId,
   addAppoint,
   getType,
   getAppointments,
   updateAppointment,
-  getAllAppointment
+  getAllAppointment,
+  deleteAppointment
 //   getAll
 };

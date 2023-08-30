@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { Patient } from '../models/patient';
 
@@ -21,6 +22,7 @@ export class PatientService {
     name:any;
     fetchedData:any;
     constructor(
+        private snackBar: MatSnackBar,
         private http: HttpClient,
         private errorHandlerService: ErrorHandlerService,
         private router: Router
@@ -88,9 +90,20 @@ export class PatientService {
     return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}/${id3}`).subscribe(
       (response: any) => {
         console.log('Case and Appointment deleted successfully:', response);
+        if(response.status === 201){
+          this.snackBar.open("The Case is deleted!","Close", {
+            duration: 3000, // Display duration in milliseconds
+          });
+        }
       },
       (error) => {
-        console.error('Error deleting patient:', error);
+        console.error('Error deleting cases:', error);
+        if(error.status === 400){
+          this.snackBar.open("To delete this case, first delete its appointments.", "Close", {
+            duration: 5000, // Display duration in milliseconds
+            panelClass: ['error-snackbar'], // Optional custom CSS class for styling
+          });
+        }
       }
     );
   }
@@ -136,5 +149,10 @@ export class PatientService {
     // )
     )
     
+  }
+  updateAllData(data:any){
+    console.log("Incoming data:", data)
+    // return {message : "working"};
+    return this.http.put(`${this.url}/patients/updateAll`, data);
   }
 }

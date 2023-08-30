@@ -1,0 +1,57 @@
+<div>
+    <div>
+      <h2>All Appointments</h2>
+      <mat-table [dataSource]="appointmentInfo" class="mat-elevation-z8 demo-table">
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>Appointment ID</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.id }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="appointmentDate">
+          <mat-header-cell *matHeaderCellDef>Appointment Date</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.appointmentDate | date }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="appointmentTime">
+          <mat-header-cell *matHeaderCellDef>Appointment Time</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.appointmentTime }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="duration">
+          <mat-header-cell *matHeaderCellDef>Duration</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.duration }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="appointmentTypeId">
+          <mat-header-cell *matHeaderCellDef>Appointment Type ID</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.appointmentTypeId }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="specialtyId">
+          <mat-header-cell *matHeaderCellDef>Specialty ID</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.specialtyId }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="doctorId">
+          <mat-header-cell *matHeaderCellDef>Doctor ID</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.doctorId }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="caseId">
+          <mat-header-cell *matHeaderCellDef>Case ID</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.caseId }}</mat-cell>
+        </ng-container>
+        
+        <ng-container matColumnDef="delete">
+          <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+          <mat-cell *matCellDef="let info">
+            <button mat-raised-button color="warn" (click)="deleteAppointment(info.id)">Delete Patient</button>
+          </mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentTypeId', 'specialtyId', 'doctorId', 'caseId','delete']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentTypeId', 'specialtyId', 'doctorId', 'caseId', 'delete'];"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+  

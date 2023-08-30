@@ -60,14 +60,23 @@ export class HomeComponent {
   viewAllCases(){
     this.router.navigate(['/allCases'])
   }
-  editPatient(id1,id2) {
-   this.router.navigate([`/update-Patient`, id1,id2]);
+  viewAllAppointments(){
+    this.router.navigate(['/allAppointments'])
+  }
+  editPatient(id1:Number,id2:Number,id3:Number) {
+    if(!id3){
+      id3 = 0;
+    }
+   this.router.navigate([`/update`, id1,id2,id3]);
    }
 
   deletePatient(id1:any,id2:any,id3:any) {
     console.log("Front end !")
-    let isExecuted = confirm("This will delete this case and appointment of this Patient. Do you want to delete?")
+    let isExecuted = confirm("Are you sure you want to delete?")
     if(isExecuted){
+      if(!id3){
+        id3 = 0;
+      }
       this.patientService.deletePatient(id1,id2,id3)
       setTimeout(() => { 
         this.search(); 

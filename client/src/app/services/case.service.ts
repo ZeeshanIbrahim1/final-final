@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
 import { UpdatePatientComponent } from '../components/update-patient/update-patient.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class CaseService {
   };
 
   constructor(
+    private snackBar: MatSnackBar,
     private http: HttpClient,
     private errorHandlerService: ErrorHandlerService,
     private router: Router
@@ -119,13 +121,25 @@ export class CaseService {
       )
     );
   }
-  deleteCases(id){
-    return this.http.delete(`${this.url}/cases/deleteCase/${id}`)
-    .pipe(
-      catchError(
-        this.errorHandlerService.handleError('FirmInfo')
-      )
-    );
+  deleteCases(id: Number){
+    return this.http.delete(`${this.url}/cases/deleteCase/${id}`).subscribe(
+      (response: any) =>{
+        console.log('Case and Appointment deleted successfully:', response);
+        if(response.status === 201){
+          this.snackBar.open("The Case is deleted!","Close", {
+            duration: 3000, // Display duration in milliseconds
+          });
+        }
+      },
+      (error)=>{
+        console.error('Error deleting cases:', error);
+        if(error.status === 400){
+          this.snackBar.open("To delete this case, first delete its appointments.", "Close", {
+            duration: 5000, // Display duration in milliseconds
+            panelClass: ['error-snackbar'], // Optional custom CSS class for styling
+          });
+        }
+      })
   }
   
 }

@@ -15,6 +15,8 @@ import { ViewAllPatientsComponent } from './components/view-all-patients/view-al
 import { ViewAllCasesComponent } from './components/view-all-cases/view-all-cases.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartUsingNpxChartsComponent } from "./components/chart-using-npx-charts/chart-using-npx-charts.component"
+import { ViewAllAppointmentsComponent } from './components/view-all-appointments/view-all-appointments.component';
+import { UpdateComponent } from './components/update/update.component';
 
 const routes: Routes = [
   { path: '', component: RegisterComponent  },
@@ -30,8 +32,10 @@ const routes: Routes = [
   { path:  'update-appointment/:id', component:UpdateAppointmentComponent, canActivate:[AuthGuard] },
   { path: 'allPatient', component:ViewAllPatientsComponent, canActivate:[AuthGuard] },
   { path: 'allCases', component:ViewAllCasesComponent, canActivate:[AuthGuard] },
+  { path: 'allAppointments', component:ViewAllAppointmentsComponent, canActivate:[AuthGuard]},
   { path: 'charts' , component:ChartsComponent ,canActivate:[AuthGuard] },
   { path: 'njxChart', component:ChartUsingNpxChartsComponent, canActivate:[AuthGuard] },
+  { path: 'update/:id1/:id2/:id3', component:UpdateComponent},
   { path: '**', redirectTo: 'home' },
 ];
 

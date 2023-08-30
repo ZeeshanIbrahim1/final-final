@@ -11,4 +11,6 @@ router.get("/getType", appointController.getType)
 router.get("/getAppoints/:id", appointController.getAppointments)
 router.put("/updateAppoint/:id",appointController.updateAppointment)
 router.get("/getAllAppointments", appointController.getAllAppointment)
+router.delete('/deleteAppoint/:id',appointController.deleteAppointment)
+
 module.exports = router;

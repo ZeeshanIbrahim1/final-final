@@ -144,22 +144,27 @@ const getAll = async (req,res) => {
 
 const deleteCase = async(req,res) => {
   const caseId = req.params.id;
-  const transaction = await sequelize.transaction();
   const dateStamp = new Date();
-  try {
-    await models.Case.update(
+  const appointmentsExist = await models.Appointment.findOne({
+    where: { 
+      caseId ,
+      deleted: null
+    }
+  });
+  if(appointmentsExist){
+    res.status(400).json({message:"To delete this case, first delete its appointments."})
+  }
+  else{
+    try {
+      await models.Case.update(
       { deleted : dateStamp },
-      {where:{id:caseId}, transaction}
+      {where:{id:caseId}}
     )
-    await models.Appointment.update(
-      {deleted: dateStamp},
-      {where:{caseId: caseId},transaction}
-    )
-    transaction.commit();
-    res.json("Cases and Appointment Successfuly deleted")
-  } catch (error) {
-    transaction.rollback();
-    console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:", error)
+      res.status(201).json({message : "Cases and Appointment Successfuly deleted"})
+    } catch (error) {
+      console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:", error)
+      res.json(400).json({message:"To delete Case you have to first delete its patient"})
+    }
   }
 }
 

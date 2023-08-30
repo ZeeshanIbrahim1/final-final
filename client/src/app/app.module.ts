@@ -33,6 +33,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatError } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 // import {MatDatepickerModule} from '@angular/material/datepicker';
 // import {MatInputModule} from '@angular/material/input';
@@ -42,6 +43,9 @@ import { ViewAllPatientsComponent } from './components/view-all-patients/view-al
 import { ViewAllCasesComponent } from './components/view-all-cases/view-all-cases.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartUsingNpxChartsComponent } from './components/chart-using-npx-charts/chart-using-npx-charts.component';
+import { ViewAllAppointmentsComponent } from './components/view-all-appointments/view-all-appointments.component';
+import { UpdateComponent } from './components/update/update.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,9 +63,12 @@ import { ChartUsingNpxChartsComponent } from './components/chart-using-npx-chart
     ViewAllCasesComponent,
     ChartsComponent,
     ChartUsingNpxChartsComponent,
+    ViewAllAppointmentsComponent,
+    UpdateComponent,
   ],
   imports: [
     BrowserModule,
+    MatSnackBarModule,
     AppRoutingModule,
     MatButtonModule,
     MatCardModule,

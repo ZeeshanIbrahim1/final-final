@@ -135,7 +135,7 @@ module.exports = (sequelize, DataTypes) => {
   LEFT JOIN
     categories ct ON c.categoryId = ct.id
   LEFT JOIN
-    appointments a ON c.id = a.caseId
+    appointments a ON c.id = a.caseId AND a.deleted IS NULL
   LEFT JOIN
     purposeofvisits pv ON c.purposeOfVisitId = pv.id
   LEFT JOIN

@@ -9,5 +9,6 @@ router.delete("/delete/:id1/:id2/:id3",patientController.deletePatient);
 router.get('/filter',patientController.filterData)
 router.get('/getAllP', patientController.getPatientAll)
 router.delete('/deleteOne/:id',patientController.deleteOne)
+router.put("/updateAll",patientController.updateAll)
 
 module.exports = router;
