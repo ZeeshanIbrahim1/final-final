@@ -22,9 +22,12 @@ export class ViewAllAppointmentsComponent {
     )
   }
   deleteAppointment(id:any){
-    this.appointService.deleteAppointment(id)
-    .subscribe(
-      ()=>this.ngOnInit()
-    )
-  }
+    let isExecuted = confirm("Are you sure you want to delete this appointment?")
+    if(isExecuted){
+      this.appointService.deleteAppointment(id)
+      .subscribe(
+        ()=>this.ngOnInit()
+        )
+      }
+    }
 }

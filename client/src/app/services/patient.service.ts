@@ -77,10 +77,21 @@ export class PatientService {
   }
   deleteOnePatient(id1:any){
     this.http.delete(`${this.url}/patients/deleteOne/${id1}`).subscribe(
-      (response)=>{
+      (response: any)=>{
         console.log("Patient deleted successfully:", response)
+        if(response.status === 201){
+          this.snackBar.open("The Case is deleted!","Close", {
+            duration: 3000, // Display duration in milliseconds
+          });
+        }
       },
       (error) => {
+        if(error.status === 401){
+          this.snackBar.open("To delete this Pateint, first delete its Cases.", "Close", {
+            duration: 5000, // Display duration in milliseconds
+            panelClass: ['error-snackbar'], // Optional custom CSS class for styling
+          });
+        }
         console.error('Error deleting patient:', error);
       }
     )

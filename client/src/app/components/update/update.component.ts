@@ -36,6 +36,7 @@ export class UpdateComponent implements OnInit {
   doctorInfo: any[] = [];
   typeInfo: any[] = [];
   updateForm: FormGroup;
+  updateAppointmentFormExists: boolean = true;
 
   constructor(
     private patientService: PatientService,
@@ -48,7 +49,14 @@ export class UpdateComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
+    this.patientId = this.route.snapshot.params['id1'];
+    this.caseId = this.route.snapshot.params['id2'];
+    this.appointmentId = this.route.snapshot.paramMap.get('id3');
     this.getInfo();
+    if(this.appointmentId === "0"){
+      this.updateAppointmentFormExists = false;
+    }
     this.updatePatientForm = this.createFormGroup();
     this.updateCaseForm = this.createCaseGroup();
     this.updateAppointmentForm = this.createAppointmentGroup();
@@ -56,12 +64,8 @@ export class UpdateComponent implements OnInit {
     this.updateForm = this.fb.group({
       patient: this.updatePatientForm,
       case:this.updateCaseForm,
-      appointment: this.updateAppointmentForm
+      appointment: this.updateAppointmentFormExists ? this.updateAppointmentForm : null
     })
-
-    this.patientId = this.route.snapshot.params['id1'];
-    this.caseId = this.route.snapshot.params['id2'];
-    this.appointmentId = this.route.snapshot.paramMap.get('id3');
     console.log("3 ids",this.patientId,this.caseId,this.appointmentId)
     this.fetchUpdatePatient(this.patientId);
     this.fetchUpdateCase(this.caseId);
@@ -303,16 +307,16 @@ export class UpdateComponent implements OnInit {
         appointmentData: this.updateForm.get('appointment').value,
       };
       console.log("All info:", updatedData)
-      // this.patientService.updateAllData(updatedData)
-      // .subscribe(
-      //   response => {
-      //     console.log("response:", response);
-      //     this.router.navigate(['/home']);
-      //   },
-      //   error => {
-      //     console.log("error:", error)
-      //   }
-      //   );
+      this.patientService.updateAllData(updatedData)
+      .subscribe(
+        response => {
+          console.log("response:", response);
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.log("error:", error)
+        }
+        );
       }
   }
 }

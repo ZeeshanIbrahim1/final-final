@@ -105,16 +105,19 @@ const deleteOne = async (req, res) =>{
   const patientId = req.params.id;
   const deletionTimestamp = new Date();
   try{
-    await models.Patient.update(
-      {deleted: deletionTimestamp},
-      {where:{id : patientId},transaction}
-    )
-    await models.Case.update({
-      deleted: deletionTimestamp},
-      {where: {patientId: patientId},transaction}
+    const caseExists = await models.Case.findOne(
+      {where: {deleted: null,patientId: patientId}}
       )
-    transaction.commit()
-    res.json("Patient Successfully deleted")
+    if(caseExists){
+      res.status(401).json({message : "To delete this patient: First DELETE all cases of this Patient."})
+    }
+    else{
+      await models.Patient.update(
+        {deleted: deletionTimestamp},
+        {where:{id : patientId},transaction})
+      transaction.commit()
+      res.status(200).json({message:"Patient Successfully deleted"})
+        }
   }catch(error){
     transaction.rollback()
     console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:",error)
@@ -154,14 +157,19 @@ const updateAll = async (req,res) => {
   const transaction = await sequelize.transaction()
   try {
     // Update Patient
-    console.log("idsss", patientData.id,appointmentData.id,caseData.id,)
-    await models.Patient.update(patientData, {where: {id:patientData.id}, transaction });
+    const patientId = parseInt(patientData.id,10)
+    const caseId = parseInt(caseData.id,10)
+    
+    // console.log("idsss",patientId,appointmentData.id,caseId)
+    await models.Patient.update(patientData, {where: {id:patientId}, transaction });
 
     // Update Case
-    await models.Case.update(caseData, {where: {id:caseData.id}, transaction });
+    await models.Case.update(caseData, {where: {id:caseId}, transaction });
 
     // Update Appointment
-    await models.appointmentData.update(appointmentData, {where: {id:appointmentData.id}, transaction });
+    if(appointmentData != null){
+      await models.Appointment.update(appointmentData, {where: {id:appointmentData.id}, transaction });
+    }
 
     // Commit the transaction
     await transaction.commit();

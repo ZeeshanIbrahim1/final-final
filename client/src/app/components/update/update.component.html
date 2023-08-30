@@ -275,20 +275,14 @@ novalidate>
 
 </div>
 <div class="mat-elevation-z8 p-all m-all">
+  <form
+  class="appointmentForm"
+  [formGroup]="updateAppointmentForm"
+  (ngSubmit)="updateAppoint()"
+  *ngIf="!noAppointmentAssigned()"
+  novalidate
+  >
   <h1 class="mLeft">Update Appointment</h1>
-    <div *ngIf="noAppointmentAssigned()">
-        <h1 class="mLeft">No appointment assigned to Case</h1>
-          <button class="mLeft-big" color="primary" (click)="updatePnC()"  mat-raised-button>
-            UPDATE
-          </button>
-    </div>
-    <form
-      class="appointmentForm"
-      [formGroup]="updateAppointmentForm"
-      (ngSubmit)="updateAppoint()"
-      *ngIf="!noAppointmentAssigned()"
-      novalidate
-    >
       <mat-grid-list cols="3" rowHeight="90px" class="matgrid">
        <mat-grid-tile class="matgrid">
           <mat-form-field appearance="outline">
