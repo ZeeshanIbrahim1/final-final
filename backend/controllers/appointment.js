@@ -106,10 +106,30 @@ const updateAppointment = async(req,res) =>{
     })
 }
 const getAllAppointment = async(req,res) => {
-    const allAppointments = await models.Appointment.findAll(
-      {where:{deleted: null}}
-    );
-    if(!allAppointments && allAppointments.lenth ===0 ){
+  let sql = `
+  SELECT
+    a.id AS "id",
+    a.appointmentDate AS "appointmentDate",
+    a.appointmentTime AS "appointmentTime",
+    a.duration AS "duration",
+    t.appointmentType AS "appointmentType",
+    s.name AS "speciality",
+    d.first_name AS "doctorName",
+    a.caseId AS "caseId"
+    FROM
+    appointments a
+    LEFT JOIN 
+      appointmenttype t on a.appointmentTypeId = t.id
+    LEFT JOIN
+      specialties s ON a.specialtyId = s.id
+    LEFT JOIN
+      doctors d ON a.doctorId = d.id
+    WHERE
+      a.deleted IS NULL
+  `  
+  const results = await models.Case.sequelize.query(sql);
+  const allAppointments = results[0];
+    if(!allAppointments && allAppointments.lenth === 0 ){
       res.json({message: "No Appointment exists"});
     }
     else{

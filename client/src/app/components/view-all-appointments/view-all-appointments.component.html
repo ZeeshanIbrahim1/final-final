@@ -22,19 +22,19 @@
           <mat-cell *matCellDef="let info">{{ info.duration }}</mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="appointmentTypeId">
-          <mat-header-cell *matHeaderCellDef>Appointment Type ID</mat-header-cell>
-          <mat-cell *matCellDef="let info">{{ info.appointmentTypeId }}</mat-cell>
+        <ng-container matColumnDef="appointmentType">
+          <mat-header-cell *matHeaderCellDef>Appointment Type</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.appointmentType }}</mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="specialtyId">
-          <mat-header-cell *matHeaderCellDef>Specialty ID</mat-header-cell>
-          <mat-cell *matCellDef="let info">{{ info.specialtyId }}</mat-cell>
+        <ng-container matColumnDef="speciality">
+          <mat-header-cell *matHeaderCellDef>Speciality</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.speciality }}</mat-cell>
         </ng-container>
         
-        <ng-container matColumnDef="doctorId">
-          <mat-header-cell *matHeaderCellDef>Doctor ID</mat-header-cell>
-          <mat-cell *matCellDef="let info">{{ info.doctorId }}</mat-cell>
+        <ng-container matColumnDef="doctor">
+          <mat-header-cell *matHeaderCellDef>Doctor</mat-header-cell>
+          <mat-cell *matCellDef="let info">{{ info.doctorName }}</mat-cell>
         </ng-container>
         
         <ng-container matColumnDef="caseId">
@@ -49,8 +49,8 @@
           </mat-cell>
         </ng-container>
         
-        <mat-header-row *matHeaderRowDef="['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentTypeId', 'specialtyId', 'doctorId', 'caseId','delete']"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: ['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentTypeId', 'specialtyId', 'doctorId', 'caseId', 'delete'];"></mat-row>
+        <mat-header-row *matHeaderRowDef="['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentType', 'speciality', 'doctor', 'caseId','delete']"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: ['id', 'appointmentDate', 'appointmentTime', 'duration', 'appointmentType', 'speciality', 'doctor', 'caseId', 'delete'];"></mat-row>
       </mat-table>
     </div>
   </div>

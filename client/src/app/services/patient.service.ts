@@ -5,11 +5,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { Patient } from '../models/patient';
 
-import { BehaviorSubject, Observable, concat } from 'rxjs';
+import { Observable } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
-import { UpdatePatientComponent } from '../components/update-patient/update-patient.component';
-import { of, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -150,20 +148,11 @@ export class PatientService {
       .set('doctor',doctor)
       
 
-   return this.http.get(`${this.url}/patients/filter`, { params }).pipe(
-    // map((data:any)=>{
-    //   for(let nm of data){
-    //     nm.name = nm.PatientFirstName + " " + nm.PatientLastName;
-    //   }
-    //   return data
-    // }
-    // )
-    )
+   return this.http.get(`${this.url}/patients/filter`, { params })
     
   }
   updateAllData(data:any){
     console.log("Incoming data:", data)
-    // return {message : "working"};
     return this.http.put(`${this.url}/patients/updateAll`, data);
   }
 }
