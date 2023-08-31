@@ -3,14 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User } from '../models/User';
-import { Patient } from '../models/patient';
-import { Case } from '../models/case';
-import { Appoint } from '../models/appoint';
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
-import { UpdatePatientComponent } from '../components/update-patient/update-patient.component';
 
 @Injectable({
   providedIn: 'root',
@@ -60,7 +56,6 @@ export class AuthService {
     return this.http
       .post<User>(`${this.url}/auth/signup`, user)
       .pipe(
-        first(),
         catchError(this.errorHandlerService.handleError<User>('signup'))
       );
   }
@@ -77,7 +72,6 @@ export class AuthService {
         { email: email, password: password }
       )
       .pipe(
-        first(),
         tap((tokenObject: any) => {
           if (tokenObject && tokenObject.token && tokenObject.userId) {
             this.userId = tokenObject.userId;
@@ -93,15 +87,4 @@ export class AuthService {
     this.removeToken();
     this.router.navigate(['/login']);
   }
-  
-  
-
-  // appoint(data): Observable<Appoint> {
-  //   return this.http
-  //     .post<Appoint>(`${this.url}/appoint`, data)
-  //     .pipe(
-  //       first(),
-  //       catchError(this.errorHandlerService.handleError<Appoint>('appoint'))
-  //     );
-  // }
 }

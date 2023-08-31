@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
     static findByDoB(date_of_birth) {
-      return Patient.findOne({ where: { date_of_birth } });
+      return Patient.findOne({ where: { date_of_birth,deleted:null } });
     }
     static addPatient(
       first_name,

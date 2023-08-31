@@ -31,6 +31,7 @@ export class ChartsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
     this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
+    // create 3rd for better understanding
     this.initializeChart();
     this.initializeFirmChart();
   }
@@ -42,7 +43,7 @@ export class ChartsComponent implements AfterViewInit {
         labels: ['Male', 'Female', 'Other'],
         datasets: [{
           label: 'Patient Gender',
-          data: [0, 0, 0], // Placeholder data
+          data: [1, 1, 1], // Placeholder data
           borderWidth: 1,
           backgroundColor: ['blue', 'pink', 'gray']
         }]

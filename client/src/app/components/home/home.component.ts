@@ -114,6 +114,10 @@ export class HomeComponent {
             this.retrievedData.length = 0;
        }
       }
+      else{
+        const messageElement = document.getElementById('message')
+        messageElement.textContent = null;
+      }
   }
   viewChartjs(){
     this.router.navigate(['/charts'])

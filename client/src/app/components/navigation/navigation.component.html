@@ -1,5 +1,8 @@
-<mat-toolbar color="primary">
-  <span>My App</span>
-  <span class="spacer"></span>
-  <button mat-button (click)="signOut()">Sign Out</button>
+<mat-toolbar>
+  <!-- <button mat-fab color="primary" (click)="goHome()">
+    <mat-icon>home</mat-icon>
+  </button> -->
+  <button mat-raised-button color="primary" (click)="goHome()">Home</button>
+  <span  class="spacer"></span>
+  <button mat-raised-button color="warn" (click)="signOut()">Sign Out</button>
 </mat-toolbar>

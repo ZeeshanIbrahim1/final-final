@@ -30,8 +30,8 @@ export class ViewAllPatientsComponent {
     let isExecuted = confirm("This will delete all cases and all appointments of this Patient. Do you want to delete?")
     if(isExecuted){
       this.patientService.deleteOnePatient(PatientId);
-      this.ngOnInit();
     }
+    this.ngOnInit();
   }
 
 }
