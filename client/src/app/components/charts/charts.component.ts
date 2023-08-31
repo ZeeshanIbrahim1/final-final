@@ -14,9 +14,11 @@ Chart.register(...registerables);
 export class ChartsComponent implements AfterViewInit {
   myChart:any;
   firmChart: any;
+  manualChart: any;
   increment: 0;
   canvasElement:any;
   firmCanvasElement: any;
+  manualElement: any;
   context:any;
   chart: any;
   patientInfo: any;
@@ -31,9 +33,11 @@ export class ChartsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
     this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
+    this.manualElement = document.getElementById('chart3') as HTMLCanvasElement;
     // create 3rd for better understanding
     this.initializeChart();
     this.initializeFirmChart();
+    this.initializeManualChart();
   }
 
   initializeChart() {
@@ -79,6 +83,33 @@ export class ChartsComponent implements AfterViewInit {
       }
     });
   }
+  initializeManualChart() {
+    this.manualChart = new Chart(this.manualElement, {
+      type: 'bar',
+      data: {
+        labels: ['lahore', 'Karachi', 'Multan', 'Islamabad', 'Peshawar', 'Quetta'],
+        datasets: [{
+          label: 'PSL Trophies',
+          data: [2,1,1,1,1,1],
+          borderWidth: 1,
+          backgroundColor: ['green', 'blue', 'orange', 'red', 'yellow', 'purple']
+        }]
+      },
+      options: {
+        plugins:{
+          legend:{
+            display:true
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+  
   ngOnInit(){
     this.getPatientInfo();
     this.getCaseInfo();
