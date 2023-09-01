@@ -2,7 +2,15 @@
   <!-- <button mat-fab color="primary" (click)="goHome()">
     <mat-icon>home</mat-icon>
   </button> -->
-  <button mat-raised-button color="primary" (click)="goHome()">Home</button>
+  <button class="MR-1" mat-raised-button color="primary" (click)="goHome()">Home</button>
+  <div>
+    <button class="MR-1" color="primary" (click)="addPatient()" mat-raised-button>New Patient</button>
+    <button class="MR-1" color="primary" (click)="viewAllPatient()" mat-raised-button>View All Patient</button>
+    <button class="MR-1" color="primary" (click)="viewAllCases()" mat-raised-button>View All Cases</button>
+    <button class="MR-1" color="primary" (click)="viewAllAppointments()" mat-raised-button>View All Appointments</button>
+    <button class="MR-1" color="primary" (click)="viewChartjs()" mat-raised-button>View Chart js</button>
+    <button color="primary" (click)="viewNjxChart()" mat-raised-button>View Njx Charts</button>
+  </div>
   <span  class="spacer"></span>
   <button mat-raised-button color="warn" (click)="signOut()">Sign Out</button>
 </mat-toolbar>

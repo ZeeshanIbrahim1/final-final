@@ -51,18 +51,7 @@ export class HomeComponent {
       'delete'
     ];
   }
-  addPatient(){
-    this.router.navigate(['/patient']);
-  }
-  viewAllPatient(){
-    this.router.navigate(['/allPatient'])
-  }
-  viewAllCases(){
-    this.router.navigate(['/allCases'])
-  }
-  viewAllAppointments(){
-    this.router.navigate(['/allAppointments'])
-  }
+
   editPatient(id1:Number,id2:Number,id3:Number) {
     if(!id3){
       id3 = 0;
@@ -119,11 +108,5 @@ export class HomeComponent {
         messageElement.textContent = null;
       }
   }
-  viewChartjs(){
-    this.router.navigate(['/charts'])
-  }
-  viewNjxChart(){
-    this.router.navigate(['/njxChart'])
-
-  }
+  
 }

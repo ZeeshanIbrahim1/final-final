@@ -5,8 +5,9 @@ import { Router } from '@angular/router';
 import { User } from '../models/User';
 
 import { Observable } from 'rxjs';
-import { first, catchError, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +50,8 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private errorHandlerService: ErrorHandlerService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
 
   signup(user: Omit<User, 'id'>): Observable<User> {
@@ -76,7 +78,8 @@ export class AuthService {
           if (tokenObject && tokenObject.token && tokenObject.userId) {
             this.userId = tokenObject.userId;
             this.setToken(tokenObject.token);
-            this.router.navigate(['/home']); // Ensure the route starts with a slash
+            this.router.navigate(['/home']);
+            this.showSuccessSnackbar('Login successful');
           } else {
             console.error('Invalid server response format');
           }
@@ -86,5 +89,11 @@ export class AuthService {
   signOut(){
     this.removeToken();
     this.router.navigate(['/login']);
+  }
+  showSuccessSnackbar(message: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000, 
+      panelClass: ['success-snackbar'], 
+    });
   }
 }

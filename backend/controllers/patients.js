@@ -27,7 +27,7 @@ const addPatient = async (req, res, next) => {
   if (storedDoB) {
     console.log("Patient with same Date of Birth already exists!");
     res
-      .status(400)
+      .status(401)
       .json(console.log("Patient with same Date of Birth already exists!!"));
     return 0;
   }

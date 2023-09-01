@@ -20,4 +20,23 @@ export class NavigationComponent implements OnInit {
   goHome(){
     this.router.navigate(['/home'])
   }
+  addPatient(){
+    this.router.navigate(['/patient']);
+  }
+  viewAllPatient(){
+    this.router.navigate(['/allPatient'])
+  }
+  viewAllCases(){
+    this.router.navigate(['/allCases'])
+  }
+  viewAllAppointments(){
+    this.router.navigate(['/allAppointments'])
+  }
+  viewChartjs(){
+    this.router.navigate(['/charts'])
+  }
+  viewNjxChart(){
+    this.router.navigate(['/njxChart'])
+
+  }
 }

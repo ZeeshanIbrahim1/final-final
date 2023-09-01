@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { Patient } from '../models/patient';
 
-import { Observable } from 'rxjs';
+import { throwError,Observable } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
 
@@ -32,9 +32,17 @@ export class PatientService {
     patient(patient: Omit<Patient, 'id'>): Observable<Patient> {
     return this.http
       .post<Patient>(`${this.url}/patients/add`, patient)
-      .pipe(
-        first(),
-        catchError(this.errorHandlerService.handleError<Patient>('patient'))
+      .pipe(  
+        catchError((error: HttpErrorResponse)=>{
+          if(error.status === 401){
+            this.snackBar.open("Patient with same Date of Birth already exists","Close", {
+              duration: 4000, // Display duration in milliseconds
+            });
+            this.router.navigate(['/home']);
+            return throwError("Bad Request: " + error.error);
+          }
+          return throwError("An error occured:"+error.message)
+        })
       );
   }
   getAllPatients() {

@@ -1,28 +1,44 @@
-
 <mat-form-field>
   <mat-label>Choose Chart</mat-label>
-  <mat-select placeholder="Chart" (selectionChange)="createChart($event.value)">
-    <mat-option *ngFor="let chart of charts" [value]="chart.value">
-      {{chart.viewChart}}
+  <mat-select placeholder="prefrence" (valueChange)="onChartTypeChange($event)">
+    <mat-option *ngFor="let prefrence of chartPrefrences" [value]="prefrence.value">
+      {{prefrence.viewValue}}
     </mat-option>
   </mat-select>
 </mat-form-field>
-<div class="chart-container">
+<div *ngIf="selectedChart">
+  <h1>Now Choose Chart type</h1>
+</div>
+<div *ngIf="selectedChart === 'chart1'">
+  <mat-form-field>
+    <mat-label>Choose Chart</mat-label>
+    <mat-select placeholder="Chart" (selectionChange)="createChart($event.value)">
+      <mat-option *ngFor="let chart of charts" [value]="chart.value">
+        {{chart.viewChart}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="chart-container">
     <canvas id="chart1" ></canvas>
+  </div>
 </div>
 
-<mat-form-field>
+<div *ngIf="selectedChart === 'chart2'">
+  
+  <mat-form-field>
     <mat-label>Choose Chart</mat-label>
     <mat-select placeholder="Chart" (selectionChange)="create2ndChart($event.value)">
       <mat-option *ngFor="let chart of charts" [value]="chart.value">
         {{chart.viewChart}}
       </mat-option>
     </mat-select>
+    <div class="chart-container">
+      <canvas id="chart2"></canvas>
+    </div>
   </mat-form-field>
-<div class="chart-container">
-    <canvas id="chart2"></canvas>
+  
 </div>
 
-<div class="chart-container">
+<!-- <div class="chart-container">
   <canvas id="chart3"></canvas>
-</div>
+</div> -->

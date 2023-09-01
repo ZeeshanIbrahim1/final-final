@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { PatientService } from 'src/app/services/patient.service';
 import { Patient } from 'src/app/models/patient';
+import { MatSnackBar } from '@angular/material/snack-bar';
 // const { format } = require('date-fns');
 
 @Component({
@@ -15,7 +16,7 @@ export class PatientsComponent implements OnInit {
   patients: Patient[] = [];
   patientForm: FormGroup;
   maxDate: Date;
-  constructor(private patientService: PatientService,private router: Router) {}
+  constructor(private patientService: PatientService,private router: Router, private snackBar:MatSnackBar) {}
   ngOnInit(): void {
     this.patientForm = this.createFormGroup();
   }
@@ -55,15 +56,21 @@ export class PatientsComponent implements OnInit {
     this.patientService.patient(this.patientForm.value).subscribe( (msg) => {
       console.log("Adding pateint id:",msg);
       this.patientService.setPatientId(msg);
+      this.patientForm.reset();
+      this.clearErrorStates();
+      setTimeout(()=>{
+        this.router.navigate(['/case']);
+      },250)
+      this.snackBar.open("Patient added!","Close", {
+        duration: 4000, // Display duration in milliseconds
+      });
     });
-    
-    //to-do patient jo add kia hua he uskay response se id pakkar or navigate me case me bhej de
-    this.patientForm.reset();
-    this.clearErrorStates();
-
-    setTimeout(()=>{
-      this.router.navigate(['/case']);
-    },250)
+    (error) => {
+      console.error("Error:", error);
+  
+      // Handle the error and navigate to the home page
+      this.router.navigate(['/home']);
+    }
   }
   clearErrorStates() {
     const formControls = this.patientForm.controls;

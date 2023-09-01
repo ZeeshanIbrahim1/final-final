@@ -12,6 +12,11 @@ Chart.register(...registerables);
   styleUrls: ['./charts.component.css']
 })
 export class ChartsComponent implements AfterViewInit {
+  chartPrefrences: any[] = [
+    {value: 'chart1', viewValue: 'Patient Comparison (Male and Female)'},
+    {value: 'chart2', viewValue: 'Firms Comparison'},
+    {value: 'chart3', viewValue: 'PSl Trophies'},
+  ];
   myChart:any;
   firmChart: any;
   manualChart: any;
@@ -19,27 +24,39 @@ export class ChartsComponent implements AfterViewInit {
   canvasElement:any;
   firmCanvasElement: any;
   manualElement: any;
-  context:any;
+  // context:any;
   chart: any;
   patientInfo: any;
   caseInfo: any;
+  appointmentInfo: any;
+  selectedChart:string;
   charts: any[]=[
     {value:"bar", viewChart : "Bar Graph"},
     {value: "pie", viewChart : "Pie Graph"},
     {value: "line", viewChart: "Line Graph"},
     // {value: "bubble", viewChart: "Bubble Chart"}
   ]
+ 
   constructor(private patientService:PatientService, private caseService:CaseService, private appointService:AppointService){}
   ngAfterViewInit() {
-    this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
-    this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
-    this.manualElement = document.getElementById('chart3') as HTMLCanvasElement;
-    // create 3rd for better understanding
-    this.initializeChart();
-    this.initializeFirmChart();
-    this.initializeManualChart();
+ 
   }
+    ngOnDestroy() {
+      // Ensure that you destroy the charts when the component is destroyed to prevent memory leaks
+      if (this.myChart) {
+        this.myChart.destroy();
+      }
+      if (this.firmChart) {
+        this.firmChart.destroy();
+      }
+      if (this.manualChart) {
+        this.manualChart.destroy();
+      }
+    }
 
+  newIntializeChart(){
+    
+  }
   initializeChart() {
     this.myChart = new Chart(this.canvasElement, {
       type: 'bar',
@@ -109,7 +126,16 @@ export class ChartsComponent implements AfterViewInit {
       }
     });
   }
-  
+  onChartTypeChange(type: string){
+    this.selectedChart = type;
+   
+    
+    // this.manualElement = document.getElementById('chart3') as HTMLCanvasElement;
+    // create 3rd for better understanding
+    
+    
+    // this.initializeManualChart();
+  }
   ngOnInit(){
     this.getPatientInfo();
     this.getCaseInfo();
@@ -118,6 +144,8 @@ export class ChartsComponent implements AfterViewInit {
     if(this.myChart){
       this.myChart.destroy()
     }
+    this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
+    this.initializeChart();
     this.chartCreation(arg1)
     this.updateChart();
   }
@@ -125,6 +153,8 @@ export class ChartsComponent implements AfterViewInit {
     if(this.firmChart){
       this.firmChart.destroy()
     }
+    this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
+    this.initializeFirmChart();
     this.firmChartCreation(arg1)
     this.updateFirmChart();
   }
