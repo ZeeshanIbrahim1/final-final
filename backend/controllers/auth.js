@@ -50,7 +50,7 @@ exports.login = async (req, res, next) => {
     }
     let token;
     if (storedUser.id) {
-      token = jwt.sign(
+      token =  jwt.sign(
         {
           email: storedUser.email,
           userId: storedUser.id,
@@ -58,6 +58,7 @@ exports.login = async (req, res, next) => {
         "secretfortoken",
         { expiresIn: "2h" }
       );
+
     } else {
       // Handle the case where the user doesn't have a valid ID
       const error = new Error("Invalid user data");
@@ -83,9 +84,11 @@ exports.signOut = (req, res, next) => {
   }
 };
 exports.verifyToken = (req, res, next) => {
-  const token = req.headers.authorization;
-  console.log("Incoming in Verify Token:", token)
-
+  const incomingtoken = req.headers.authorization;
+  console.log("Incoming in Verify Token all:", incomingtoken)
+  const split_string = incomingtoken.split(' ')
+  const token = split_string[1]
+  console.log("Incoming in Verify Token split:", token)
   if (!token) {
     return res.status(401).json({ message: "No token provided." });
   }

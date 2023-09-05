@@ -24,7 +24,6 @@
 </div>
 
 <div *ngIf="selectedChart === 'chart2'">
-  
   <mat-form-field>
     <mat-label>Choose Chart</mat-label>
     <mat-select placeholder="Chart" (selectionChange)="create2ndChart($event.value)">
@@ -32,11 +31,11 @@
         {{chart.viewChart}}
       </mat-option>
     </mat-select>
-    <div class="chart-container">
-      <canvas id="chart2"></canvas>
-    </div>
+   
   </mat-form-field>
-  
+  <div class="chart-container">
+    <canvas id="chart2"></canvas>
+  </div>
 </div>
 
 <!-- <div class="chart-container">

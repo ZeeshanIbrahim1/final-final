@@ -11,11 +11,10 @@ Chart.register(...registerables);
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css']
 })
-export class ChartsComponent implements AfterViewInit {
+export class ChartsComponent  {
   chartPrefrences: any[] = [
     {value: 'chart1', viewValue: 'Patient Comparison (Male and Female)'},
-    {value: 'chart2', viewValue: 'Firms Comparison'},
-    {value: 'chart3', viewValue: 'PSl Trophies'},
+    {value: 'chart2', viewValue: 'Firms Comparison'}
   ];
   myChart:any;
   firmChart: any;
@@ -24,6 +23,8 @@ export class ChartsComponent implements AfterViewInit {
   canvasElement:any;
   firmCanvasElement: any;
   manualElement: any;
+  genderCount:Number[] = [];
+  firmCount:Number[] = [];
   // context:any;
   chart: any;
   patientInfo: any;
@@ -38,9 +39,7 @@ export class ChartsComponent implements AfterViewInit {
   ]
  
   constructor(private patientService:PatientService, private caseService:CaseService, private appointService:AppointService){}
-  ngAfterViewInit() {
- 
-  }
+  
     ngOnDestroy() {
       // Ensure that you destroy the charts when the component is destroyed to prevent memory leaks
       if (this.myChart) {
@@ -54,30 +53,6 @@ export class ChartsComponent implements AfterViewInit {
       }
     }
 
-  newIntializeChart(){
-    
-  }
-  initializeChart() {
-    this.myChart = new Chart(this.canvasElement, {
-      type: 'bar',
-      data: {
-        labels: ['Male', 'Female', 'Other'],
-        datasets: [{
-          label: 'Patient Gender',
-          data: [1, 1, 1], // Placeholder data
-          borderWidth: 1,
-          backgroundColor: ['blue', 'pink', 'gray']
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }
   // context = this.canvasElement.getContext('2d');
   initializeFirmChart(){
     this.firmChart = new Chart(this.firmCanvasElement, {
@@ -86,7 +61,7 @@ export class ChartsComponent implements AfterViewInit {
         labels: ['ABC Firm', 'XYZ Firm'],
         datasets: [{
           label: 'Firm Cases',
-          data: [0, 0], // Placeholder data
+          data: this.firmCount, // Placeholder data
           borderWidth: 1,
           backgroundColor: ['blue', 'pink', 'gray']
         }]
@@ -128,35 +103,27 @@ export class ChartsComponent implements AfterViewInit {
   }
   onChartTypeChange(type: string){
     this.selectedChart = type;
-   
     
-    // this.manualElement = document.getElementById('chart3') as HTMLCanvasElement;
-    // create 3rd for better understanding
-    
-    
-    // this.initializeManualChart();
   }
   ngOnInit(){
     this.getPatientInfo();
     this.getCaseInfo();
   }
   createChart(arg1:any){
+    this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
     if(this.myChart){
       this.myChart.destroy()
     }
-    this.canvasElement = document.getElementById('chart1') as HTMLCanvasElement;
-    this.initializeChart();
     this.chartCreation(arg1)
-    this.updateChart();
+  
   }
   create2ndChart(arg1:any){
     if(this.firmChart){
       this.firmChart.destroy()
     }
     this.firmCanvasElement = document.getElementById('chart2') as HTMLCanvasElement;
-    this.initializeFirmChart();
     this.firmChartCreation(arg1)
-    this.updateFirmChart();
+
   }
   chartCreation(type){
     this.myChart = new Chart(this.canvasElement,{
@@ -165,7 +132,7 @@ export class ChartsComponent implements AfterViewInit {
         labels: [ "Male","Females","Other" ],
         datasets:[{
           label:"# of Patient",
-          data:[0,0,0],
+          data:this.genderCount,
           borderWidth: 1,
           backgroundColor:['blue','black','red']
         }]
@@ -186,7 +153,7 @@ export class ChartsComponent implements AfterViewInit {
         labels: [ "ABC Firm","XYZ Firm"],
         datasets:[{
           label:"Firm Cases",
-          data:[0,0],
+          data:this.firmCount,
           borderWidth: 1,
           backgroundColor:['blue','red']
         }]
@@ -204,16 +171,19 @@ export class ChartsComponent implements AfterViewInit {
     this.patientService.getPatientsAll().subscribe((response: any[])=>{
       this.patientInfo = response;
       console.log("Patient Info:",this.patientInfo)
+      this.addPatientInfo()
+      
     })
   }
   getCaseInfo(){
     this.caseService.getAllCases().subscribe((response)=>{
       this.caseInfo = response;
       console.log("Case Info:",this.caseInfo)
+      this.addFirmInfo()
     })
   }
 
-  updateChart(){
+  addPatientInfo(){
     const genderCounts={
       male:0,
       female:0,
@@ -233,17 +203,14 @@ export class ChartsComponent implements AfterViewInit {
     });
     
 
-    this.myChart.data.datasets[0].data = [
+    this.genderCount = [
       genderCounts.male,
       genderCounts.female,
       genderCounts.other
     ];
 
-    
-    this.myChart.update();
-
   }
-  updateFirmChart(){
+  addFirmInfo(){
     const firmCasesCounts = {
       firmABC:0,
       firmXYZ:0
@@ -259,13 +226,10 @@ export class ChartsComponent implements AfterViewInit {
       }
     })
 
-    this.firmChart.data.datasets[0].data = [
+    this.firmCount = [
       firmCasesCounts.firmABC,
       firmCasesCounts.firmXYZ
     ]
-
-    this.firmChart.update();
-
   }
 
 }
