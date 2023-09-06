@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements MatPaginatorIntl {
-  totalItems: number = 200;
+  totalItems: number = 100;
   pageSizeOptions: number[] = [5,10, 50, 100];
   retrievedData: any;
   firstName: string = '';
@@ -32,7 +32,7 @@ export class HomeComponent implements MatPaginatorIntl {
   //searchResults : any[] = [];
 
   patients: Patient[] = [];
-  page : any = 1;
+  page : any = 0;
   pageSize : any = 5;
 
   constructor(private patientService: PatientService,private router: Router) {}

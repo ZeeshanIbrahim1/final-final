@@ -103,7 +103,7 @@ module.exports = (sequelize, DataTypes) => {
 
     const {first_name,middle_name,last_name,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,page,pageSize} = filterIncoming;
     // Construct the base SQL query
-    const offset = ( page - 1) * pageSize;
+    const offset = ( page ) * pageSize;
     console.log("pagination:",offset,page,pageSize,typeof(offset),typeof(page),typeof(pageSize))
     let sql = `
     SELECT DISTINCT
