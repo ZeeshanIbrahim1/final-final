@@ -12,19 +12,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res) => {
-  const doctorsId = req.params.id;
-  try {
-    const doctors = await models.Doctors.findByPk(doctorsId);
-    if (!doctors) {
-      return res.status(404).json({ message: 'doctors not found' });
-    }
-    res.json(doctors);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-};
 module.exports = {
-  getById,
+  
   getAll
 };

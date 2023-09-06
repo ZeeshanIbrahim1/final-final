@@ -11,19 +11,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res) => {
-  const firmsId = req.params.id;
-  try {
-    const firms = await models.Firm.findByPk(firmsId);
-    if (!firms) {
-      return res.status(404).json({ message: 'Firms not found' });
-    }
-    res.json(firms);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-};
+
 module.exports = {
-  getById,
   getAll
 };

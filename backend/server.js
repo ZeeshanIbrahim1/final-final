@@ -18,12 +18,12 @@ const practiceRoutes = require('./routes/practicelocation');
 const appointRoutes = require('./routes/appointments');
 const categoryRoutes = require('./routes/category');
 const caseTypeRoutes = require('./routes/caseType')
-
+const purposeOfVisitRoutes = require('./routes/purposeOfVisit')
 app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/auth", authRoutes);
-app.use("/patients",authController.verifyToken, patientsRoutes);
+app.use('/patients',authController.verifyToken, patientsRoutes);
 app.use('/cases',authController.verifyToken, casesRoutes);
 app.use('/specialty',authController.verifyToken, specialtyRoutes);
 app.use('/firm',authController.verifyToken, firmRoutes);
@@ -33,6 +33,7 @@ app.use('/appoint',authController.verifyToken, appointRoutes)
 app.use('/practicelocation',authController.verifyToken,practiceRoutes)
 app.use('/category',authController.verifyToken, categoryRoutes)
 app.use('/caseType',authController.verifyToken, caseTypeRoutes )
+app.use('/purposeOfVisit',authController.verifyToken, purposeOfVisitRoutes )
 
 app.use(errorController.get404);
 app.use(errorController.get500);

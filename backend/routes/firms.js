@@ -3,7 +3,6 @@ const router = express.Router();
 const firmController = require("../controllers/firms");
 
 
-router.get("/all", firmController.getAll);
-router.get("/id/:id", firmController.getById);
+router.get("/", firmController.getAll);
 
 module.exports = router;

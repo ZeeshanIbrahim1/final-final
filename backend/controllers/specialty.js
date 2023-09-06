@@ -11,20 +11,7 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getById = async (req, res) => {
-  const specialtyId = req.params.id;
 
-  try {
-    const specialty = await models.Specialty.findByPk(specialtyId);
-    if (!specialty) {
-      return res.status(404).json({ message: 'Specialty not found' });
-    }
-    res.json(specialty);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal server error' });
-  }
-};
 module.exports = {
-  getById,
   getAll
 };

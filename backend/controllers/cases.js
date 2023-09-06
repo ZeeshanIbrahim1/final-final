@@ -51,7 +51,7 @@ const getCase = async (req,res, next) =>{
   res.status(200).json(cases);
 }
  catch (error) {
-  console.error("Error in getAllPatients:", error);
+  console.error("Error in getAllCases:", error);
   res.status(500).json({ message: "Internal server error." });
   next(error)
 }

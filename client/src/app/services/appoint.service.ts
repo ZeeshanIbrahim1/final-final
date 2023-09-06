@@ -28,7 +28,7 @@ export class AppointService {
   appoint(Appoint:any): Observable<Appoint> {
     console.log("IN appoinr/service.ts", Appoint)
     return this.http
-      .post<Appoint>(`${this.url}/appoint/addAppointment`, Appoint)
+      .post<Appoint>(`${this.url}/appoint/`, Appoint)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<Appoint>('appoint'))
@@ -38,7 +38,7 @@ export class AppointService {
     return this.http.get(`${this.url}/appoint/getId/${appointId}`) 
   }
   getAppointments(appointmentId:any){
-    return this.http.get(`${this.url}/appoint/getAppoints/${appointmentId}`)
+    return this.http.get(`${this.url}/appoint/${appointmentId}`)
     .pipe(
       catchError(
         this.errorHandlerService.handleError('getAppointments')
@@ -46,7 +46,7 @@ export class AppointService {
     );
   }
   getAllAppointments(){
-    return this.http.get(`${this.url}/appoint/getAllAppointments`)
+    return this.http.get(`${this.url}/appoint/`)
   }
   getSpecialtyInfo(){
     return this.http
@@ -75,7 +75,7 @@ export class AppointService {
     )
   }
   updateAppointment(appointmentId: number,value){
-      this.http.put(`${this.url}/appoint/updateAppoint/${appointmentId}`,value).subscribe(
+      this.http.put(`${this.url}/appoint/${appointmentId}`,value).subscribe(
       (response: any) => {
         console.log('Appointment updated successfully:', response);
       },
@@ -84,7 +84,7 @@ export class AppointService {
       })
   }
   deleteAppointment(id: number){
-    return this.http.delete(`${this.url}/appoint/deleteAppoint/${id}`)
+    return this.http.delete(`${this.url}/appoint/${id}`)
     .pipe(
       catchError(
         this.errorHandlerService.handleError('deleteAppoint')

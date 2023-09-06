@@ -31,7 +31,7 @@ export class PatientService {
     
     patient(patient: Omit<Patient, 'id'>): Observable<Patient> {
     return this.http
-      .post<Patient>(`${this.url}/patients/add`, patient)
+      .post<Patient>(`${this.url}/patients/`, patient)
       .pipe(  
         catchError((error: HttpErrorResponse)=>{
           if(error.status === 401){
@@ -45,15 +45,12 @@ export class PatientService {
         })
       );
   }
-  getAllPatients() {
-    console.log('working');
-    return this.http.get(`${this.url}/patients/all`) 
-  }
+  
   getPatient(id: string): Observable<Patient[]> {
     console.log("IN getPatient");
     const numericPatientId = parseInt(id, 10);
     return this.http
-      .get<Patient[]>(`${this.url}/patients/update-Patient/${numericPatientId}`)
+      .get<Patient[]>(`${this.url}/patients/${numericPatientId}`)
       .pipe(
         catchError(
           this.errorHandlerService.handleError<Patient[]>('getPatient')
@@ -61,10 +58,10 @@ export class PatientService {
       );
   }
   getPatientsAll(){
-    return this.http.get(`${this.url}/patients/getAllP`)
+    return this.http.get(`${this.url}/patients/`)
   }
   updatePatient(id:Number,patient: Omit<Patient, 'id'>){
-    this.http.put(`${this.url}/patients/update/${id}`, patient).subscribe(
+    this.http.put(`${this.url}/patients/${id}`, patient).subscribe(
       (response: any) => {
         console.log('Patient updated successfully:', response);
       },
@@ -82,7 +79,7 @@ export class PatientService {
     return this.setId;
   }
   deleteOnePatient(id1:any){
-    this.http.delete(`${this.url}/patients/deleteOne/${id1}`).subscribe(
+    this.http.delete(`${this.url}/patients/${id1}`).subscribe(
       (response: any)=>{
         console.log("Patient deleted successfully:", response)
         if(response.status === 201){
@@ -104,7 +101,7 @@ export class PatientService {
   }
   deletePatient(id1:Number,id2:Number,id3:Number){
     console.log("IN AUTH SERVICE",id1,id2,id3)
-    return this.http.delete(`${this.url}/patients/delete/${id1}/${id2}/${id3}`).subscribe(
+    return this.http.delete(`${this.url}/patients/${id1}/${id2}/${id3}`).subscribe(
       (response: any) => {
         console.log('Case and Appointment deleted successfully:', response);
         if(response.status === 201){
@@ -138,8 +135,9 @@ export class PatientService {
     firmName : string | null,
     doa : Date | null,
     doctor : string | null,
+    page: number,
+    pageSize: number
   ) {
-    console.log("dob", dob, typeof(dob))
     const params = new HttpParams() 
       .set('first_name', firstName)
       .set('middle_name', middleName)
@@ -154,6 +152,8 @@ export class PatientService {
       .set('firmName',firmName)
       .set('doa',doa ? doa.toISOString():'')
       .set('doctor',doctor)
+      .set('page',page)
+      .set('pageSize',pageSize)
       
 
    return this.http.get(`${this.url}/patients/filter`, { params })
@@ -161,6 +161,6 @@ export class PatientService {
   }
   updateAllData(data:any){
     console.log("Incoming data:", data)
-    return this.http.put(`${this.url}/patients/updateAll`, data);
+    return this.http.put(`${this.url}/patients/`, data);
   }
 }

@@ -101,8 +101,10 @@ module.exports = (sequelize, DataTypes) => {
     
     static async filterPatient(filterIncoming){
 
-    const {first_name,middle_name,last_name,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,} = filterIncoming;
+    const {first_name,middle_name,last_name,caseId,categoryName,purposeOfVisit,caseType,dob,practiceLocation,insuranceName,firmName,doa,doctor,page,pageSize} = filterIncoming;
     // Construct the base SQL query
+    const offset = ( page - 1) * pageSize;
+    console.log("pagination:",offset,page,pageSize,typeof(offset),typeof(page),typeof(pageSize))
     let sql = `
     SELECT DISTINCT
     p.id AS "PatientId",
@@ -197,8 +199,9 @@ module.exports = (sequelize, DataTypes) => {
       whereConditions.push(`d.first_name LIKE '%${doctor}%'`)
     }
     if (whereConditions.length > 0) {
-      sql += ` WHERE ${whereConditions.join(' AND ')};`;
+      sql += ` WHERE ${whereConditions.join(' AND ')}`;
     }
+    sql += ` LIMIT ${pageSize} OFFSET ${offset}`
 
 
     console.log("conditonnnnnn", whereConditions)

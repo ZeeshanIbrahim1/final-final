@@ -4,11 +4,14 @@ const router = express.Router();
 const casesController = require("../controllers/cases");
 
 
-router.post("/add", casesController.addCase);
 router.get("/getCase/:id", casesController.getCase)
-router.put("/update/:id",casesController.updateCase);
 router.get("/getId/:id",casesController.getId)
-router.get("/visit", casesController.getVisit)
-router.get("/allCases", casesController.getAll)
-router.delete("/deleteCase/:id",casesController.deleteCase)
+router.get("/", casesController.getAll)
+
+router.post("/", casesController.addCase);
+
+router.put("/:id",casesController.updateCase);
+
+router.delete("/:id",casesController.deleteCase)
+
 module.exports = router;

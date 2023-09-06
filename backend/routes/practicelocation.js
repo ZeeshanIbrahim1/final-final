@@ -3,7 +3,6 @@ const router = express.Router();
 const practiceController = require("../controllers/practicelocation");
 
 
-router.get("/all", practiceController.getAll);
-router.get("/id", practiceController.getById);
+router.get("/", practiceController.getAll);
 
 module.exports = router;

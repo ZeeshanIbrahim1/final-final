@@ -5,12 +5,15 @@ const models = require("../models");
 const appointController = require("../controllers/appointment")
 const { Op } = require("sequelize");
 
-router.post("/addAppointment", appointController.addAppoint);
-router.get("/getId/:id", appointController.getId)
 router.get("/getType", appointController.getType)
-router.get("/getAppoints/:id", appointController.getAppointments)
-router.put("/updateAppoint/:id",appointController.updateAppointment)
-router.get("/getAllAppointments", appointController.getAllAppointment)
-router.delete('/deleteAppoint/:id',appointController.deleteAppointment)
+router.get("/getId/:id", appointController.getId)
+router.get("/:id", appointController.getOneAppointments)
+router.get("/", appointController.getAllAppointment)
+
+router.post("/", appointController.addAppoint);
+
+router.put("/:id",appointController.updateAppointment)
+
+router.delete('/:id',appointController.deleteAppointment)
 
 module.exports = router;

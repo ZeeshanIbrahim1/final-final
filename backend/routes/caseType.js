@@ -4,6 +4,6 @@ const router = express.Router();
 const caseTypeController = require("../controllers/caseType");
 
 
-router.get("/all", caseTypeController.getAll);
+router.get("/", caseTypeController.getAll);
 
 module.exports = router;

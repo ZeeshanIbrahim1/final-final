@@ -68,7 +68,7 @@ const getType = async (req,res)=>{
     res.status(401).json({message: "Error getting Appointment Type Information"})
   }
 }
-const getAppointments = async(req,res)=>{
+const getOneAppointments = async(req,res)=>{
   const appointId = req.params.id;
   const id = parseInt(appointId,10)
   try{
@@ -156,7 +156,7 @@ module.exports = {
   getId,
   addAppoint,
   getType,
-  getAppointments,
+  getOneAppointments,
   updateAppointment,
   getAllAppointment,
   deleteAppointment

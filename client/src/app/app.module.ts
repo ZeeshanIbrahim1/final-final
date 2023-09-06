@@ -34,6 +34,7 @@ import { MatError } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 // import {MatDatepickerModule} from '@angular/material/datepicker';
 // import {MatInputModule} from '@angular/material/input';
@@ -87,7 +88,8 @@ import { UpdateComponent } from './components/update/update.component';
     MatRadioModule,
     FormsModule,
     MatSelectModule,
-    NgxChartsModule
+    NgxChartsModule,
+    MatPaginatorModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
