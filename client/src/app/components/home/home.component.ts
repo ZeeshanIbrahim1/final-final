@@ -39,14 +39,23 @@ export class HomeComponent implements MatPaginatorIntl {
   firstPageLabel = 'First page';
   lastPageLabel = 'Last page';
   uniquePatientFN: string[] = [];
+  _uniquePatientFN: string[] = [];
   uniquePatientMN: string[] = [];
+  _uniquePatientMN: string[] = [];
   uniquePatientLN: string[] = [];
+  _uniquePatientLN: string[] = [];
   uniqueCategoryName: string[] = [];
+  _uniqueCategoryName: string[] = [];
   uniquePoV: string[] = [];
+  _uniquePoV: string[] = [];
   uniqueCaseType: string[] = [];
+  _uniqueCaseType: string[] = [];
   uniquePracticeLocation: string[] = [];
+  _uniquePracticeLocation: string[] = [];
   uniqueInsuranceName: string[] = [];
+  _uniqueInsuranceName: string[] = [];
   uniqueFirmNames: string[] = [];
+  _uniqueFirmNames: string[] = [];
   uniqueDoctor: string[] = [];
   _uniqueDoctor: string[] = []
 
@@ -62,18 +71,7 @@ export class HomeComponent implements MatPaginatorIntl {
   uniqueFirmNamesSet = new Set<string>();
 
 
-onInputChange(){
-  console.log(this.multiUserSearchInput.nativeElement.value)
-  const searchInput = this.multiUserSearchInput.nativeElement.value ? this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-  this.uniqueDoctor = this._uniqueDoctor.filter((data) =>{
-      if(data){
-        const name:string = data.toLowerCase();
-        return name.indexOf(searchInput) > -1; 
-      }
-      return 0;
-    }
-    )
-  }
+
 
 populating(){
   this.retrievedData.forEach((data) => {
@@ -95,20 +93,25 @@ populating(){
   this.uniquePatientLN = Array.from(this.uniquePatientLNSet);
   this.uniqueCategoryName = Array.from(this.uniqueCategoryNameSet);
   this.uniquePoV = Array.from(this.uniquePoVSet);
+  this.uniqueCaseType = Array.from(this.uniqueCaseTypeSet);
   this.uniquePracticeLocation = Array.from(this.uniquePracticeLocationSet);
   this.uniqueInsuranceName = Array.from(this.uniqueInsuranceNameSet);
-  this.uniqueDoctor = Array.from(this.uniqueDoctorSet);
-  this._uniqueDoctor = this.uniqueDoctor;
   this.uniqueFirmNames = Array.from(this.uniqueFirmNamesSet);
+  this.uniqueDoctor = Array.from(this.uniqueDoctorSet);
+  
+  
+  this._uniquePatientFN = this.uniquePatientFN
+  this._uniquePatientMN = this.uniquePatientMN;
+  this._uniquePatientLN = this.uniquePatientLN;
+  this._uniqueCategoryName = this.uniqueCategoryName;
+  this._uniquePoV = this.uniquePoV;
+  this._uniquePracticeLocation = this.uniquePracticeLocation;
+  this._uniqueCaseType = this.uniqueCaseType; 
+  this._uniqueInsuranceName = this.uniqueInsuranceName;
+  this._uniqueFirmNames = this.uniqueFirmNames;
+  this._uniqueDoctor = this.uniqueDoctor;
 }
-onDoctorChange(newValue: string|any) {
-  this.filterForm.value.doctor = newValue.value;
-  console.log("FIRST INCOMINGs")
-}
-onFilterChange(filterName: string, newValue: string | any) {
-  this.filterForm.value[filterName] = newValue.value;
-  console.log(`Filter changed for ${filterName}:`, newValue.value);
-}
+
 
   getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
@@ -199,5 +202,21 @@ onFilterChange(filterName: string, newValue: string | any) {
         messageElement.textContent = null;
       }
   }
+  onInputChange(name:string,originalName:string){
+    console.log(this.multiUserSearchInput.nativeElement.value)
+    const searchInput = this.multiUserSearchInput.nativeElement.value ? this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+    this[name] = this[originalName].filter((data) =>{
+        if(data){
+          const name:string = data.toLowerCase();
+          return name.indexOf(searchInput) > -1; 
+        }
+        return 0;
+      }
+      )
+    }
+    onFilterChange(filterName: string, newValue: string | any) {
+      this.filterForm.value[filterName] = newValue.value;
+      console.log(`Filter changed for ${filterName}:`, newValue.value);
+    }
   
 }
