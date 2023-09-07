@@ -3,85 +3,118 @@
 <h1>
   Apply filter
 </h1>
-<mat-grid-list cols="3" rowHeight="90px" class="matgrid" class="mat-elevation-z8 p-all m-all">
-  <mat-grid-tile class="matgrid">
+
+<mat-grid-list [formGroup]="filterForm" cols="4" rowHeight="130px" class="matgrid" class="mat-elevation-z10 p-all m-all">
+  
+  <mat-grid-tile class="matgrid greats">
         <mat-form-field appearance="outline">
-          <mat-label>Patient First Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="firstName" />
+          <mat-label>Patient First Name:</mat-label> 
+          <mat-select (selectionChange)="onFilterChange('firstName', $event)">
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch/>
+            <mat-option *ngFor="let name of uniquePatientFN" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile class="matgrid">
+      <mat-grid-tile class="matgrid greats">
         <mat-form-field appearance="outline">
           <mat-label>Patient Middle Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="middleName" />
+          <mat-select  (selectionChange)="onFilterChange('middleName', $event)">
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch />
+            <mat-option *ngFor="let name of uniquePatientMN" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile class="matgrid">
+      <mat-grid-tile class="matgrid greats">
         <mat-form-field appearance="outline">
           <mat-label>Patient Last Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="lastName" />
+          <mat-select  (selectionChange)="onFilterChange('lastName', $event)">
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch/>
+            <mat-option *ngFor="let name of uniquePatientLN" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
       </mat-grid-tile>
     
 
-      <mat-grid-tile class="matgrid">
+      <mat-grid-tile class="matgrid greats">
         <mat-form-field appearance="outline">
           <mat-label>Case ID:</mat-label>
-          <input matInput type="number" [(ngModel)]="caseId" />
+          <input matInput type="number" formControlName="caseId" />
         </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Category Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="categoryName" />
+          <mat-select  (selectionChange)="onFilterChange('categoryName', $event)">
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch />
+            <mat-option *ngFor="let name of uniqueCategoryName" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Purpose of Visit:</mat-label>
-          <input matInput type="text" [(ngModel)]="purposeOfVisit" />
+          <mat-select >
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch/>
+            <mat-option *ngFor="let name of uniquePoV" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
       
           <mat-label>Case Type:</mat-label>
-          <input matInput type="text" [(ngModel)]="caseType" />
+          <mat-select >
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch/>
+            <mat-option *ngFor="let name of uniqueCaseType" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
       
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Practice Location:</mat-label>
-          <input matInput type="text" [(ngModel)]="practiceLocation" />
+          <mat-select >
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch />
+            <mat-option *ngFor="let name of uniquePracticeLocation" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
       
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Insurance Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="insuranceName" />
+          <mat-select >
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch/>
+            <mat-option *ngFor="let name of uniqueInsuranceName" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Firm Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="firmName" />
+          <mat-select >
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch />
+            <mat-option *ngFor="let name of uniqueFirmNames" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
 
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
           <mat-form-field appearance="outline">
           <mat-label>Doctor Name:</mat-label>
-          <input matInput type="text" [(ngModel)]="doctor" />
+          
+          <mat-select  (selectionChange)="onDoctorChange($event)" multiple>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange()" #multiUserSearch>
+              <mat-option  *ngFor="let name of uniqueDoctor" [value]="name">{{ name }}</mat-option>
+          </mat-select>
         </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile class="matgrid">
+        <mat-grid-tile class="matgrid greats">
         <button mat-raised-button color="primary" (click)="search()">Search</button>
         </mat-grid-tile>
-  
+      
 </mat-grid-list>
 <div *ngIf="retrievedData && retrievedData.length > 0 ">
 <div>

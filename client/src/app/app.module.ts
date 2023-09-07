@@ -46,6 +46,8 @@ import { ChartsComponent } from './components/charts/charts.component';
 import { ChartUsingNpxChartsComponent } from './components/chart-using-npx-charts/chart-using-npx-charts.component';
 import { ViewAllAppointmentsComponent } from './components/view-all-appointments/view-all-appointments.component';
 import { UpdateComponent } from './components/update/update.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { UpdateComponent } from './components/update/update.component';
   ],
   imports: [
     BrowserModule,
+    NgMultiSelectDropDownModule.forRoot(),  
     MatSnackBarModule,
     AppRoutingModule,
     MatButtonModule,
@@ -81,6 +84,7 @@ import { UpdateComponent } from './components/update/update.component';
     ReactiveFormsModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
+    NgxMatSelectSearchModule,
     HttpClientModule,
     MatGridListModule,
     MatDatepickerModule,

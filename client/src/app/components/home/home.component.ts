@@ -1,10 +1,12 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PatientService } from 'src/app/services/patient.service';
 import { Patient } from 'src/app/models/patient';
 import { Router } from '@angular/router';
 import {MatPaginatorIntl, PageEvent} from '@angular/material/paginator';
 import { Subject } from 'rxjs';
+import { FilterCriteria } from 'src/app/models/filter-criteria';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-home',
@@ -15,33 +17,98 @@ export class HomeComponent implements MatPaginatorIntl {
   totalItems: number = 100;
   pageSizeOptions: number[] = [5,10, 50, 100];
   retrievedData: any;
-  firstName: string = '';
-  middleName: string ='';
-  lastName: string= '';
-  caseId: number | null = null;
-  categoryName: string = '';
-  purposeOfVisit: string = '';
-  caseType: string = '';
-  dob: Date | null =null;
-  practiceLocation : string = '';
-  insuranceName : string = '';
-  firmName : string = '';
-  doa : Date | null =null;
-  doctor: string = '';
+  filterForm: FormGroup;
   displayedColumns: string[] = []
   //searchResults : any[] = [];
-
+  filterCriteria: FilterCriteria = new FilterCriteria();
   patients: Patient[] = [];
   page : any = 0;
   pageSize : any = 5;
+  searchCtrl = new FormControl();
 
-  constructor(private patientService: PatientService,private router: Router) {}
+  
+  constructor(private fb: FormBuilder,private patientService: PatientService,private router: Router) {
+    this.filterForm = this.fb.group(new FilterCriteria());
+    this.filterCriteria = this.filterForm.value;
+  }
+  @ViewChild('multiUserSearch') multiUserSearchInput: ElementRef;
   changes: Subject<void>;
   itemsPerPageLabel = 'Items per page:';
   nextPageLabel = 'Next page';
   previousPageLabel = 'Previous page';
   firstPageLabel = 'First page';
   lastPageLabel = 'Last page';
+  uniquePatientFN: string[] = [];
+  uniquePatientMN: string[] = [];
+  uniquePatientLN: string[] = [];
+  uniqueCategoryName: string[] = [];
+  uniquePoV: string[] = [];
+  uniqueCaseType: string[] = [];
+  uniquePracticeLocation: string[] = [];
+  uniqueInsuranceName: string[] = [];
+  uniqueFirmNames: string[] = [];
+  uniqueDoctor: string[] = [];
+  _uniqueDoctor: string[] = []
+
+  uniquePatientFNSet = new Set<string>();
+  uniquePatientMNSet = new Set<string>();
+  uniquePatientLNSet = new Set<string>();
+  uniqueCategoryNameSet = new Set<string>();
+  uniquePoVSet = new Set<string>();
+  uniqueCaseTypeSet = new Set<string>();
+  uniquePracticeLocationSet = new Set<string>();
+  uniqueInsuranceNameSet = new Set<string>();
+  uniqueDoctorSet = new Set<string>();
+  uniqueFirmNamesSet = new Set<string>();
+
+
+onInputChange(){
+  console.log(this.multiUserSearchInput.nativeElement.value)
+  const searchInput = this.multiUserSearchInput.nativeElement.value ? this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+  this.uniqueDoctor = this._uniqueDoctor.filter((data) =>{
+      if(data){
+        const name:string = data.toLowerCase();
+        return name.indexOf(searchInput) > -1; 
+      }
+      return 0;
+    }
+    )
+  }
+
+populating(){
+  this.retrievedData.forEach((data) => {
+    this.uniquePatientFNSet.add(data.PatientFirstName);
+    this.uniquePatientMNSet.add(data.PatientMiddleName);
+    this.uniquePatientLNSet.add(data.PatientLastName);
+    this.uniqueCategoryNameSet.add(data.categoryName);
+    this.uniquePoVSet.add(data.purposeOfVisit );
+    this.uniqueCaseTypeSet.add(data.caseType);
+    this.uniquePracticeLocationSet.add(data.practiceLocation);
+    this.uniqueInsuranceNameSet.add(data.insuranceName);
+    this.uniqueDoctorSet.add(data.doctorFirstName);
+    this.uniqueFirmNamesSet.add(data.firmName);
+  });
+  
+  // Convert the Set back to an array for template use
+  this.uniquePatientFN = Array.from(this.uniquePatientFNSet);
+  this.uniquePatientMN = Array.from(this.uniquePatientMNSet);
+  this.uniquePatientLN = Array.from(this.uniquePatientLNSet);
+  this.uniqueCategoryName = Array.from(this.uniqueCategoryNameSet);
+  this.uniquePoV = Array.from(this.uniquePoVSet);
+  this.uniquePracticeLocation = Array.from(this.uniquePracticeLocationSet);
+  this.uniqueInsuranceName = Array.from(this.uniqueInsuranceNameSet);
+  this.uniqueDoctor = Array.from(this.uniqueDoctorSet);
+  this._uniqueDoctor = this.uniqueDoctor;
+  this.uniqueFirmNames = Array.from(this.uniqueFirmNamesSet);
+}
+onDoctorChange(newValue: string|any) {
+  this.filterForm.value.doctor = newValue.value;
+  console.log("FIRST INCOMINGs")
+}
+onFilterChange(filterName: string, newValue: string | any) {
+  this.filterForm.value[filterName] = newValue.value;
+  console.log(`Filter changed for ${filterName}:`, newValue.value);
+}
 
   getRangeLabel = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
@@ -103,20 +170,11 @@ export class HomeComponent implements MatPaginatorIntl {
     this.search();
   }
   search(){
+    console.log("SECOND INCOMING")
+    console.log("doctors:",  this.filterForm.value.doctor)
+    
      this.patientService.searchPatientsAndCases(
-       this.firstName,
-       this.middleName,
-       this.lastName,
-       this.caseId,
-       this.categoryName,
-       this.purposeOfVisit,
-       this.caseType,
-       this.dob,
-       this.practiceLocation,
-       this.insuranceName,
-       this.firmName,
-       this.doa,
-       this.doctor,
+      this.filterForm.value,
        this.page,
        this.pageSize
      ).subscribe((info)=> {
@@ -124,6 +182,7 @@ export class HomeComponent implements MatPaginatorIntl {
       this.retrievedData = info;
       console.log("Again trying", this.retrievedData)
       this.displayInfo();
+      this.populating();
     })
   }
   displayInfo(){

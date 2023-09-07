@@ -8,6 +8,7 @@ import { Patient } from '../models/patient';
 import { throwError,Observable } from 'rxjs';
 import { first, catchError, tap } from 'rxjs/operators';
 import { ErrorHandlerService } from './error-handler.service';
+import { FilterCriteria } from '../models/filter-criteria';
 
 @Injectable({
   providedIn: 'root',
@@ -121,37 +122,21 @@ export class PatientService {
       }
     );
   }
-   searchPatientsAndCases(
-    firstName: string | null,
-    middleName: string| null,
-    lastName:string| null,
-    caseId: number | null,
-    categoryName : string | null,
-    purposeOfVisit : string | null,
-    caseType : string | null,
-    dob : Date | null,
-    practiceLocation : string | null,
-    insuranceName : string | null,
-    firmName : string | null,
-    doa : Date | null,
-    doctor : string | null,
-    page: number,
-    pageSize: number
-  ) {
+   searchPatientsAndCases(filterCriteria: FilterCriteria, page: number, pageSize: number) {
     const params = new HttpParams() 
-      .set('first_name', firstName)
-      .set('middle_name', middleName)
-      .set('last_name', lastName)
-      .set('caseId', caseId ? caseId.toString() : '')
-      .set('categoryName', categoryName)
-      .set('purposeOfVisit',purposeOfVisit)
-      .set('caseType',caseType)
-      .set('dob', dob instanceof Date ? dob.toISOString(): '')
-      .set('practiceLocation',practiceLocation)
-      .set('insuranceName',insuranceName)
-      .set('firmName',firmName)
-      .set('doa',doa ? doa.toISOString():'')
-      .set('doctor',doctor)
+      .set('first_name', filterCriteria.firstName)
+      .set('middle_name', filterCriteria.middleName)
+      .set('last_name', filterCriteria.lastName)
+      .set('caseId', filterCriteria.caseId ? filterCriteria.caseId.toString() : '')
+      .set('categoryName', filterCriteria.categoryName)
+      .set('purposeOfVisit', filterCriteria.purposeOfVisit)
+      .set('caseType', filterCriteria.caseType)
+      .set('dob', filterCriteria.dob instanceof Date ? filterCriteria.dob.toISOString(): '')
+      .set('practiceLocation', filterCriteria.practiceLocation)
+      .set('insuranceName', filterCriteria.insuranceName)
+      .set('firmName', filterCriteria.firmName)
+      .set('doa', filterCriteria.doa ? filterCriteria.doa.toISOString():'')
+      .set('doctor', filterCriteria.doctor)
       .set('page',page)
       .set('pageSize',pageSize)
       
