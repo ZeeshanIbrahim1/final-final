@@ -69,7 +69,7 @@ export class HomeComponent implements MatPaginatorIntl {
   uniqueInsuranceNameSet = new Set<string>();
   uniqueDoctorSet = new Set<string>();
   uniqueFirmNamesSet = new Set<string>();
-
+  bool = true;
 
 
 
@@ -202,7 +202,12 @@ populating(){
         messageElement.textContent = null;
       }
   }
-  onInputChange(name:string,originalName:string){
+  goId:number = 0;
+  onInputChange(name:string,originalName:string,id:number){
+    if(this.goId != id){
+      this.multiUserSearchInput.nativeElement.value = '';
+      this.goId = id;
+    }
     console.log(this.multiUserSearchInput.nativeElement.value)
     const searchInput = this.multiUserSearchInput.nativeElement.value ? this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
     this[name] = this[originalName].filter((data) =>{

@@ -10,7 +10,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Patient First Name:</mat-label> 
           <mat-select (selectionChange)="onFilterChange('firstName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientFN','_uniquePatientFN')" #multiUserSearch/>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientFN','_uniquePatientFN',1)" #multiUserSearch/>
             <mat-option *ngFor="let name of uniquePatientFN" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -19,7 +19,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Patient Middle Name:</mat-label>
           <mat-select  (selectionChange)="onFilterChange('middleName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientMN','_uniquePatientMN')" #multiUserSearch />
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientMN','_uniquePatientMN',2)" #multiUserSearch />
             <mat-option *ngFor="let name of uniquePatientMN" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -28,7 +28,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Patient Last Name:</mat-label>
           <mat-select  (selectionChange)="onFilterChange('lastName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientLN','_uniquePatientLN')" #multiUserSearch/>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePatientLN','_uniquePatientLN',3)" #multiUserSearch/>
             <mat-option *ngFor="let name of uniquePatientLN" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -45,7 +45,7 @@
           <mat-form-field appearance="outline">
           <mat-label>Category Name:</mat-label>
           <mat-select  (selectionChange)="onFilterChange('categoryName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueCategoryName','_uniqueCategoryName')" #multiUserSearch />
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueCategoryName','_uniqueCategoryName',4)" #multiUserSearch />
             <mat-option *ngFor="let name of uniqueCategoryName" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -54,7 +54,7 @@
           <mat-form-field appearance="outline">
           <mat-label>Purpose of Visit:</mat-label>
           <mat-select (selectionChange)="onFilterChange('purposeOfVisit', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePoV','_uniquePoV')" #multiUserSearch/>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePoV','_uniquePoV',5)" #multiUserSearch/>
             <mat-option *ngFor="let name of uniquePoV" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -65,7 +65,7 @@
       
           <mat-label>Case Type:</mat-label>
           <mat-select (selectionChange)="onFilterChange('caseType', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePracticeLocation','_uniquePracticeLocation')" #multiUserSearch/>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniquePracticeLocation','_uniquePracticeLocation',6)" #multiUserSearch/>
             <mat-option *ngFor="let name of uniqueCaseType" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -75,7 +75,7 @@
           <mat-form-field appearance="outline">
           <mat-label>Practice Location:</mat-label>
           <mat-select (selectionChange)="onFilterChange('practiceLocation', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueCaseType','_uniqueCaseType')" #multiUserSearch />
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueCaseType','_uniqueCaseType',7)" #multiUserSearch />
             <mat-option *ngFor="let name of uniquePracticeLocation" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -85,7 +85,7 @@
           <mat-form-field appearance="outline">
           <mat-label>Insurance Name:</mat-label>
           <mat-select (selectionChange)="onFilterChange('insuranceName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueInsuranceName','_uniqueInsuranceName')" #multiUserSearch/>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueInsuranceName','_uniqueInsuranceName',8)" #multiUserSearch/>
             <mat-option *ngFor="let name of uniqueInsuranceName" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -95,7 +95,7 @@
           <mat-form-field appearance="outline">
           <mat-label>Firm Name:</mat-label>
           <mat-select (selectionChange)="onFilterChange('firmName', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueFirmNames','_uniqueFirmNames')" #multiUserSearch />
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueFirmNames','_uniqueFirmNames',9)" #multiUserSearch />
             <mat-option *ngFor="let name of uniqueFirmNames" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -106,7 +106,7 @@
           <mat-label>Doctor Name:</mat-label>
           
           <mat-select  (selectionChange)="onFilterChange('doctor', $event)" multiple>
-            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueDoctor','_uniqueDoctor')" #multiUserSearch>
+            <input type="text" autocomplete="off" matInput (input)="onInputChange('uniqueDoctor','_uniqueDoctor',10)" #multiUserSearch>
               <mat-option  *ngFor="let name of uniqueDoctor" [value]="name">{{ name }}</mat-option>
           </mat-select>
         </mat-form-field>
