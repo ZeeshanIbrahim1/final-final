@@ -203,25 +203,21 @@ populating(){
       }
   }
   goId:number = 0;
-  onInputChange(name:string,originalName:string,id:number){
-    if(this.goId != id){
-      this.multiUserSearchInput.nativeElement.value = '';
-      this.goId = id;
-    }
-    console.log(this.multiUserSearchInput.nativeElement.value)
-    const searchInput = this.multiUserSearchInput.nativeElement.value ? this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-    this[name] = this[originalName].filter((data) =>{
-        if(data){
-          const name:string = data.toLowerCase();
-          return name.indexOf(searchInput) > -1; 
-        }
-        return 0;
-      }
-      )
-    }
-    onFilterChange(filterName: string, newValue: string | any) {
-      this.filterForm.value[filterName] = newValue.value;
-      console.log(`Filter changed for ${filterName}:`, newValue.value);
-    }
+  onInputChange(arrayName:string,originalArray:string,inputValue:any,id:number){
   
+    // Filter the array based on the inputValue
+    this[arrayName] = this[originalArray].filter((data) => {
+      if (data) {
+        const name: string = data.toLowerCase();
+        return name.includes(inputValue.target.value);
+      }
+      return false;
+    });
+  return false;
+  }
+   
+  onFilterChange(filterName: string, newValue: string | any) {
+    this.filterForm.value[filterName] = newValue.value;
+    console.log(`Filter changed for ${filterName}:`, newValue.value);
+  }
 }

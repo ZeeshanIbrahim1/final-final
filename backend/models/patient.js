@@ -1,5 +1,5 @@
 "use strict";
-const { Model, where } = require("sequelize");
+const { Model, where, and } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Patient extends Model {
     /**
@@ -156,58 +156,132 @@ module.exports = (sequelize, DataTypes) => {
     let whereConditions = [];
     console.log(first_name)
     console.log("dobbbbbbbb",dob)
-    whereConditions.push(`p.deleted IS NULL AND c.deleted IS NULL`);
+    const andConditions = [];
+    const orFNConditions = [];
+    const orMNConditions = [];
+    const orLNConditions = [];
+    const orCategoryConditions = [];
+    const orCTConditions = [];
+    const orPoVConditions = [];
+    const orINConditions = [];
+    const orFirmNameConditions = [];
+    const orDoctorConditions = [];
+    const orPLConditions = [];
+    const orConditions = [];
+    andConditions.push(`p.deleted IS NULL AND c.deleted IS NULL`);
+
     if (first_name) {
-      console.log("ddddddddddd", first_name)
-      whereConditions.push(`p.first_name LIKE '%${first_name}%'`);
+      const namesArray = first_name.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orFNConditions.push(`p.first_name LIKE '%${name}%'`);
+      }
+      andConditions.push(`(${orFNConditions.join(' OR ')})`);
     }
     if(middle_name){
-      whereConditions.push(`p.middle_name LIKE '%${middle_name}%'`);
+      const namesArray = middle_name.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orMNConditions.push(`p.middle_name LIKE '%${name}%'`);
+      }
+      andConditions.push(`(${orMNConditions.join(' OR ')})`);
     }
     if(last_name){
-      whereConditions.push(`p.last_name LIKE '%${last_name}%'`);
+      const namesArray = last_name.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orLNConditions.push(`p.last_name LIKE  '%${name}%'`);
+      }
+      andConditions.push(`(${orLNConditions.join(' OR ')})`);
     }
     if (caseId) {
-      whereConditions.push(`c.id = '${caseId}'`);
+      andConditions.push(`c.id = '${caseId}'`);
     }
     if(categoryName){
-      whereConditions.push(`ct.categoryName LIKE '%${categoryName.trim()}%'`)
+      const namesArray = categoryName.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orCategoryConditions.push(`ct.categoryName LIKE  '%${name}%'`);
+      }
+      andConditions.push(`(${orCategoryConditions.join(' OR ')})`);
     }
     if(purposeOfVisit){
-        whereConditions.push(`c.purposeOfVisit LIKE '%${purposeOfVisit}%'`)
+      const namesArray = purposeOfVisit.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orPoVConditions.push(`ct.categoryName LIKE  '%${name}%'`);
+      }
+      andConditions.push(`(${orPoVConditions.join(' OR ')})`);
     }
     if(caseType){
-      whereConditions.push(`t.Name LIKE '%${caseType}%'`)
+      const namesArray = caseType.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orCTConditions.push(`ct.categoryName LIKE  '%${name}%'`);
+      }
+      andConditions.push(`(${orCTConditions.join(' OR ')})`);
     }
     if(dob){
       console.log("DATE OF BIRTH",dob)
-      whereConditions.push(`p.date_of_birth LIKE '%${dob}%'`)
+      andConditions.push(`p.date_of_birth LIKE '%${dob}%'`)
     }
     if(practiceLocation){
-      whereConditions.push(`l.name LIKE '%${practiceLocation}%'`)
+      const namesArray = practiceLocation.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orPoVConditions.push(`l.name LIKE LIKE  '%${name}%'`);
+      }
+      andConditions.push(`(${orPoVConditions.join(' OR ')})`);
     }
     if(insuranceName){
-      whereConditions.push(`i.insuranceName LIKE '%${insuranceName}%'` )
+      const namesArray = insuranceName.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orINConditions.push(`i.insuranceName LIKE '%${name}%'`);
+      }
+      andConditions.push(`(${orINConditions.join(' OR ')})`);
     }
     if(firmName){
-      whereConditions.push(`f.firmName LIKE '%${firmName}%'`)
+      const namesArray = firmName.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orFirmNameConditions.push(`f.firmName LIKE '%${name}%'`);
+      }
+      andConditions.push(`(${orFirmNameConditions.join(' OR ')})`);
     }
     if(doa){
-      whereConditions.push(`a.appointmentDate LIKE '%${doa.toISOString().split('T')[0]}%'`)
+      andConditions.push(`a.appointmentDate LIKE '%${doa.toISOString().split('T')[0]}%'`)
     }
     if(doctor){
-      whereConditions.push(`d.first_name LIKE '%${doctor}%'`)
+      const namesArray = doctor.split(',');
+      console.log(namesArray)
+      for(let i= 0; i< namesArray.length; i++ ){
+        const name = namesArray[i].trim();
+        orDoctorConditions.push(`d.first_name LIKE '%${name}%'`);
+      }
+      andConditions.push(`(${orDoctorConditions.join(' OR ')})`);
     }
-    if (whereConditions.length > 0) {
-      sql += ` WHERE ${whereConditions.join(' AND ')}`;
+    if (orConditions.length > 0) {
+      andConditions.push(`(${orConditions.join(' OR ')})`);
     }
-    sql += ` LIMIT ${pageSize} OFFSET ${offset}`
-
-
-    console.log("conditonnnnnn", whereConditions)
+    if (andConditions.length > 0) {
+      sql += ` WHERE ${andConditions.join(' AND ')}`;
+    }
+    
+    sql += ` LIMIT ${pageSize} OFFSET ${offset}`;
+    
     // Execute the SQL query
     const results = await sequelize.query(sql);
-
+    
     return results[0];
   }
   }
