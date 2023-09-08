@@ -19,9 +19,13 @@ const appointRoutes = require('./routes/appointments');
 const categoryRoutes = require('./routes/category');
 const caseTypeRoutes = require('./routes/caseType')
 const purposeOfVisitRoutes = require('./routes/purposeOfVisit')
+const specs = require('./config/swaggerConfig.js');
+const swaggerUi = require('swagger-ui-express')
+
 app.use(bodyParser.json());
 app.use(cors());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/auth", authRoutes);
 app.use('/patients',authController.verifyToken, patientsRoutes);
 app.use('/cases',authController.verifyToken, casesRoutes);
