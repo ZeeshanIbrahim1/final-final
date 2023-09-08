@@ -8,17 +8,21 @@ const purposeOfVisit = require("../controllers/purposeOfVisit");
  *   get:
  *     summary: Get a list of all purposes of visits
  *     description: Retrieve a list of all purposes of visits.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
- *         description: A list of purposes of visits.
+ *         description: A list of doctors.
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/PurposeOfVisit'
+ *                 $ref: '#/components/schemas/Doctor'
+ *       401:
+ *         description: Unauthorized. Authentication token is missing or invalid.
  *       404:
- *         description: No insurance found.
+ *         description: No doctors found.
  */
 router.get("/", purposeOfVisit.getAll);
 

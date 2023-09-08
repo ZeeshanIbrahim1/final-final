@@ -8,6 +8,8 @@ const doctorsController = require("../controllers/doctors");
  *   get:
  *     summary: Get a list of all doctors
  *     description: Retrieve a list of all doctors.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of doctors.
@@ -17,6 +19,8 @@ const doctorsController = require("../controllers/doctors");
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Doctor'
+ *       401:
+ *         description: Unauthorized. Authentication token is missing or invalid.
  *       404:
  *         description: No doctors found.
  */
