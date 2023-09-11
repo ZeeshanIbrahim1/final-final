@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
       caseTypeId,
       categoryId,
       purposeOfVisitId,
-    ) {
+      ) {
+    try{
       return Case.create({
         doa,
         firmId,
@@ -23,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         categoryId,
         purposeOfVisitId,
       });
+    }catch(err){
+
+    }
+    
     }
     static async getOneCase(id){
       console.log("IN getOneCase")

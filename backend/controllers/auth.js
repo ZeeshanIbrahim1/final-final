@@ -90,12 +90,12 @@ exports.verifyToken = (req, res, next) => {
   const token = split_string[1]
   console.log("Incoming in Verify Token split:", token)
   if (!token) {
-    return res.status(401).json({ message: "No token provided." });
+    return res.status(401).json({ message: "Unauthorized. Authentication token is missing." });
   }
 
   jwt.verify(token, "secretfortoken", (err, decodedToken) => {
     if (err) {
-      return res.status(401).json({ message: "Invalid token." });
+      return res.status(401).json({ message:"Unauthorized. Authentication token is invalid." });
     }
     req.userData = decodedToken;
     next();

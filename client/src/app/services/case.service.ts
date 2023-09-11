@@ -133,7 +133,7 @@ export class CaseService {
       },
       (error)=>{
         console.error('Error deleting cases:', error);
-        if(error.status === 400){
+        if(error.status === 409){
           this.snackBar.open("To delete this case, first delete its appointments.", "Close", {
             duration: 5000, // Display duration in milliseconds
             panelClass: ['error-snackbar'], // Optional custom CSS class for styling

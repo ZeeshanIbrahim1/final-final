@@ -70,23 +70,25 @@ const updateCase = async (req, res) => {
     insuranceId,
     firmId} = req.body;
     console.log("FIRRRRRRRRRRRRM IDDDDDDD:",firmId,typeof(firmId))
-  await models.Case.updateCase(
-    caseId,
-      purposeOfVisit,
-      doa,
-      firmId,
-      insuranceId,
-      practiceLocationId,
-      caseTypeId,
-      categoryId,
-    );
-  res.status(201).json({ message: "Case updated!" });
- }
- const getId= async (req,res,next)=>{
-  const appointId = req.params.id;
-  console.log("In CASES Controllers:". appointId)
-  await models.Case.getId(appointId);
- }
+    const oneCase = await models.Case.getOneCase(id);
+    if(oneCase){
+      await models.Case.updateCase(
+        caseId,
+        purposeOfVisit,
+        doa,
+        firmId,
+        insuranceId,
+        practiceLocationId,
+        caseTypeId,
+        categoryId,
+        );
+        res.status(201).json({ message: "Case updated!" });
+    }
+    else{
+      res.status(404).josn({message: "No Case found."})
+    }
+}
+ 
 const getVisit = async (req,res,next)=>{
   try{
     const extractedInfo = await models.PurposeOfVisit.findAll();
@@ -102,6 +104,7 @@ const getVisit = async (req,res,next)=>{
       res.json({ message: "Internal server error."})
   }
 }
+
 const getAll = async (req,res) => {
   let sql = `
   SELECT
@@ -152,7 +155,7 @@ const deleteCase = async(req,res) => {
     }
   });
   if(appointmentsExist){
-    res.status(400).json({message:"To delete this case, first delete its appointments."})
+    res.status(409).json({message:"To delete this case, first delete its appointments."})
   }
   else{
     try {
@@ -160,10 +163,10 @@ const deleteCase = async(req,res) => {
       { deleted : dateStamp },
       {where:{id:caseId}}
     )
-      res.status(201).json({message : "Cases and Appointment Successfuly deleted"})
+      res.status(201).json({message : "Cases Successfuly deleted!"})
     } catch (error) {
       console.log("ERROR IN BACKEND CONTROLLERS deleting Patient:", error)
-      res.json(400).json({message:"To delete Case you have to first delete its patient"})
+      res.json(400).json({message:"Server Error"})
     }
   }
 }
@@ -172,7 +175,6 @@ module.exports = {
   addCase,
   getCase,
   updateCase,
-  getId,
   getVisit,
   getAll,
   deleteCase
