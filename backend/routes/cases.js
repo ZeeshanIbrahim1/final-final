@@ -92,7 +92,6 @@ const casesController = require("../controllers/cases");
  *  /cases/{id}:
  *   delete:
  *     summary: Soft Deletes the case with passed id
- *     description: Soft deletes the case.Current time stamp is added in the deleted attribute of the given case Id.
  *     parameters:
  *       - in: path
  *         name: id
@@ -100,6 +99,7 @@ const casesController = require("../controllers/cases");
  *           type:
  *             integer
  *         required: true
+ *     description: Soft deletes the case.Current time stamp is added in the deleted attribute of the given case Id.
  *     security:
  *       - bearerAuth: []
  *     responses:
@@ -125,13 +125,13 @@ const casesController = require("../controllers/cases");
  *  /cases/getCase/{id}:
  *   get:
  *     summary: Get single Case Id
- *     description: Get specific case Id based on the given Appointment Id (passed as parameters) 
  *     parameters:
  *       - in: path
  *         name: id
  *         schema:
  *           type: integer
  *         required: true
+ *     description: Get specific case based on Case Id (passed as parameters) 
  *     security:
  *      -bearerAuth: []
  *     responses:

@@ -4,6 +4,20 @@ const doctorsController = require("../controllers/doctors");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Doctor:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         first_name:
+ *           type: string
+ *         middle_name:
+ *           type: string
+ *         last_name:
+ *           type: string
+ *
  * /doctors/all:
  *   get:
  *     summary: Get a list of all doctors
@@ -24,6 +38,9 @@ const doctorsController = require("../controllers/doctors");
  *       404:
  *         description: No doctors found.
  */
+
+
+
 
 router.get("/all", doctorsController.getAll);
 

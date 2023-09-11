@@ -4,6 +4,22 @@ const firmController = require("../controllers/firms");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *      Firm:
+ *        type: object
+ *        properties:
+ *          id:
+ *            type: integer	
+ *          firmName:	
+ *            type: string 
+ *          firmCity:
+ *            type: string	
+ *          firmState:
+ *            type: string	
+ *          firmZip:
+ *            type: string
+ *  
  * /firm/:
  *   get:
  *     summary: Get a list of all firms
