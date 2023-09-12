@@ -4,6 +4,22 @@ const practiceController = require("../controllers/practicelocation");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     PracticeLocations:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *         name:
+ *           type: string
+ *         city:
+ *           type: string
+ *         state:
+ *           type: string
+ *         zip:
+ *           type: string
+ *
  * /practicelocation/:
  *   get:
  *     summary: Get a list of all practice location

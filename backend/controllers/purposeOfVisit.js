@@ -11,7 +11,7 @@ const getAll = async (req,res,next)=>{
       }
     }catch(errors){
         console.log("Error in Cases Controller / getVisit",errors)
-        res.json({ message: "Internal server error."})
+        res.status(500).json({ message: "Internal server error."})
     }
   }
 

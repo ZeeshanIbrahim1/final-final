@@ -27,11 +27,10 @@ const addPatient = async (req, res, next) => {
   if (storedDoB) {
     console.log("Patient with same Date of Birth already exists!");
     res
-      .status(401)
-      .json(console.log("Patient with same Date of Birth already exists!!"));
-    return 0;
+      .status(401).json({message: "Patient with same Date of Birth already exists!"});
   }
-  const patientStored = await models.Patient.addPatient(first_name,
+  const patientStored = await models.Patient.addPatient(
+    first_name,
     middle_name,
     last_name,
     email,

@@ -198,11 +198,6 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  updatePatient() {
-    const numericPatientId = parseInt(this.patientId, 10);
-    this.patientService.updatePatient(numericPatientId, this.updatePatientForm.value);
-    this.router.navigate(['./update-case/', this.caseId]);
-  }
 
   updateCase() {
     this.caseService.setCaseId(this.caseId);

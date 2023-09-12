@@ -61,16 +61,6 @@ export class PatientService {
   getPatientsAll(){
     return this.http.get(`${this.url}/patients/`)
   }
-  updatePatient(id:Number,patient: Omit<Patient, 'id'>){
-    this.http.put(`${this.url}/patients/${id}`, patient).subscribe(
-      (response: any) => {
-        console.log('Patient updated successfully:', response);
-      },
-      (error) => {
-        console.log('Error updating patient:', error);
-      }
-    );
-  }
   setPatientId(id_R){
     this.setId  = id_R;
     console.log("set Id", this.setId)
