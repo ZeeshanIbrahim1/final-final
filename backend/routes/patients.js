@@ -187,7 +187,7 @@ router.get('/', patientController.getPatientAll);
  * @swagger
  *  /patients/:
  *   post:
- *      summary: Add single case to table.
+ *      summary: Add single patient to table.
  *      tags: [Patient]
  *      requestBody:
  *       required: true

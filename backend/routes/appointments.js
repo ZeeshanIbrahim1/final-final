@@ -12,7 +12,7 @@ router.get("/", appointController.getAllAppointment)
 
 router.post("/", appointController.addAppoint);
 
-router.put("/:id",appointController.updateAppointment)
+//router.put("/:id",appointController.updateAppointment)
 
 router.delete('/:id',appointController.deleteAppointment)
 
