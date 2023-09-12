@@ -70,7 +70,6 @@ export class UpdatePatientComponent implements OnInit {
     }
   updatePatient() {
     const numericId = parseInt(this.patientId, 10);
-    this.patientService.updatePatient(numericId,this.updatePatientForm.value);
     this.router.navigate(['./update-case/',this.caseId])
   }
   populating(){

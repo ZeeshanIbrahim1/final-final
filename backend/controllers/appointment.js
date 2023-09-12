@@ -60,7 +60,7 @@ const getType = async (req,res)=>{
       res.json(typeInfo);
     }
   else{
-    res.status(400).json("No record in Appointment Type");
+    res.status(404).json("No record in Appointment Type");
   }
   }
   catch(error){
@@ -72,7 +72,7 @@ const getOneAppointments = async(req,res)=>{
   const appointId = req.params.id;
   const id = parseInt(appointId,10)
   try{
-    const appointments = await models.Appointment.findOne({ where: { id } })
+    const appointments = await models.Appointment.findOne({ where: { id, deleted:null } })
     if (!appointments || appointments.length === 0) {
       return res.status(404).json({ message: "No Appointments found." });
     }

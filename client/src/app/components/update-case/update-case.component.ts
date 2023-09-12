@@ -28,7 +28,6 @@ export class UpdateCaseComponent {
     this.getinfo();
     this.updateCaseForm = this.createCaseGroup();
     this.caseId = this.route.snapshot.paramMap.get('id'); // Assuming you're passing patient ID as a route parameter
-    this.appointmentId = this.getAppointId(this.caseId);
     await this.fetchUpdateCase(this.caseId);
   }
   createCaseGroup(): FormGroup {
@@ -116,12 +115,6 @@ export class UpdateCaseComponent {
     this.caseService.getVisitInfo().subscribe((response: any[])=>{
       this.visitInfo = response;
       console.log("Visit Info:", this.visitInfo)
-    })
-  }
-  getAppointId(appointId){
-    this.appointService.getAppointId(appointId).subscribe((msg: any)=> {
-      console.log("Appointmentsssssss Id:",msg);
-      this.appointmentId = msg;
     })
   }
   updateCase() {

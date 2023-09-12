@@ -55,7 +55,7 @@ const casesController = require("../controllers/cases");
  * @swagger
  *  /cases/:
  *   post:
- *      summary: Add single case to table.
+ *      summary: Add single case to case table.
  *      requestBody:
  *       required: true
  *       content:
@@ -85,7 +85,7 @@ const casesController = require("../controllers/cases");
  *        - bearerAuth: []
  *      responses:
  *        200:
- *          description: Case Id generated.
+ *          description: Case added and Case Id generated.
  *        500:
  *          desciption: Internal Server Error. 
  * @swagger

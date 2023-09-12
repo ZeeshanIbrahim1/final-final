@@ -11,9 +11,6 @@ const patientController = require("../controllers/patients");
 
 /**
  * @swagger
- *   tags:
- *   name: Patient
- *   description: API endpoints for managing patients
  * components:
  *    schemas:
  *       Patient:
@@ -245,7 +242,7 @@ router.post("/", patientController.addPatient);
  * @swagger
  * /patients/:
  *   put:
- *     summary: Create a new patient record
+ *     summary: Update a new patient record
  *     tags: [Patient]
  *     description: Create a new patient record along with case and appointment data.
  *     requestBody:

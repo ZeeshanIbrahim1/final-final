@@ -34,9 +34,6 @@ export class AppointService {
         catchError(this.errorHandlerService.handleError<Appoint>('appoint'))
       );
   }
-  getAppointId(appointId:any){
-    return this.http.get(`${this.url}/appoint/getId/${appointId}`) 
-  }
   getAppointments(appointmentId:any){
     return this.http.get(`${this.url}/appoint/${appointmentId}`)
     .pipe(
