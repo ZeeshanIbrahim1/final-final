@@ -125,7 +125,7 @@ const deleteOne = async (req, res) =>{
 }
 
 const filterData = async (req , res) =>{
-  const filters = req.query;
+  const filters = req.body;
   console.log("filters Incoming:",filters)
   try {
     const patient = await models.Patient.filterPatient(filters);

@@ -170,29 +170,23 @@ module.exports = (sequelize, DataTypes) => {
     const orConditions = [];
     andConditions.push(`p.deleted IS NULL AND c.deleted IS NULL`);
 
-    if (first_name) {
-      const namesArray = first_name.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if (first_name && first_name.length != 0) {
+      for(let i= 0; i< first_name.length; i++ ){
+        const name = first_name[i].trim();
         orFNConditions.push(`p.first_name LIKE '%${name}%'`);
       }
       andConditions.push(`(${orFNConditions.join(' OR ')})`);
     }
-    if(middle_name){
-      const namesArray = middle_name.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(middle_name && middle_name.length != 0){
+      for(let i= 0; i< middle_name.length; i++ ){
+        const name = middle_name[i].trim();
         orMNConditions.push(`p.middle_name LIKE '%${name}%'`);
       }
       andConditions.push(`(${orMNConditions.join(' OR ')})`);
     }
-    if(last_name){
-      const namesArray = last_name.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(last_name && last_name.length != 0){
+      for(let i= 0; i< last_name.length; i++ ){
+        const name = last_name[i].trim();
         orLNConditions.push(`p.last_name LIKE  '%${name}%'`);
       }
       andConditions.push(`(${orLNConditions.join(' OR ')})`);
@@ -200,29 +194,23 @@ module.exports = (sequelize, DataTypes) => {
     if (caseId) {
       andConditions.push(`c.id = '${caseId}'`);
     }
-    if(categoryName){
-      const namesArray = categoryName.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(categoryName && categoryName.length != 0){
+      for(let i= 0; i< categoryName.length; i++ ){
+        const name = categoryName[i].trim();
         orCategoryConditions.push(`ct.categoryName LIKE  '%${name}%'`);
       }
       andConditions.push(`(${orCategoryConditions.join(' OR ')})`);
     }
-    if(purposeOfVisit){
-      const namesArray = purposeOfVisit.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(purposeOfVisit && purposeOfVisit.length != 0){
+      for(let i= 0; i< purposeOfVisit.length; i++ ){
+        const name = purposeOfVisit[i].trim();
         orPoVConditions.push(`ct.categoryName LIKE  '%${name}%'`);
       }
       andConditions.push(`(${orPoVConditions.join(' OR ')})`);
     }
-    if(caseType){
-      const namesArray = caseType.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(caseType && caseType.length != 0 ){
+      for(let i= 0; i< caseType.length; i++ ){
+        const name = caseType[i].trim();
         orCTConditions.push(`ct.categoryName LIKE  '%${name}%'`);
       }
       andConditions.push(`(${orCTConditions.join(' OR ')})`);
@@ -231,29 +219,23 @@ module.exports = (sequelize, DataTypes) => {
       console.log("DATE OF BIRTH",dob)
       andConditions.push(`p.date_of_birth LIKE '%${dob}%'`)
     }
-    if(practiceLocation){
-      const namesArray = practiceLocation.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(practiceLocation && practiceLocation.length != 0){
+      for(let i= 0; i< practiceLocation.length; i++ ){
+        const name = practiceLocation[i].trim();
         orPoVConditions.push(`l.name LIKE LIKE  '%${name}%'`);
       }
       andConditions.push(`(${orPoVConditions.join(' OR ')})`);
     }
-    if(insuranceName){
-      const namesArray = insuranceName.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(insuranceName && insuranceName.length != 0){
+      for(let i= 0; i< insuranceName.length; i++ ){
+        const name = insuranceName[i].trim();
         orINConditions.push(`i.insuranceName LIKE '%${name}%'`);
       }
       andConditions.push(`(${orINConditions.join(' OR ')})`);
     }
-    if(firmName){
-      const namesArray = firmName.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(firmName && firmName.length != 0){
+      for(let i= 0; i< firmName.length; i++ ){
+        const name = firmName[i].trim();
         orFirmNameConditions.push(`f.firmName LIKE '%${name}%'`);
       }
       andConditions.push(`(${orFirmNameConditions.join(' OR ')})`);
@@ -261,11 +243,9 @@ module.exports = (sequelize, DataTypes) => {
     if(doa){
       andConditions.push(`a.appointmentDate LIKE '%${doa.toISOString().split('T')[0]}%'`)
     }
-    if(doctor){
-      const namesArray = doctor.split(',');
-      console.log(namesArray)
-      for(let i= 0; i< namesArray.length; i++ ){
-        const name = namesArray[i].trim();
+    if(doctor && doctor.length != 0){
+      for(let i= 0; i< doctor.length; i++ ){
+        const name = doctor[i].trim();
         orDoctorConditions.push(`d.first_name LIKE '%${name}%'`);
       }
       andConditions.push(`(${orDoctorConditions.join(' OR ')})`);

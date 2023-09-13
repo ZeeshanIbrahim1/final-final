@@ -14,7 +14,7 @@ const specialtyController = require("../controllers/specialty");
  *         name:
  *           type: string
  *
- * /specialty/all:
+ * /specialty/:
  *   get:
  *     summary: Get a list of all specialties
  *     description: Retrieve a list of all specialties.
@@ -36,6 +36,6 @@ const specialtyController = require("../controllers/specialty");
  *       500:
  *         description: Internal Server Error.
  */
-router.get("/all", specialtyController.getAll);
+router.get("/", specialtyController.getAll);
 
 module.exports = router;

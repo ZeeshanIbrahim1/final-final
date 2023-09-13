@@ -53,7 +53,7 @@ const getId = async (req, res) => {
   }
 };
 
-const getType = async (req,res)=>{
+const type = async (req,res)=>{
   try{
     const typeInfo = await models.AppointmentType.findAll();
     if(typeInfo) {
@@ -155,7 +155,7 @@ const getAllAppointment = async(req,res) => {
 module.exports = {
   getId,
   addAppoint,
-  getType,
+  type,
   getOneAppointments,
   updateAppointment,
   getAllAppointment,

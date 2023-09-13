@@ -30,7 +30,7 @@ export class CaseService {
   
   case(info: Omit<Case, 'id'>): Observable<Case> {
     return this.http
-      .post<Case>(`${this.url}/cases/`, info)
+      .post<Case>(`${this.url}/case/`, info)
       .pipe(
         first(),
         catchError(this.errorHandlerService.handleError<Case>('case'))
@@ -38,7 +38,7 @@ export class CaseService {
   }
   getCase(patientId){
     return this.http
-      .get(`${this.url}/cases/getCase/${patientId}`) // Change the return type here too
+      .get(`${this.url}/case/getCase/${patientId}`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('getCase')
@@ -80,7 +80,7 @@ export class CaseService {
     )
   }
   updateCase(id:Number,cases: Case){
-    this.http.put(`${this.url}/cases/${id}`, cases).subscribe(
+    this.http.put(`${this.url}/case/${id}`, cases).subscribe(
       (response: any) => {
         console.log('Cases updated successfully:', response);
       },
@@ -114,7 +114,7 @@ export class CaseService {
     this.currentCaseId = caseId;
   }
   getAllCases(){
-    return this.http.get(`${this.url}/cases/`)
+    return this.http.get(`${this.url}/case/`)
     .pipe(
       catchError(
         this.errorHandlerService.handleError('getAllCases')
@@ -122,7 +122,7 @@ export class CaseService {
     );
   }
   deleteCases(id: Number){
-    return this.http.delete(`${this.url}/cases/${id}`).subscribe(
+    return this.http.delete(`${this.url}/case/${id}`).subscribe(
       (response: any) =>{
         console.log('Case and Appointment deleted successfully:', response);
         if(response.status === 201){

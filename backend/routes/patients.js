@@ -43,7 +43,7 @@ const patientController = require("../controllers/patients");
  *              type: string
  * 
  * /patients/filter:
- *   get:
+ *   post:
  *     summary: Get list of Patients.
  *     tags: [Patient]
  *     parameters:
@@ -128,7 +128,6 @@ const patientController = require("../controllers/patients");
  *                 $ref: '#/components/schemas/Patient'
  * 
  */
-router.get('/filter',patientController.filterData)
 
 /**
  * @swagger
@@ -156,8 +155,7 @@ router.get('/filter',patientController.filterData)
  *            description: No patients found.
  *          500:
  *            description: Internal Server Error.
- */
-router.get("/:id", patientController.getPatient);
+*/
 
 /**
  * @swagger
@@ -178,8 +176,7 @@ router.get("/:id", patientController.getPatient);
  *            description: No patients found.
  *          500:
  *            description: Internal Server Error.
- */
-router.get('/', patientController.getPatientAll);
+*/
 /**
  * @swagger
  *  /patients/:
@@ -235,7 +232,6 @@ router.get('/', patientController.getPatientAll);
  *        500:
  *          description: Internal Server Error. 
 */
-router.post("/", patientController.addPatient);
 
 
 /**
@@ -328,8 +324,7 @@ router.post("/", patientController.addPatient);
  *         description: Bad request, validation error
  *       500:
  *         description: An error occurred while updating data
- */
-router.put("/",patientController.updateAll)
+*/
 
 
 /**
@@ -365,8 +360,7 @@ router.put("/",patientController.updateAll)
  *         description: Bad request. Appointments exist for the case, so it cannot be deleted.
  *       500:
  *         description: Internal server error. An error occurred during the deletion process.
- */
-router.delete("/:id1/:id2/:id3",patientController.deletePatient);
+*/
 
 /**
  * @swagger
@@ -389,7 +383,13 @@ router.delete("/:id1/:id2/:id3",patientController.deletePatient);
  *         description: Unauthorized. Cases exist for the patient, so the patient cannot be deleted.
  *       500:
  *         description: Internal server error. An error occurred during the deletion process.
- */
+*/
+router.get('/', patientController.getPatientAll);
+router.get('/:id', patientController.getPatient);
+router.post('/filter',patientController.filterData)
+router.post("/", patientController.addPatient);
+router.put("/",patientController.updateAll)
+router.delete("/:id1/:id2/:id3",patientController.deletePatient);
 router.delete('/:id',patientController.deleteOne)
 
 module.exports = router;

@@ -122,7 +122,7 @@ const casesController = require("../controllers/cases");
  *       404:
  *         description: No Case found.  
  * @swagger
- *  /cases/getCase/{id}:
+ *  /cases/case/{id}:
  *   get:
  *     summary: Get single Case Id
  *     parameters:
@@ -133,7 +133,7 @@ const casesController = require("../controllers/cases");
  *         required: true
  *     description: Get specific case based on Case Id (passed as parameters) 
  *     security:
- *      -bearerAuth: []
+ *      - bearerAuth: []
  *     responses:
  *       200:
  *         description: No such appointment Id exists!
@@ -146,8 +146,8 @@ const casesController = require("../controllers/cases");
 */
 
 
-router.get("/getCase/:id", casesController.getCase)
 router.get("/", casesController.getAll)
+router.get("/case/:id", casesController.getCase)
 
 router.post("/", casesController.addCase);
 

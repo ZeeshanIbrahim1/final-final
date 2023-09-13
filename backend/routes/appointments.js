@@ -43,7 +43,7 @@ const { Op } = require("sequelize");
  *                type: integer	
  *              caseId:
  *                type: integer       
- * /appoint/getType:
+ * /appoint/type:
  *   get:
  *     summary: Get all Appointment Types
  *     tags: [Appointment]
@@ -64,7 +64,7 @@ const { Op } = require("sequelize");
  *      404:
  *        description: No record in Appointment Type
  */
-router.get("/getType", appointController.getType)
+router.get("/type", appointController.type)
 
 /**
  * @swagger

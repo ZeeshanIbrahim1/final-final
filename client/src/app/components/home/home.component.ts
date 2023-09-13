@@ -15,7 +15,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 })
 export class HomeComponent implements MatPaginatorIntl {
   totalItems: number = 100;
-  pageSizeOptions: number[] = [5,10, 50, 100];
+  pageSizeOptions: number[] = [10, 50, 100];
   retrievedData: any;
   filterForm: FormGroup;
   displayedColumns: string[] = []
@@ -23,7 +23,7 @@ export class HomeComponent implements MatPaginatorIntl {
   filterCriteria: FilterCriteria = new FilterCriteria();
   patients: Patient[] = [];
   page : any = 0;
-  pageSize : any = 5;
+  pageSize : any = 10;
   searchCtrl = new FormControl();
 
   
@@ -99,7 +99,9 @@ populating(){
   this.uniqueFirmNames = Array.from(this.uniqueFirmNamesSet);
   this.uniqueDoctor = Array.from(this.uniqueDoctorSet);
   
-  
+  this.uniqueDoctor = this.uniqueDoctor.filter((string)=> string != null)
+  this.uniquePatientMN = this.uniquePatientMN.filter((string)=> string !='' )
+
   this._uniquePatientFN = this.uniquePatientFN
   this._uniquePatientMN = this.uniquePatientMN;
   this._uniquePatientLN = this.uniquePatientLN;

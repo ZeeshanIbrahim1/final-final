@@ -32,7 +32,7 @@ export class PatientService {
     
     patient(patient: Omit<Patient, 'id'>): Observable<Patient> {
     return this.http
-      .post<Patient>(`${this.url}/patients/`, patient)
+      .post<Patient>(`${this.url}/patient/`, patient)
       .pipe(  
         catchError((error: HttpErrorResponse)=>{
           if(error.status === 401){
@@ -51,7 +51,7 @@ export class PatientService {
     console.log("IN getPatient");
     const numericPatientId = parseInt(id, 10);
     return this.http
-      .get<Patient[]>(`${this.url}/patients/${numericPatientId}`)
+      .get<Patient[]>(`${this.url}/patient/${numericPatientId}`)
       .pipe(
         catchError(
           this.errorHandlerService.handleError<Patient[]>('getPatient')
@@ -59,7 +59,7 @@ export class PatientService {
       );
   }
   getPatientsAll(){
-    return this.http.get(`${this.url}/patients/`)
+    return this.http.get(`${this.url}/patient/`)
   }
   setPatientId(id_R){
     this.setId  = id_R;
@@ -70,7 +70,7 @@ export class PatientService {
     return this.setId;
   }
   deleteOnePatient(id1:any){
-    this.http.delete(`${this.url}/patients/${id1}`).subscribe(
+    this.http.delete(`${this.url}/patient/${id1}`).subscribe(
       (response: any)=>{
         console.log("Patient deleted successfully:", response)
         if(response.status === 201){
@@ -92,7 +92,7 @@ export class PatientService {
   }
   deletePatient(id1:Number,id2:Number,id3:Number){
     console.log("IN AUTH SERVICE",id1,id2,id3)
-    return this.http.delete(`${this.url}/patients/${id1}/${id2}/${id3}`).subscribe(
+    return this.http.delete(`${this.url}/patient/${id1}/${id2}/${id3}`).subscribe(
       (response: any) => {
         console.log('Case and Appointment deleted successfully:', response);
         if(response.status === 201){
@@ -113,29 +113,46 @@ export class PatientService {
     );
   }
    searchPatientsAndCases(filterCriteria: FilterCriteria, page: number, pageSize: number) {
-    const params = new HttpParams() 
-      .set('first_name', filterCriteria.firstName)
-      .set('middle_name', filterCriteria.middleName)
-      .set('last_name', filterCriteria.lastName)
-      .set('caseId', filterCriteria.caseId ? filterCriteria.caseId.toString() : '')
-      .set('categoryName', filterCriteria.categoryName)
-      .set('purposeOfVisit', filterCriteria.purposeOfVisit)
-      .set('caseType', filterCriteria.caseType)
-      .set('dob', filterCriteria.dob instanceof Date ? filterCriteria.dob.toISOString(): '')
-      .set('practiceLocation', filterCriteria.practiceLocation)
-      .set('insuranceName', filterCriteria.insuranceName)
-      .set('firmName', filterCriteria.firmName)
-      .set('doa', filterCriteria.doa ? filterCriteria.doa.toISOString():'')
-      .set('doctor', filterCriteria.doctor)
-      .set('page',page)
-      .set('pageSize',pageSize)
+    const body = {
+    first_name: filterCriteria.firstName,
+    middle_name: filterCriteria.middleName,
+    last_name: filterCriteria.lastName,
+    caseId: filterCriteria.caseId ? filterCriteria.caseId.toString() : '',
+    categoryName: filterCriteria.categoryName,
+    purposeOfVisit: filterCriteria.purposeOfVisit,
+    caseType: filterCriteria.caseType,
+    dob: filterCriteria.dob instanceof Date ? filterCriteria.dob.toISOString(): '',
+    practiceLocation: filterCriteria.practiceLocation,
+    insuranceName: filterCriteria.insuranceName,
+    firmName: filterCriteria.firmName,
+    doa: filterCriteria.doa ? filterCriteria.doa.toISOString():'',
+    doctor: filterCriteria.doctor,
+    page:page,
+    pageSize:pageSize
+    }
+    // new HttpParams() 
+    //   .set('first_name', filterCriteria.firstName)
+    //   .set('middle_name', filterCriteria.middleName)
+    //   .set('last_name', filterCriteria.lastName)
+    //   .set('caseId', filterCriteria.caseId ? filterCriteria.caseId.toString() : '')
+    //   .set('categoryName', filterCriteria.categoryName)
+    //   .set('purposeOfVisit', filterCriteria.purposeOfVisit)
+    //   .set('caseType', filterCriteria.caseType)
+    //   .set('dob', filterCriteria.dob instanceof Date ? filterCriteria.dob.toISOString(): '')
+    //   .set('practiceLocation', filterCriteria.practiceLocation)
+    //   .set('insuranceName', filterCriteria.insuranceName)
+    //   .set('firmName', filterCriteria.firmName)
+    //   .set('doa', filterCriteria.doa ? filterCriteria.doa.toISOString():'')
+    //   .set('doctor', filterCriteria.doctor)
+    //   .set('page',page)
+    //   .set('pageSize',pageSize)
       
-
-   return this.http.get(`${this.url}/patients/filter`, { params })
+    console.log("body:" , body)
+   return this.http.post(`${this.url}/patient/filter`,  body )
     
   }
   updateAllData(data:any){
     console.log("Incoming data:", data)
-    return this.http.put(`${this.url}/patients/`, data);
+    return this.http.put(`${this.url}/patient/`, data);
   }
 }

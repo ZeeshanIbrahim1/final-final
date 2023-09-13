@@ -27,11 +27,11 @@ app.use(cors());
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/auth", authRoutes);
-app.use('/patients',authController.verifyToken, patientsRoutes);
-app.use('/cases',authController.verifyToken, casesRoutes);
+app.use('/patient',authController.verifyToken, patientsRoutes);
+app.use('/case',authController.verifyToken, casesRoutes);
 app.use('/specialty',authController.verifyToken, specialtyRoutes);
 app.use('/firm',authController.verifyToken, firmRoutes);
-app.use('/doctors',authController.verifyToken, doctorRoutes);
+app.use('/doctor',authController.verifyToken, doctorRoutes);
 app.use('/insurance',authController.verifyToken, insuranceRoutes);
 app.use('/appoint',authController.verifyToken, appointRoutes)
 app.use('/practicelocation',authController.verifyToken,practiceRoutes)

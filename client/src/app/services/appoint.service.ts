@@ -47,7 +47,7 @@ export class AppointService {
   }
   getSpecialtyInfo(){
     return this.http
-      .get(`${this.url}/specialty/all`) // Change the return type here too
+      .get(`${this.url}/specialty/`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('getPractiseInfo')
@@ -64,7 +64,7 @@ export class AppointService {
       );
   }
   getTypeInfo(){
-    return this.http.get(`${this.url}/appoint/getType`)
+    return this.http.get(`${this.url}/appoint/type`)
     .pipe(
       catchError(
         this.errorHandlerService.handleError('typeInfo')
