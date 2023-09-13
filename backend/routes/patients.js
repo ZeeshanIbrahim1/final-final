@@ -42,7 +42,7 @@ const patientController = require("../controllers/patients");
  *            zip:
  *              type: string
  * 
- * /patients/filter:
+ * /patients/patients:
  *   post:
  *     summary: Get list of Patients.
  *     tags: [Patient]
@@ -386,7 +386,7 @@ const patientController = require("../controllers/patients");
 */
 router.get('/', patientController.getPatientAll);
 router.get('/:id', patientController.getPatient);
-router.post('/filter',patientController.filterData)
+router.post('/patients',patientController.filterData)
 router.post("/", patientController.addPatient);
 router.put("/",patientController.updateAll)
 router.delete("/:id1/:id2/:id3",patientController.deletePatient);

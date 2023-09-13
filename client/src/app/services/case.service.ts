@@ -38,7 +38,7 @@ export class CaseService {
   }
   getCase(patientId){
     return this.http
-      .get(`${this.url}/case/getCase/${patientId}`) // Change the return type here too
+      .get(`${this.url}/case/${patientId}`) // Change the return type here too
       .pipe(
         catchError(
           this.errorHandlerService.handleError('getCase')
@@ -114,7 +114,7 @@ export class CaseService {
     this.currentCaseId = caseId;
   }
   getAllCases(){
-    return this.http.get(`${this.url}/case/`)
+    return this.http.get(`${this.url}/case/cases`)
     .pipe(
       catchError(
         this.errorHandlerService.handleError('getAllCases')

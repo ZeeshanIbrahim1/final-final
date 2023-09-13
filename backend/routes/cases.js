@@ -5,7 +5,7 @@ const casesController = require("../controllers/cases");
 
 /**
  * @swagger  
- *  /cases/{caseId}:          
+ *  /case/{caseId}:          
  *   put:
  *     summary: Update one case.
  *     parameters:
@@ -53,7 +53,7 @@ const casesController = require("../controllers/cases");
  *       404:
  *         description: No Case found.
  * @swagger
- *  /cases/:
+ *  /case/:
  *   post:
  *      summary: Add single case to case table.
  *      requestBody:
@@ -89,7 +89,7 @@ const casesController = require("../controllers/cases");
  *        500:
  *          desciption: Internal Server Error. 
  * @swagger
- *  /cases/{id}:
+ *  /case/{id}:
  *   delete:
  *     summary: Soft Deletes the case with passed id
  *     parameters:
@@ -110,7 +110,7 @@ const casesController = require("../controllers/cases");
  *       500:
  *         description: Internal Server Error  
  * @swagger
- *  /cases/:
+ *  /case/:
  *   get:
  *     summary: Get a list of all Cases
  *     description: Retrieve list of all cases.
@@ -122,7 +122,7 @@ const casesController = require("../controllers/cases");
  *       404:
  *         description: No Case found.  
  * @swagger
- *  /cases/case/{id}:
+ *  /case/case/{id}:
  *   get:
  *     summary: Get single Case Id
  *     parameters:
@@ -146,8 +146,8 @@ const casesController = require("../controllers/cases");
 */
 
 
-router.get("/", casesController.getAll)
-router.get("/case/:id", casesController.getCase)
+router.get("/:id", casesController.getCase)
+router.get("/cases", casesController.getAll)
 
 router.post("/", casesController.addCase);
 

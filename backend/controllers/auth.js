@@ -95,8 +95,15 @@ exports.verifyToken = (req, res, next) => {
 
   jwt.verify(token, "secretfortoken", (err, decodedToken) => {
     if (err) {
-      return res.status(401).json({ message:"Unauthorized. Authentication token is invalid." });
+      if(err.name === "TokenExpiredError" ){
+        return res.status(401).json({message: "Unauthorized. Authentication token has expired"})
+      }
+      else{
+        return res.status(401).json({ message:"Unauthorized. Authentication token is invalid.",
+        err,
+      });
     }
+  }
     req.userData = decodedToken;
     next();
   });

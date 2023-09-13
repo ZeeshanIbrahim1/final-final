@@ -148,7 +148,7 @@ export class PatientService {
     //   .set('pageSize',pageSize)
       
     console.log("body:" , body)
-   return this.http.post(`${this.url}/patient/filter`,  body )
+   return this.http.post(`${this.url}/patient/patients`,  body )
     
   }
   updateAllData(data:any){
