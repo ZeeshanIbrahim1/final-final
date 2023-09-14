@@ -5,6 +5,21 @@ const insuranceController = require("../controllers/insurance");
 /**
  * @swagger
  * /insurance/:
+ * components:
+ *   schemas:
+ *      Insurance:
+ *         type: object
+ *         properties:
+ *            id:
+ *              type: integer
+ *            insuranceName:
+ *              type: string
+ *            insuranceCity:
+ *              type: string
+ *            insuranceState:
+ *              type: string
+ *            insuranceZip:
+ *              type: string
  *   get:
  *     summary: Get a list of all insurance
  *     description: Retrieve a list of all insurance.
@@ -16,7 +31,7 @@ const insuranceController = require("../controllers/insurance");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Doctor'
+ *                 $ref: '#/components/schemas/Insurance'
  *       404:
  *         description: No insurance found.
  */

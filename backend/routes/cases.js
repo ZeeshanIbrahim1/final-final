@@ -4,7 +4,28 @@ const router = express.Router();
 const casesController = require("../controllers/cases");
 
 /**
- * @swagger  
+ * @swagger
+ * components:
+ *     schemas:
+ *      Case:
+ *       type: object
+ *       properties:
+ *         practiceLocationId:
+ *           type: integer
+ *         categoryId:
+ *           type: integer
+ *         purposeOfVisitId:
+ *           type: integer
+ *         caseTypeId:
+ *           type: integer
+ *         doa:
+ *           type: string
+ *           format: date
+ *         insuranceId:
+ *           type: integer
+ *         firmId:
+ *           type: integer
+ * @swagger
  *  /case/{caseId}:          
  *   put:
  *     summary: Update one case.
@@ -30,7 +51,7 @@ const casesController = require("../controllers/cases");
  *               caseTypeId:
  *                 type: integer
  *               doa:
- *                 type: string  # You might want to specify the format (e.g., date) here
+ *                 type: string
  *                 format: date
  *               insuranceId:
  *                 type: integer
@@ -140,7 +161,7 @@ const casesController = require("../controllers/cases");
  *         content:
  *            application/json:
  *              schema:
- *                $ref: '#/components/schemas/User'
+ *                $ref: '#/components/schemas/Case'
  *       400:
  *         description: No such appointment Id exists!
 */

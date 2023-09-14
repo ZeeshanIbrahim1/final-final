@@ -5,6 +5,17 @@ const categoryController = require("../controllers/category");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *      Category:
+ *         type: object
+ *         properties:
+ *            id:
+ *              type: integer
+ *            categoryName:
+ *              type: string
+ *            categoryType:
+ *              type: string
  * /category/:
  *   get:
  *     summary: Get a list of all caregories

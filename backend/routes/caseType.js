@@ -5,6 +5,15 @@ const caseTypeController = require("../controllers/caseType");
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *      CaseType:
+ *         type: object
+ *         properties:
+ *            id:
+ *              type: integer
+ *            name:
+ *              type: string
  * /caseType/:
  *   get:
  *     summary: Get a list of all case Types
