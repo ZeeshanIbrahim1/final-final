@@ -152,8 +152,6 @@ module.exports = (sequelize, DataTypes) => {
     specialties s ON a.specialtyId = s.id
     `;
 
-    // Add WHERE conditions based on filters
-    let whereConditions = [];
     console.log(first_name)
     console.log("dobbbbbbbb",dob)
     const andConditions = [];
@@ -258,11 +256,27 @@ module.exports = (sequelize, DataTypes) => {
     }
     
     sql += ` LIMIT ${pageSize} OFFSET ${offset}`;
-    
+    const countSql = `
+    SELECT COUNT(*) AS totalRows
+    FROM patients p
+    INNER JOIN cases c ON p.id = c.patientId
+    LEFT JOIN casetypes t ON c.caseTypeId = t.id
+    LEFT JOIN categories ct ON c.categoryId = ct.id
+    LEFT JOIN appointments a ON c.id = a.caseId AND a.deleted IS NULL
+    LEFT JOIN purposeofvisits pv ON c.purposeOfVisitId = pv.id
+    LEFT JOIN doctors d ON a.doctorId = d.id
+    LEFT JOIN firms f ON c.firmId = f.id
+    LEFT JOIN insurances i ON c.insuranceId = i.id
+    LEFT JOIN practicelocations l ON c.practiceLocationId = l.id
+    LEFT JOIN specialties s ON a.specialtyId = s.id
+    WHERE ${andConditions.join(' AND ')}
+  `;
+  const countResult = await sequelize.query(countSql);
+  const totalItems = countResult[0][0].totalRows;
     // Execute the SQL query
     const results = await sequelize.query(sql);
     
-    return results[0];
+    return [ totalItems, results[0] ];
   }
   }
   Patient.init(

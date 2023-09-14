@@ -14,7 +14,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements MatPaginatorIntl {
-  totalItems: number = 100;
+  totalItems: number;
   pageSizeOptions: number[] = [10, 50, 100];
   retrievedData: any;
   filterForm: FormGroup;
@@ -24,6 +24,7 @@ export class HomeComponent implements MatPaginatorIntl {
   patients: Patient[] = [];
   page : any = 0;
   pageSize : any = 10;
+  results: any[]; // Specify the actual type of your results array
   searchCtrl = new FormControl();
 
   
@@ -147,7 +148,9 @@ populating(){
       'delete'
     ];
   }
-
+  updateTotalItems(newTotalItems: number) {
+    this.totalItems = newTotalItems;
+  }
   editPatient(id1:Number,id2:Number,id3:Number) {
     if(!id3){
       id3 = 0;
@@ -182,13 +185,13 @@ populating(){
       this.filterForm.value,
        this.page,
        this.pageSize
-     ).subscribe((info)=> {
-      console.log("info",info)
-      this.retrievedData = info;
-      console.log("Again trying", this.retrievedData)
+     ).subscribe((info) => {
+      console.log("info", info);
+      this.retrievedData = info[1]; // Update to get the results property
+      this.totalItems =  info[0]; // Access the totalItems property
       this.displayInfo();
       this.populating();
-    })
+    });
   }
   displayInfo(){
       // console.log("All information:",this.retrievedData)

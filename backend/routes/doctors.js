@@ -18,7 +18,7 @@ const doctorsController = require("../controllers/doctors");
  *         last_name:
  *           type: string
  *
- * /doctors/all:
+ * /doctor/all:
  *   get:
  *     summary: Get a list of all doctors
  *     description: Retrieve a list of all doctors.

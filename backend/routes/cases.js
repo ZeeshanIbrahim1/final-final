@@ -110,7 +110,7 @@ const casesController = require("../controllers/cases");
  *       500:
  *         description: Internal Server Error  
  * @swagger
- *  /case/:
+ *  /case/cases:
  *   get:
  *     summary: Get a list of all Cases
  *     description: Retrieve list of all cases.
@@ -146,8 +146,8 @@ const casesController = require("../controllers/cases");
 */
 
 
-router.get("/:id", casesController.getCase)
 router.get("/cases", casesController.getAll)
+router.get("/:id", casesController.getCase)
 
 router.post("/", casesController.addCase);
 
