@@ -50,16 +50,16 @@ export class CaseService {
     .get(`${this.url}/category/`) // Change the return type here too
     .pipe(
       catchError(
-        this.errorHandlerService.handleError('getPractiseInfo')
+        this.errorHandlerService.handleError('getCategoryInfo')
       )
     );
   }
   getCaseTypeInfo(){
     return this.http
-    .get(`${this.url}/caseType/`) // Change the return type here too
+    .get(`${this.url}/case-type/`) // Change the return type here too
     .pipe(
       catchError(
-        this.errorHandlerService.handleError('getPractiseInfo')
+        this.errorHandlerService.handleError('getCaseTypeInfo')
       )
     );
   }

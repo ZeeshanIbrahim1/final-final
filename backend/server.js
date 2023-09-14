@@ -36,7 +36,7 @@ app.use('/insurance',authController.verifyToken, insuranceRoutes);
 app.use('/appoint',authController.verifyToken, appointRoutes)
 app.use('/practicelocation',authController.verifyToken,practiceRoutes)
 app.use('/category',authController.verifyToken, categoryRoutes)
-app.use('/caseType',authController.verifyToken, caseTypeRoutes )
+app.use('/case-type',authController.verifyToken, caseTypeRoutes )
 app.use('/purposeOfVisit',authController.verifyToken, purposeOfVisitRoutes )
 
 app.use(errorController.get404);

@@ -5,6 +5,13 @@ const casesController = require("../controllers/cases");
 
 /**
  * @swagger
+ * tags:
+ *   name: Case
+ *   description: API endpoints for managing cases
+ */
+
+/**
+ * @swagger
  * components:
  *     schemas:
  *      Case:
@@ -29,6 +36,7 @@ const casesController = require("../controllers/cases");
  *  /case/{caseId}:          
  *   put:
  *     summary: Update one case.
+ *     tags: [Case]
  *     parameters:
  *       - in: path
  *         name: caseId
@@ -77,6 +85,7 @@ const casesController = require("../controllers/cases");
  *  /case/:
  *   post:
  *      summary: Add single case to case table.
+ *      tags: [Case]
  *      requestBody:
  *       required: true
  *       content:
@@ -113,6 +122,7 @@ const casesController = require("../controllers/cases");
  *  /case/{id}:
  *   delete:
  *     summary: Soft Deletes the case with passed id
+ *     tags: [Patient]
  *     parameters:
  *       - in: path
  *         name: id
@@ -134,6 +144,7 @@ const casesController = require("../controllers/cases");
  *  /case/cases:
  *   get:
  *     summary: Get a list of all Cases
+ *     tags: [Case]
  *     description: Retrieve list of all cases.
  *     security:
  *       - bearerAuth: []
@@ -146,6 +157,7 @@ const casesController = require("../controllers/cases");
  *  /case/case/{id}:
  *   get:
  *     summary: Get single Case Id
+ *     tags: [Case]
  *     parameters:
  *       - in: path
  *         name: id

@@ -14,7 +14,7 @@ const caseTypeController = require("../controllers/caseType");
  *              type: integer
  *            name:
  *              type: string
- * /caseType/:
+ * /case-type/:
  *   get:
  *     summary: Get a list of all case Types
  *     description: Retrieve a list of all case types.

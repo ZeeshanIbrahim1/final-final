@@ -33,32 +33,8 @@ const { Op } = require("sequelize");
  *     responses:
  *       201:
  *         description: User registered successfully.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Registration success message.
  *       401:
  *         description: Validation error. Invalid input data.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 errors:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       param:
- *                         type: string
- *                         description: The parameter that caused the error.
- *                       msg:
- *                         type: string
- *                         description: A message describing the error.
  *     security: []
 */
 router.post(
@@ -112,7 +88,6 @@ router.post(
  *       200:
  *         description: User logged in successfully.
  *         content:
- *           application/json:
  *             schema:
  *               type: object
  *               properties:
@@ -120,29 +95,13 @@ router.post(
  *                   type: string
  *                   description: Authentication token for the user.
  *                 userId:
- *                   type: string
+ *                   type: integer
  *                   description: The user's unique identifier.
  *       401:
  *         description: Authentication failed. Invalid email or password.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Error message indicating the reason for authentication failure.
  *       500:
  *         description: Internal server error.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 error:
- *                   type: string
- *                   description: Description of the internal server error.
- *     security: [] 
+ *     security: []
  */
 router.post("/login", authController.login);
 module.exports = router;

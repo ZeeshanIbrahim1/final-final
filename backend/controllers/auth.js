@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const models = require("../models");
 const jwt = require("jsonwebtoken");
-
+const secretKey = process.env.SECRET_STRING
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   console.log(errors);
@@ -55,7 +55,7 @@ exports.login = async (req, res, next) => {
           email: storedUser.email,
           userId: storedUser.id,
         },
-        "secretfortoken",
+        secretKey,
         { expiresIn: "2h" }
       );
 
@@ -93,7 +93,7 @@ exports.verifyToken = (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized. Authentication token is missing." });
   }
 
-  jwt.verify(token, "secretfortoken", (err, decodedToken) => {
+  jwt.verify(token, secretKey, (err, decodedToken) => {
     if (err) {
       if(err.name === "TokenExpiredError" ){
         return res.status(401).json({message: "Unauthorized. Authentication token has expired"})
