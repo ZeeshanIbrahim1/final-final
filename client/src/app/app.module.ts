@@ -43,7 +43,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ViewAllPatientsComponent } from './components/view-all-patients/view-all-patients.component';
 import { ViewAllCasesComponent } from './components/view-all-cases/view-all-cases.component';
 import { ChartsComponent } from './components/charts/charts.component';
-import { ChartUsingNpxChartsComponent } from './components/chart-using-npx-charts/chart-using-npx-charts.component';
+import { ChartUsingNpxChartsComponent } from './components/chart-using-ngx-charts/chart-using-ngx-charts.component';
 import { ViewAllAppointmentsComponent } from './components/view-all-appointments/view-all-appointments.component';
 import { UpdateComponent } from './components/update/update.component';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';

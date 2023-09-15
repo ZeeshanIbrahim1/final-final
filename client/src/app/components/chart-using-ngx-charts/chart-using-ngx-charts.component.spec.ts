@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ChartUsingNpxChartsComponent } from './chart-using-npx-charts.component';
+import { ChartUsingNpxChartsComponent } from './chart-using-ngx-charts.component';
 
 describe('ChartUsingNpxChartsComponent', () => {
   let component: ChartUsingNpxChartsComponent;

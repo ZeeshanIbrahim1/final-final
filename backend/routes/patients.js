@@ -41,97 +41,139 @@ const patientController = require("../controllers/patients");
  *              type: string	
  *            zip:
  *              type: string
- * 
- * /patients/patients:
- *   post:
- *     summary: Get list of Patients.
- *     tags: [Patient]
- *     parameters:
- *       - in: query
- *         name: first_name
- *         schema:
- *           type: string
- *         description: Retrieve a list of patients with this first name.
- *       - in: query
- *         name: middle_name
- *         schema:
- *           type: string
- *         description: Retrieve a list of patients with this middle name.      
- *       - in: query
- *         name: last_name
- *         schema:
- *           type: string
- *         description: Retrieve a list of patients with this first name.
- *       - in: query
- *         name: caseId
- *         schema:
- *           type: integer
- *         description: The numbers of items to return          
- *       - in: query
- *         name: categoryName
- *         schema:
- *           type: string
- *         description: The number of items to skip before starting to collect the result set
- *       - in: query
- *         name: purposeOfVisit
- *         schema:
- *           type: string
- *         description: The numbers of items to return          
- *       - in: query
- *         name: caseType
- *         schema:
- *           type: string
- *         description: The number of items to skip before starting to collect the result set
- *       - in: query
- *         name: practiceLocation
- *         schema:
- *           type: string
- *         description: The numbers of items to return          
- *       - in: query
- *         name: insuranceName
- *         schema:
- *           type: string
- *         description: The number of items to skip before starting to collect the result set
- *       - in: query
- *         name: firmName
- *         schema:
- *           type: string
- *         description: The numbers of items to return          
- *       - in: query
- *         name: doctor
- *         schema:
- *           type: string
- *         description: The numbers of items to return          
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *           required: true
- *         description: The number of items to skip before starting to collect the result set
- *       - in: query
- *         name: pageSize
- *         schema:
- *           type: integer
- *           required: true
- *         description: The numbers of items to return          
- *     description: Retrieve list of Patients and Cases on the basis of filters and page size.If there exists a patient and there is no Case linked to it then that Patient will not be retrieved. There can be multiple options in a single filter but must be passed as a string and the comma separating these options.
- *     security:
- *       - bearerAuth: []
- *     responses:
- *       200:
- *         description: A list of Patients.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Patient'
- * 
  */
 
 /**
  * @swagger
- * /patients/{id}:
+ * /patient/patients:
+ *   post:
+ *    summary: Get a list of patients based on filters.
+ *    tags: [Patient]
+ *    requestBody:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            properties:
+ *              first_name:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Retrieve a list of patients with this first name.
+ *              middle_name:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Retrieve a list of patients with this middle name.
+ *              last_name:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Retrieve a list of patients with this last name.
+ *              caseId:
+ *                type: string
+ *                description: The ID of a specific case.
+ *              categoryName:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by category name.
+ *              purposeOfVisit:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by purpose of visit.
+ *              caseType:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by case type.
+ *              practiceLocation:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by practice location.
+ *              insuranceName:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by insurance name.
+ *              firmName:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by firm name.
+ *              doctor:
+ *                type: array  # Updated to array
+ *                items:
+ *                  type: string
+ *                description: Filter by doctor's name.
+ *              page:
+ *                type: integer
+ *                required: true
+ *                description: The page number for pagination.
+ *              pageSize:
+ *                type: integer
+ *                required: true
+ *                description: The number of items per page.
+ *    responses:
+ *     200:
+ *      description: A list of Patients.
+ *      content:
+ *       application/json:
+ *         schema:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               patientId:
+ *                 type: integer
+ *                 description: 
+ *               patientName:
+ *                 type: string
+ *                 description: 
+ *               caseId:
+ *                 type: integer
+ *                 description: The ID of the case. 
+ *               appointmentId:
+ *                 type: integer
+ *                 description: The ID of the appointment. 
+ *               categoryName:
+ *                 type: string
+ *                 description: Category name. 
+ *               purposeOfVisit:
+ *                 type: string
+ *                 description:  Purpose of visit. 
+ *               caseType:
+ *                 type: string
+ *                 description:  Case type. 
+ *               patientDoB:
+ *                 type: string
+ *                 format: date
+ *                 description:  Date of Birth of the patient. 
+ *               practiceLocation:
+ *                 type: string
+ *                 description: Practice location. 
+ *               insuranceName:
+ *                 type: string
+ *                 description: Insurance name. 
+ *               firmName:
+ *                 type: string
+ *                 description: Firm name. 
+ *               dateOfAccident:
+ *                 type: string
+ *                 format: date
+ *                 description: Date of accident. 
+ *               doctorName:
+ *                 type: string
+ *                 description: Name of the doctor. 
+ *    security:
+ *     - bearerAuth: []
+ */
+
+/**
+ * @swagger
+ * /patient/{id}:
  *   get:
  *     summary: get one patient.
  *     tags: [Patient]
@@ -159,7 +201,7 @@ const patientController = require("../controllers/patients");
 
 /**
  * @swagger
- * /patients/:
+ * /patient/:
  *   get:
  *     summary: get list of all patients.
  *     tags: [Patient]
@@ -179,7 +221,7 @@ const patientController = require("../controllers/patients");
 */
 /**
  * @swagger
- *  /patients/:
+ *  /patient/:
  *   post:
  *      summary: Add single patient to table.
  *      tags: [Patient]
@@ -236,7 +278,7 @@ const patientController = require("../controllers/patients");
 
 /**
  * @swagger
- * /patients/:
+ * /patient/:
  *   put:
  *     summary: Update a new patient record
  *     tags: [Patient]
@@ -329,7 +371,7 @@ const patientController = require("../controllers/patients");
 
 /**
  * @swagger
- * /api/deletePatient/{id1}/{id2}/{id3}:
+ * /patient/{id1}/{id2}/{id3}:
  *   delete:
  *     summary: Soft Delete a Case (if no appointments exist).
  *     tags: [Patient]
@@ -364,7 +406,7 @@ const patientController = require("../controllers/patients");
 
 /**
  * @swagger
- * /api/deletePatient/{id}:
+ * /patient/{id}:
  *   delete:
  *     summary: Soft Delete a patient.
  *     description: Soft deletes a patient if no cases exist for the patient.

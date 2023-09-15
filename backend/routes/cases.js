@@ -122,7 +122,7 @@ const casesController = require("../controllers/cases");
  *  /case/{id}:
  *   delete:
  *     summary: Soft Deletes the case with passed id
- *     tags: [Patient]
+ *     tags: [Case]
  *     parameters:
  *       - in: path
  *         name: id

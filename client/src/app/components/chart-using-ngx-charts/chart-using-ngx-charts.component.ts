@@ -5,8 +5,8 @@ import { CaseService } from 'src/app/services/case.service';
 
 @Component({
   selector: 'app-chart-using-npx-charts',
-  templateUrl: './chart-using-npx-charts.component.html',
-  styleUrls: ['./chart-using-npx-charts.component.css']
+  templateUrl: './chart-using-ngx-charts.component.html',
+  styleUrls: ['./chart-using-ngx-charts.component.css']
 })
 export class ChartUsingNpxChartsComponent {
  data: any[];
